@@ -203,9 +203,8 @@
         titulo: localStorage.getItem('peli_titulo') || "Sin título",
         imagen: localStorage.getItem('peli_imagen') || "",
         video: localStorage.getItem('peli_video') || "",
-        estudio: localStorage.getItem('peli_estudio') || "Desconocido",
-        actriz: localStorage.getItem('peli_actriz') || "Desconocida"
-    };
+        estudio: localStorage.getItem('peli_estudio') || "Desconocido"
+  };
 
     document.getElementById("hero-bg").style.backgroundImage = `url(${peliInfo.imagen})`;
     document.getElementById("movie-title").innerText = peliInfo.titulo;
