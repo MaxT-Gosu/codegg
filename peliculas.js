@@ -121,6 +121,17 @@ const baseDeDatos = [
         actriz: "Niko Kawagoe",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "LULU-338", 
+        titulo: "During Overtime, When We Were Alone In The Office", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242108/1727408240.webp", 
+        bg: "https://i.postimg.cc/P5Vprp9Y/LULU-338.png", 
+        video: "https://appcine.b-cdn.net/Codegg/LULU-338.mp4.mp4", 
+        estudio: "Lunatics",
+        fecha: "Oct. 01, 2024",
+        actriz: "Waka Misono",
+        tags: "Reducing Mosaic"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
