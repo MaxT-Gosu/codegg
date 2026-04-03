@@ -132,6 +132,17 @@ const baseDeDatos = [
         actriz: "Waka Misono",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "MIDA-543", 
+        titulo: "Covered In Yua Juice, Nonstop 320 Climaxes X Convulsions 2201", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772385327.webp", 
+        bg: "https://i.postimg.cc/R0nvm29r/MIDA-543.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mida-543.mp4.mp4", 
+        estudio: "Moodyz",
+        fecha: "Mar. 03, 2026",
+        actriz: " Yua Fukuda",
+        tags: "Reducing Mosaic"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
