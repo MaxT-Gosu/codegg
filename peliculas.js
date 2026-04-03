@@ -33,5 +33,18 @@ const baseDeDatos = [
         actriz: "Reika Natsume",
         tags: "Reducing Mosaic"
     },
+		{ 
+        id: "STARS-160", 
+        titulo: "Getting Their Fuck On In The Club", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1775217128.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/1stars160/1stars160jp-14.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Stars-160.mp4.mp4", 
+        estudio: "Sod Create",
+        fecha: "Nov. 21, 2019",
+        actriz: "Ichikawa Masami....",
+        tags: "Slut, Hardcore"
+    },
+	
+	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
 ];
