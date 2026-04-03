@@ -260,15 +260,18 @@
     const playerContainer = document.getElementById("movie-player");
     const videoTag = document.getElementById("player");
 
-    function playMovie() {
+function playMovie() {
         if(!peliInfo.video || peliInfo.video === "") {
             alert("⚠️ Error: El enlace de video no está disponible.");
             return;
         }
 
+        // --- TU LINK DE PUBLICIDAD (ADSTERRA/MONETAG) ---
+        // Esto crea el script de anuncio cada vez que el usuario intenta ver la película
         var ads = document.createElement('script');
         ads.src = "https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js";
         document.body.appendChild(ads);
+        // -----------------------------------------------
 
         videoTag.src = peliInfo.video;
         playerContainer.style.display = "block";
