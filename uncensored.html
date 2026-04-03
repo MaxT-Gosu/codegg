@@ -4,71 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uncensored - JavGG</title>
-    <style>
-        :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; }
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color: #fff; padding: 20px 0 100px 0; }
-        .container { padding: 0 15px; }
-        
-        /* LISTA VERTICAL */
-        .anime-list { display: flex; flex-direction: column; gap: 15px; }
-        .anime-card { 
-            position: relative; background: var(--card-bg); border-radius: 10px; 
-            overflow: hidden; width: 100%; height: 160px; cursor: pointer; 
-            display: flex; align-items: flex-end; 
-        }
-        .anime-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-        .anime-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
-        
-        .card-content { position: relative; z-index: 5; padding: 15px; }
-        .card-id { background: var(--accent-color); padding: 2px 8px; border-radius: 4px; font-weight: 900; font-size: 12px; }
 
-        /* MENU INFERIOR */
-        .bottom-menu { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
-        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; }
-        .menu-item i { font-size: 18px; display: block; margin-bottom: 4px; }
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #E50914; 
+            --card-bg: #1a1a1a;
+            --skeleton-bg: #222;
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box}
+
+        body{
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--bg-color);
+            color: #fff;
+            padding-top: 20px;
+            padding-bottom: 100px;
+        }
+
+        /* ---------- ANIMACIÓN CARGA ---------- */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        .container { padding: 0 12px; }
+
+        /* GRID 3X3 COMO EL ORIGINAL */
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px;
+        }
+
+        .anime-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 2 / 3;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .anime-card:active { transform: scale(0.96); }
+
+        .anime-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        /* ---------- MENU INFERIOR (ESTILO INDEX) ---------- */
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 1000;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-item {
+            text-decoration: none;
+            color: #888;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-item i { font-size: 18px; margin-bottom: 5px; }
         .menu-item.active { color: var(--accent-color); }
+
+        @media(min-width:768px){
+            .anime-grid { grid-template-columns: repeat(5, 1fr); gap: 15px; }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
 <div class="container">
-    <h2 style="margin-bottom: 20px;">UNCENSORED</h2>
-    <div class="anime-list" id="lista"></div>
+    <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Uncensored Movies</h2>
+    <div class="anime-grid" id="anime-grid"></div>
 </div>
 
 <nav class="bottom-menu">
-    <a href="index.html" class="menu-item"><i class="fas fa-home"></i>Home</a>
-    <a href="censored.html" class="menu-item"><i class="fas fa-film"></i>Censored</a>
-    <a href="uncensored.html" class="menu-item active"><i class="fas fa-tv"></i>Uncensored</a>
-    <a href="#" class="menu-item"><i class="fas fa-search"></i>Buscar</a>
+    <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="censored.html" class="menu-item"><i class="fas fa-film"></i><span>Censored</span></a>
+    <a href="uncensored.html" class="menu-item active"><i class="fas fa-tv"></i><span>Uncensored</span></a>
+    <a href="#" class="menu-item"><i class="fas fa-search"></i><span>Buscar</span></a>
 </nav>
 
 <script src="peliculas.js"></script>
 
 <script>
-// 2. SOLO ID Y IMAGEN (Para que la lista cargue)
-const listaLocal = [
-    { id: "NGOD-170", img: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg" },
-    { id: "JUL-908", img: "https://i.ibb.co/v4p52FgD/JUL-908.png" },
-    { id: "IPIT-012", img: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg" }
+// SOLO ID Y SRC PARA CARGAR LA IMAGEN
+const peliculasLocal = [
+    { id: "NGOD-170", src: "https://i.ibb.co/wNV1TShf/NGOD-170.webp" },
+    { id: "JUL-908", src: "https://i.ibb.co/Y48wTByV/JUL-908.jpg" },
+    { id: "IPIT-012", src: "https://i.ibb.co/svJswVLW/IPIT-012.webp" }
 ];
 
-function cargar() {
-    const contenedor = document.getElementById("lista");
-    contenedor.innerHTML = listaLocal.map(p => `
-        <div class="anime-card" onclick="ir('${p.id}')">
-            <img src="${p.img}" loading="lazy">
-            <div class="card-content">
-                <span class="card-id">${p.id}</span>
-            </div>
+function cargarContenido() {
+    const grid = document.getElementById("anime-grid");
+    grid.innerHTML = peliculasLocal.map(p => `
+        <div class="anime-card skeleton" onclick="abrirDetalles('${p.id}')">
+            <img src="${p.src}" onload="revealImg(this)" loading="lazy">
         </div>
     `).join("");
 }
 
-function ir(id) {
-    // 3. BUSCAMOS TODA LA INFO EN peliculas.js ANTES DE IRNOS
+function abrirDetalles(id) {
+    // BUSCAMOS TODA LA INFO EN peliculas.js USANDO EL ID
     const p = baseDeDatos.find(item => item.id === id);
     if(p) {
         localStorage.setItem('peli_id', p.id);
@@ -78,12 +142,15 @@ function ir(id) {
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
         window.location.href = "detalles.html";
-    } else {
-        alert("Error: No se encontró la info en peliculas.js");
     }
 }
 
-document.addEventListener("DOMContentLoaded", cargar);
+function revealImg(img) {
+    img.style.opacity = "1";
+    img.parentElement.classList.remove("skeleton");
+}
+
+document.addEventListener("DOMContentLoaded", cargarContenido);
 </script>
 </body>
 </html>
