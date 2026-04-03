@@ -1,176 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Censored - JavGG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Censored - JavGG</title>
 
-<style>
-:root {
-    --bg-color: #0a0a0a;
-    --accent-color: #E50914; 
-    --card-bg: #1a1a1a;
-    --skeleton-bg: #222;
-}
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #E50914; 
+            --card-bg: #1a1a1a;
+            --skeleton-bg: #222;
+        }
 
-*{margin:0;padding:0;box-sizing:border-box}
+        *{margin:0;padding:0;box-sizing:border-box}
 
-body{
-    font-family: 'Roboto', Arial, sans-serif;
-    background: var(--bg-color);
-    color: #fff;
-    padding-top: 20px;
-    padding-bottom: 100px;
-}
+        body{
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--bg-color);
+            color: #fff;
+            padding-top: 20px;
+            padding-bottom: 100px;
+        }
 
-/* ---------- ANIMACIÓN CARGA ---------- */
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-.skeleton {
-    background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
+        /* ---------- ANIMACIÓN CARGA ---------- */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
 
-.container {
-    padding: 0 10px;
-}
+        .container { padding: 0 10px; }
 
-/* ---------- GRID ---------- */
-.anime-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px;
-}
+        /* ---------- GRID 3X3 ---------- */
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px;
+        }
 
-.anime-card {
-    position: relative;
-    background: var(--card-bg);
-    border-radius: 8px;
-    overflow: hidden;
-    aspect-ratio: 2 / 3;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
+        .anime-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 2 / 3;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
 
-.anime-card:active {
-    transform: scale(0.95);
-}
+        .anime-card:active { transform: scale(0.95); }
 
-.anime-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
+        .anime-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
 
-/* ---------- MENU INFERIOR ---------- */
-.bottom-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(15, 15, 15, 0.95);
-    backdrop-filter: blur(15px);
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0;
-    z-index: 1000;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
+        /* ---------- MENU INFERIOR (ESTILO INDEX) ---------- */
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 1000;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-.menu-item {
-    text-decoration: none;
-    color: #888;
-    font-size: 11px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        .menu-item {
+            text-decoration: none;
+            color: #888;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.menu-item i {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
+        .menu-item i { font-size: 18px; margin-bottom: 5px; }
+        .menu-item.active { color: var(--accent-color); }
+    </style>
 
-.menu-item.active {
-    color: var(--accent-color);
-}
-</style>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
 
 <div class="container">
     <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Censored Movies</h2>
-    <div class="anime-grid" id="anime-grid">
-        </div>
+    <div class="anime-grid" id="anime-grid"></div>
 </div>
 
 <nav class="bottom-menu">
-    <a href="index.html" class="menu-item">
-        <i class="fas fa-home"></i><span>Home</span>
-    </a>
-    <a href="censored.html" class="menu-item active">
-        <i class="fas fa-film"></i><span>Censored</span>
-    </a>
-    <a href="uncensored.html" class="menu-item">
-        <i class="fas fa-tv"></i><span>Uncensored</span>
-    </a>
-    <a href="#" class="menu-item">
-        <i class="fas fa-search"></i><span>Buscar</span>
-    </a>
+    <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="censored.html" class="menu-item active"><i class="fas fa-film"></i><span>Censored</span></a>
+    <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
+    <a href="#" class="menu-item"><i class="fas fa-search"></i><span>Buscar</span></a>
 </nav>
 
+<script src="peliculas.js"></script>
+
 <script>
-// IMPORTANTE: He agregado campos vacíos de video/estudio/actriz. 
-// Debes rellenarlos para que se vean en la pantalla de detalles.
-const peliculas = [
-    { id: "IPIT-012", src: "https://i.ibb.co/svJswVLW/IPIT-012.webp", titulo: "IPIT-012 Película", video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4", estudio: "Desconocido", actriz: "Actriz X" },
-    { id: "SYKH-129", src: "https://i.ibb.co/144129d/SYKH-129.webp", titulo: "SYKH-129 Película", video: "", estudio: "", actriz: "" },
-    { id: "IPIT-009", src: "https://i.ibb.co/twWgBg3M/IPIT-009.webp", titulo: "IPIT-009 Película", video: "", estudio: "", actriz: "" },
-    { id: "SONE-574", src: "https://i.ibb.co/mV2yJZcW/SONE-574.jpg", titulo: "SONE-574 Película", video: "", estudio: "", actriz: "" },
-    { id: "RKI-614", src: "https://i.ibb.co/XxK56GsD/RKI-614.jpg", titulo: "RKI-614 Película", video: "", estudio: "", actriz: "" },
-    { id: "JUL-941", src: "https://i.ibb.co/b5Wx9CTw/JUL-941.webp", titulo: "JUL-941 Película", video: "", estudio: "", actriz: "" },
-    { id: "IPX-958", src: "https://i.ibb.co/dw4jdgrp/IPX-958.jpg", titulo: "IPX-958 Película", video: "", estudio: "", actriz: "" },
-    { id: "JUL-843", src: "https://i.postimg.cc/FsGJHW3c/JUL-843.webp", titulo: "JUL-843 Película", video: "", estudio: "", actriz: "" },
-    { id: "JUL-703", src: "https://i.postimg.cc/44MMqHvV/JUL-703.webp", titulo: "JUL-703 Película", video: "", estudio: "", actriz: "" },
-    { id: "FNS-165", src: "https://i.postimg.cc/4NdbrCcr/FNS-165.webp", titulo: "FNS-165 Película", video: "", estudio: "", actriz: "" },
-    { id: "MSQD-005", src: "https://i.postimg.cc/kgz5QfXD/MSQD-005.webp", titulo: "MSQD-005 Película", video: "", estudio: "", actriz: "" },
-    { id: "JUR-209", src: "https://i.postimg.cc/fRg7MhGh/JUR-209.webp", titulo: "JUR-209 Película", video: "", estudio: "", actriz: "" },
-    { id: "MIKR-076", src: "https://i.postimg.cc/PxCBnwrK/MIKR-076.webp", titulo: "MIKR-076 Película", video: "", estudio: "", actriz: "" },
-    { id: "MIDA-543", src: "https://i.postimg.cc/BnzJdJWS/MIDA-543.webp", titulo: "MIDA-543 Película", video: "", estudio: "", actriz: "" },
-    { id: "LULU-338", src: "https://i.postimg.cc/Mp3MKMNK/LULU-338.webp", titulo: "LULU-338 Película", video: "", estudio: "", actriz: "" },
-    { id: "MIDE-992", src: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp", titulo: "MIDE-992 Película", video: "", estudio: "", actriz: "" },
-    { id: "MOSJ-017", src: "https://i.postimg.cc/y6rwr9vC/MOSJ-017.webp", titulo: "MOSJ-017 Película", video: "", estudio: "", actriz: "" },
-    { id: "STARS-111", src: "https://cdn001.imggle.net/webp/poster/20242012/1737085766.webp", titulo: "STARS-111 Película", video: "", estudio: "", actriz: "" }
+// LISTA LOCAL: Solo ID y SRC para cargar el Grid
+const peliculasLocal = [
+    { id: "IPIT-012", src: "https://i.ibb.co/svJswVLW/IPIT-012.webp" },
+    { id: "SYKH-129", src: "https://i.ibb.co/144129d/SYKH-129.webp" },
+    { id: "IPIT-009", src: "https://i.ibb.co/twWgBg3M/IPIT-009.webp" },
+    { id: "SONE-574", src: "https://i.ibb.co/mV2yJZcW/SONE-574.jpg" },
+    { id: "RKI-614", src: "https://i.ibb.co/XxK56GsD/RKI-614.jpg" },
+    { id: "JUL-941", src: "https://i.ibb.co/b5Wx9CTw/JUL-941.webp" },
+    { id: "IPX-958", src: "https://i.ibb.co/dw4jdgrp/IPX-958.jpg" },
+    { id: "JUL-843", src: "https://i.postimg.cc/FsGJHW3c/JUL-843.webp" },
+    { id: "JUL-703", src: "https://i.postimg.cc/44MMqHvV/JUL-703.webp" },
+    { id: "FNS-165", src: "https://i.postimg.cc/4NdbrCcr/FNS-165.webp" },
+    { id: "MSQD-005", src: "https://i.postimg.cc/kgz5QfXD/MSQD-005.webp" },
+    { id: "JUR-209", src: "https://i.postimg.cc/fRg7MhGh/JUR-209.webp" },
+    { id: "MIKR-076", src: "https://i.postimg.cc/PxCBnwrK/MIKR-076.webp" },
+    { id: "MIDA-543", src: "https://i.postimg.cc/BnzJdJWS/MIDA-543.webp" },
+    { id: "LULU-338", src: "https://i.postimg.cc/Mp3MKMNK/LULU-338.webp" },
+    { id: "MIDE-992", src: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp" },
+    { id: "MOSJ-017", src: "https://i.postimg.cc/y6rwr9vC/MOSJ-017.webp" },
+    { id: "STARS-111", src: "https://cdn001.imggle.net/webp/poster/20242012/1737085766.webp" }
 ];
 
 function cargarImagenes() {
     const grid = document.getElementById("anime-grid");
-    
-    grid.innerHTML = peliculas.map(p => `
-        <div class="anime-card skeleton" onclick="abrirDetalles('${p.id}', '${p.titulo}', '${p.src}', '${p.video}', '${p.estudio}', '${p.actriz}')">
+    grid.innerHTML = peliculasLocal.map(p => `
+        <div class="anime-card skeleton" onclick="abrirDetalles('${p.id}', '${p.src}')">
             <img src="${p.src}" onload="imgLoaded(this)" loading="lazy">
         </div>
     `).join("");
 }
 
-function abrirDetalles(id, titulo, imagen, video, estudio, actriz) {
-    // Guardamos en la memoria para que detalles.html lo lea
-    localStorage.setItem('peli_id', id);
-    localStorage.setItem('peli_titulo', titulo);
-    localStorage.setItem('peli_imagen', imagen);
-    localStorage.setItem('peli_video', video);
-    localStorage.setItem('peli_estudio', estudio);
-    localStorage.setItem('peli_actriz', actriz);
+function abrirDetalles(id, imgFallback) {
+    localStorage.clear();
+
+    // Buscamos la info completa en peliculas.js
+    let p = null;
+    if (typeof baseDeDatos !== 'undefined') {
+        p = baseDeDatos.find(item => item.id === id);
+    }
+
+    if(p) {
+        localStorage.setItem('peli_id', p.id);
+        localStorage.setItem('peli_titulo', p.titulo);
+        localStorage.setItem('peli_imagen', p.poster);
+        localStorage.setItem('peli_background', p.bg || "");
+        localStorage.setItem('peli_video', p.video);
+        localStorage.setItem('peli_estudio', p.estudio);
+    } else {
+        // Respaldo por si no está en peliculas.js aún
+        localStorage.setItem('peli_id', id);
+        localStorage.setItem('peli_imagen', imgFallback);
+        localStorage.setItem('peli_titulo', id);
+    }
     
     window.location.href = "detalles.html";
 }
