@@ -21,6 +21,17 @@ const baseDeDatos = [
         fecha: "2023-11-20",
         actriz: "Lily Hart",
         tags: "Older Sister"
-    }
+    },
+	    { 
+        id: "URE-131", 
+        titulo: "A Story About A Mother Who Gets Addicted To Sex With A Gangster", 
+        poster: "https://cdn001.imggle.net/webp/poster/12082025/1767892920.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/ure00131/ure00131jp-6.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Ure-131.mp4.mp4", 
+        estudio: "Madonna",
+        fecha: "Jan. 13, 2026",
+        actriz: "Reika Natsume",
+        tags: "Reducing Mosaic"
+    },
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
 ];
