@@ -66,6 +66,17 @@ const baseDeDatos = [
         actriz: "Hibiki Amemiya",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "PPPE-300", 
+        titulo: "Brainwashing Your Boobs With Your Eyes And Ears", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737083638.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/pppe00300/pppe00300jp-8.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Pppe-300.mp4.mp4", 
+        estudio: "Oppai",
+        fecha: "Jan. 21, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
