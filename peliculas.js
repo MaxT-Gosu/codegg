@@ -165,6 +165,50 @@ const baseDeDatos = [
         actriz: "Miyuu Kiyohara",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "FPRE-112", 
+        titulo: "A Voluptuous Slut Who Plays With Her Cock Pet", 
+        poster: "https://cdn001.imggle.net/webp/poster/20240410/1730429980.webp", 
+        bg: "https://i.postimg.cc/X7P3HMb6/FPRE-112.png", 
+        video: "https://appcine.b-cdn.net/Codegg/FPRE-112.mp4", 
+        estudio: "Fitch",
+        fecha: "Nov. 05, 2024",
+        actriz: "Ran Kikuno",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "JUR-209", 
+        titulo: "Who Used To Like Me, Has Transformed Into A Sexy", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737686201.webp", 
+        bg: "https://i.postimg.cc/52k5fMhx/JUR-209.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-209.mp4", 
+        estudio: "Madonna",
+        fecha: " Jan. 28, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "VAGU-158", 
+        titulo: "Making Daughter-in-law Of Nozomi And My Love", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1735698775.webp", 
+        bg: "https://i.postimg.cc/NG1QfJD5/VAGU-158.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-209.mp4", 
+        estudio: "Venus",
+        fecha: "Jul. 13, 2016",
+        actriz: "Nozomi Tanihara",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "MIAB-433", 
+        titulo: "Breast Crushing, Infinite Piston, Sperm Reflux", 
+        poster: "https://cdn001.imggle.net/webp/poster/20250903/1744304112.webp", 
+        bg: "https://i.postimg.cc/pLfm9VXn/MIAB-433.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIAB-433.mp4", 
+        estudio: "Moodyz",
+        fecha: "Apr. 15, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
