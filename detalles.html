@@ -73,7 +73,7 @@
     <div class="row">
         <i class="fas fa-caret-right arrow"></i>
         <span class="label">Release Day:</span>
-        <span class="value">2026-04-07</span>
+        <span class="value" id="p-fecha">---</span>
     </div>
     <div class="row">
         <i class="fas fa-caret-right arrow"></i>
@@ -83,16 +83,13 @@
     <div class="row">
         <i class="fas fa-caret-right arrow"></i>
         <span class="label">Country:</span>
-        <span class="value">Japan</span>
+        <span class="value" id="p-pais">---</span>
     </div>
     <div class="row" style="border:none;">
         <i class="fas fa-caret-right arrow"></i>
         <span class="label">Tags:</span>
-        <div class="tag-list">
-            <span class="tag"><i class="fas fa-tag"></i> Affair</span>
-            <span class="tag"><i class="fas fa-tag"></i> Bride</span>
-            <span class="tag"><i class="fas fa-tag"></i> Young Wife</span>
-        </div>
+        <div class="tag-list" id="p-tags">
+            </div>
     </div>
 </div>
 
@@ -109,26 +106,50 @@
 </div>
 
 <script>
+    // Recuperamos todos los datos guardados en el navegador
     const data = {
         id: localStorage.getItem('peli_id'),
         title: localStorage.getItem('peli_titulo'),
         img: localStorage.getItem('peli_imagen'),
         bg: localStorage.getItem('peli_background'),
         video: localStorage.getItem('peli_video'),
-        studio: localStorage.getItem('peli_estudio')
+        studio: localStorage.getItem('peli_estudio'),
+        fecha: localStorage.getItem('peli_fecha'),
+        pais: localStorage.getItem('peli_pais'),
+        tags: localStorage.getItem('peli_tags')
     };
 
+    // Fondo (Background)
     const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
     if(finalBg) {
         document.getElementById('hero-bg').style.backgroundImage = "url('" + finalBg + "')";
     }
     
+    // Título e ID
     document.getElementById('p-title').innerText = data.title || "Sin título";
     document.getElementById('p-id').innerText = data.id || "N/A";
+    
+    // Información Detallada Dinámica
     document.getElementById('p-studio').innerText = data.studio || "Desconocido";
+    document.getElementById('p-fecha').innerText = data.fecha || "No disponible";
+    document.getElementById('p-pais').innerText = data.pais || "Japan";
+
+    // Generar Tags Dinámicos
+    const tagContainer = document.getElementById('p-tags');
+    if(data.tags && data.tags !== "null") {
+        const tagsArray = data.tags.split(','); // Separa por comas
+        tagsArray.forEach(tagText => {
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.innerHTML = `<i class="fas fa-tag"></i> ${tagText.trim()}`;
+            tagContainer.appendChild(span);
+        });
+    } else {
+        tagContainer.innerHTML = '<span class="tag">Sin etiquetas</span>';
+    }
 
     function play() {
-        if(!data.video) {
+        if(!data.video || data.video === "null") {
             alert("⚠️ Enlace de video no disponible actualmente.");
             return;
         }
