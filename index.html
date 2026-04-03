@@ -66,6 +66,7 @@ header h1 {
     height: 100%;
     object-fit: cover;
     display: block;
+    opacity: 0;
     transition: opacity 0.8s ease;
 }
 .hero::after {
@@ -203,10 +204,11 @@ const CONFIG = {
     hero: {
         id: "JUL-908",
         title: "JUL-908 Especial",
-        image: "https://i.ibb.co/v4p52FgD/JUL-908.png",
+        image: "https://i.ibb.co/v4p52FgD/JUL-908.png", // Usamos la horizontal aquí
+        background: "https://i.ibb.co/v4p52FgD/JUL-908.png", // Repetimos para detalles
         video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4",
         estudio: "Madman",
-        actriz: "Desconocida"
+        actriz: "Lily Hart"
     },
     sections: [
         {
@@ -216,9 +218,9 @@ const CONFIG = {
                 { 
                     id: "NGOD-170", 
                     src: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
-					background: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg",
+                    background: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg",
                     label: "NGOD-170",
-                    titulo_largo: "Estoy cansando",
+                    titulo_largo: "I Got Fingered By My Husband's Mean Boss...",
                     video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4",
                     estudio: "Jet Eizo",
                     actriz: "Nene Tanaka"
@@ -226,22 +228,22 @@ const CONFIG = {
                 { 
                     id: "IPIT-012", 
                     src: "https://i.ibb.co/svJswVLW/IPIT-012.webp", 
-					background: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg",
+                    background: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg",
                     label: "IPIT-012",
-                    titulo_largo: "IPIT-012 Película Completa",
+                    titulo_largo: "Business Trip Destination Room NTR Blond Female Employee",
                     video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4",
-                    estudio: "Estudio X",
-                    actriz: "Actriz Y"
+                    estudio: "Idea Pocket",
+                    actriz: "Lily Hart"
                 },
-				{ 
+                { 
                     id: "FC2PPV-4862565", 
                     src: "https://cdn001.imggle.net/webp/poster/06032026/1773376012.webp", 
-					background: "https://contents-thumbnail2.fc2.com/w1280/storage200000.contents.fc2.com/file/297/29683723/1773281076.95.jpg",
+                    background: "https://contents-thumbnail2.fc2.com/w1280/storage200000.contents.fc2.com/file/297/29683723/1773281076.95.jpg",
                     label: "FC2PPV-4862565",
                     titulo_largo: "Huge breasted nurse wife with a bust of 100 cm.",
                     video: "https://appcine.b-cdn.net/Codegg/Fc2ppv-4862565-Rm%20Reducing%20Mosaic%20Huge%20Breasted%20Nurse%20Wife%20With.mp4",
-                    estudio: "Estudio X",
-                    actriz: "Actriz Y"
+                    estudio: "FC2PPV",
+                    actriz: "Varios"
                 }
             ]
         }
@@ -252,17 +254,19 @@ document.getElementById("logo-title").innerText = CONFIG.pageTitle;
 document.getElementById("hero-img").src = CONFIG.hero.image;
 document.getElementById("hero-title").innerText = CONFIG.hero.title;
 
+// Botón HERO configurado para enviar background
 document.getElementById("hero-button").onclick = () => {
-    abrirDetalles(CONFIG.hero.id, CONFIG.hero.title, CONFIG.hero.image, CONFIG.hero.video, CONFIG.hero.estudio, CONFIG.hero.actriz);
+    abrirDetalles(CONFIG.hero.id, CONFIG.hero.title, CONFIG.hero.image, CONFIG.hero.video, CONFIG.hero.estudio, CONFIG.hero.actriz, CONFIG.hero.background);
 };
 
-function abrirDetalles(id, titulo, imagen, video, estudio, actriz) {
+function abrirDetalles(id, titulo, imagen, video, estudio, actriz, background) {
     localStorage.setItem('peli_id', id);
     localStorage.setItem('peli_titulo', titulo);
-    localStorage.setItem('peli_imagen', imagen);
+    localStorage.setItem('peli_imagen', imagen); // Poster
     localStorage.setItem('peli_video', video);
     localStorage.setItem('peli_estudio', estudio);
     localStorage.setItem('peli_actriz', actriz);
+    localStorage.setItem('peli_background', background || ""); // Fondo horizontal
     window.location.href = "detalles.html";
 }
 
@@ -286,7 +290,8 @@ CONFIG.sections.forEach(section => {
     section.items.forEach(item => {
         const card = document.createElement("div");
         card.className = "card-item";
-        card.onclick = () => abrirDetalles(item.id, item.titulo_largo, item.src, item.video, item.estudio, item.actriz);
+        // Pasamos item.background al final
+        card.onclick = () => abrirDetalles(item.id, item.titulo_largo, item.src, item.video, item.estudio, item.actriz, item.background);
         
         card.innerHTML = `
             <div class="img-wrapper skeleton">
