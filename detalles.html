@@ -47,7 +47,7 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* --- CABECERA HERO (BACKGROUND HORIZONTAL) --- */
+        /* --- CABECERA HERO --- */
         .hero-container {
             position: relative;
             width: 100%;
@@ -115,10 +115,8 @@
             cursor: pointer;
         }
 
-        /* --- FICHA TÉCNICA (ESTUDIO) --- */
-        .specs-container {
-            padding: 0 20px;
-        }
+        /* --- FICHA TÉCNICA --- */
+        .specs-container { padding: 0 20px; }
 
         .spec-card {
             background: rgba(255, 255, 255, 0.05);
@@ -244,9 +242,12 @@
     };
 
     // 2. INYECTAR DATOS EN LA PANTALLA
-    // Usamos el background si existe, sino el poster
-    const fondoFinal = peliInfo.background && peliInfo.background !== "" ? peliInfo.background : peliInfo.imagen;
-    document.getElementById("hero-bg").style.backgroundImage = `url(${fondoFinal})`;
+    // Ajuste de seguridad: Usamos comillas para evitar errores con URLs raras
+    const fondoFinal = (peliInfo.background && peliInfo.background !== "" && peliInfo.background !== "null") 
+                       ? peliInfo.background 
+                       : peliInfo.imagen;
+
+    document.getElementById("hero-bg").style.backgroundImage = "url('" + fondoFinal + "')";
     
     document.getElementById("movie-title").innerText = peliInfo.titulo;
     document.getElementById("badge-id").innerText = peliInfo.id;
@@ -261,7 +262,7 @@
             return;
         }
 
-        // --- PUBLICIDAD AL REPRODUCIR ---
+        // --- PUBLICIDAD ---
         var ads = document.createElement('script');
         ads.src = "https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js";
         document.body.appendChild(ads);
