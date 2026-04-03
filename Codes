@@ -5,7 +5,10 @@ const baseDeDatos = [
         poster: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
         bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", 
         video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", 
-        estudio: "Jet Eizo" 
+        estudio: "Jet Eizo",
+        fecha: "2024-02-15", // <--- NUEVO
+        pais: "Japan",       // <--- NUEVO
+        tags: "Uncensored, Creampie" // <--- NUEVO
     },
     { 
         id: "IPIT-012", 
@@ -13,7 +16,10 @@ const baseDeDatos = [
         poster: "https://i.ibb.co/svJswVLW/IPIT-012.webp", 
         bg: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg", 
         video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4", 
-        estudio: "Idea Pocket" 
+        estudio: "Idea Pocket",
+        fecha: "2023-11-20",
+        pais: "Japan",
+        tags: "Idea Pocket, Cosplay"
     },
     { 
         id: "FC2PPV-4862565", 
@@ -21,14 +27,10 @@ const baseDeDatos = [
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1773376012.webp", 
         bg: "https://contents-thumbnail2.fc2.com/w1280/storage200000.contents.fc2.com/file/297/29683723/1773281076.95.jpg", 
         video: "https://appcine.b-cdn.net/Codegg/Fc2ppv-4862565-Rm%20Reducing%20Mosaic.mp4", 
-        estudio: "FC2PPV" 
-    },
-    { 
-        id: "JUL-908", 
-        titulo: "JUL-908 Especial", 
-        poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", 
-        bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
-        video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", 
-        estudio: "Madman" 
+        estudio: "FC2PPV",
+        fecha: "2026-03-01",
+        pais: "Japan",
+        tags: "Nurse, Big Breasts"
     }
+    // Añade fecha, pais y tags a las demás siguiendo este ejemplo...
 ];
