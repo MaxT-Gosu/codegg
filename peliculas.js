@@ -231,6 +231,61 @@ const baseDeDatos = [
         actriz: "Haruno Ando",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "AMBI-108", 
+        titulo: "Devil Father's Sex Toy Conceived And Torn", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773453514.webp", 
+        bg: "https://i.postimg.cc/9Mr9b0ZY/AMBI-108.png", 
+        video: "https://appcine.b-cdn.net/Codegg/AMBI-108.mp4", 
+        estudio: "Planet Plus",
+        fecha: "Feb. 01, 2020",
+        actriz: "Planet Plus",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "DLDSS-483", 
+        titulo: "Turn My Winning Mother Into A Female", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1772842892505.webp", 
+        bg: "https://i.postimg.cc/85WmbBLy/DLDSS-483.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dldss-483.mp4", 
+        estudio: "Dahlia",
+        fecha: "Apr. 09, 2026",
+        actriz: "Suzume Mino",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "FNS-165", 
+        titulo: "Who Was Unable To Return Home Due To A Typhoon", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773901863398.webp", 
+        bg: "https://i.postimg.cc/m25N4d36/FNS-165.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dldss-483.mp4", 
+        estudio: "Faleno",
+        fecha: "Apr. 09, 2026",
+        actriz: "Nene Yoshitaka",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "099NTK-892", 
+        titulo: "A slutty body with maximum huggability and raw sex 2", 
+        poster: "https://cdn001.imggle.net/webp/poster/20241115/1733784913.webp", 
+        bg: "https://i.postimg.cc/LsLY2Qxs/099NTK-892-(2).png", 
+        video: "https://appcine.b-cdn.net/Codegg/099Ntk-892.mp4", 
+        estudio: "Magic",
+        fecha: "Dec. 09, 2024",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "FPRE-222", 
+        titulo: "Clothed Fuck With A Tall, Busty Model-type Slut", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1770919055.webp", 
+        bg: "https://i.postimg.cc/3R72gXdC/FPRE-222.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Fpre-222.mp4", 
+        estudio: "Fitch",
+        fecha: "Feb. 17, 2026",
+        actriz: "Ran Kikuno ",
+        tags: "Reducing Mosaic"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
