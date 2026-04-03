@@ -3,172 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="page-title">JavGG</title>
+<title>JavGG</title>
 
 <style>
-:root {
-    --bg-color: #0a0a0a;
-    --accent-color: #E50914; 
-    --card-bg: #1a1a1a;
-    --skeleton-bg: #252525;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-    font-family: 'Roboto', sans-serif;
-    background: var(--bg-color);
-    color:#fff;
-    overflow-x:hidden;
-}
-
-/* ---------- ANIMACIONES ---------- */
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-.skeleton {
-    background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-.container{width:100%;padding-bottom:100px}
-
-/* ---------- HEADER ---------- */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-}
-header h1 {
-    font-size: 26px;
-    color: #fff;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* ---------- HERO ---------- */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 65vh;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-.hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-}
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background: linear-gradient(to top, var(--bg-color), transparent);
-}
-.hero-content {
-    position: absolute;
-    bottom: 30px;
-    left: 0;
-    right: 0;
-    padding: 0 20px;
-    z-index: 5;
-    text-align: center;
-}
-.hero-content h2 {
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 15px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-}
-.hero-content button {
-    background: var(--accent-color);
-    color: #fff;
-    border: none;
-    padding: 12px 30px;
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 auto;
-    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
-}
-
-/* ---------- SECCIONES ---------- */
-.section { margin: 25px 0; padding-left: 15px; }
-.section h2 { font-size: 18px; margin-bottom: 4px; font-weight: 700; }
-.section p { font-size: 13px; color: #aaa; margin-bottom: 15px; }
-
-.image-grid {
-    display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding-right: 15px;
-    scrollbar-width: none;
-}
-.image-grid::-webkit-scrollbar { display: none; }
-
-.card-item { flex-shrink: 0; width: 140px; cursor: pointer; }
-.img-wrapper {
-    position: relative;
-    width: 140px;
-    height: 200px;
-    border-radius: 8px;
-    overflow: hidden;
-    background: var(--skeleton-bg);
-}
-.image-grid img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
-.image-title {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(4px);
-    color: #fff;
-    font-size: 11px;
-    padding: 6px 2px;
-    text-align: center;
-}
-
-/* ---------- MENU INFERIOR ---------- */
-.bottom-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(15, 15, 15, 0.95);
-    backdrop-filter: blur(15px);
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0;
-    z-index: 1000;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-.menu-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #888;
-    text-decoration: none;
-    font-size: 11px;
-}
-.menu-item i { font-size: 18px; margin-bottom: 5px; }
-.menu-item.active { color: var(--accent-color); }
+    :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #252525; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color:#fff; overflow-x:hidden; }
+    
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    
+    .container{width:100%;padding-bottom:100px}
+    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); position: absolute; width: 100%; z-index: 10; }
+    header h1 { font-size: 26px; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+    
+    .hero { position: relative; width: 100%; height: 65vh; overflow: hidden; margin-bottom: 20px; background: #000; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.8s ease; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--bg-color), transparent); }
+    
+    .hero-content { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 20px; z-index: 5; text-align: center; }
+    .hero-content h2 { font-size: 28px; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    .hero-content button { background: var(--accent-color); color: #fff; border: none; padding: 12px 30px; font-size: 16px; font-weight: 700; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto; }
+    
+    .section { margin: 25px 0; padding-left: 15px; }
+    .section h2 { font-size: 18px; margin-bottom: 15px; font-weight: 700; }
+    
+    .image-grid { display: flex; overflow-x: auto; gap: 12px; padding-right: 15px; scrollbar-width: none; }
+    .image-grid::-webkit-scrollbar { display: none; }
+    
+    .card-item { flex-shrink: 0; width: 140px; cursor: pointer; }
+    .img-wrapper { position: relative; width: 140px; height: 200px; border-radius: 8px; overflow: hidden; background: var(--skeleton-bg); }
+    .image-grid img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
+    .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; }
+    
+    .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; }
+    .menu-item i { font-size: 18px; margin-bottom: 5px; }
+    .menu-item.active { color: var(--accent-color); }
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -176,14 +47,12 @@ header h1 {
 <body>
 
 <div class="container">
-    <header>
-        <h1 id="logo-title">JavGG</h1>
-    </header>
-
+    <header><h1>JavGG</h1></header>
+    
     <div class="hero skeleton" id="hero-box">
-        <img id="hero-img" src="" onload="revealHero(this)">
+        <img id="hero-img" src="" onload="this.style.opacity='1'; document.getElementById('hero-box').classList.remove('skeleton')">
         <div class="hero-content">
-            <h2 id="hero-title"></h2>
+            <h2 id="hero-title">Cargando...</h2>
             <button id="hero-button"><i class="fas fa-play"></i> REPRODUCIR</button>
         </div>
     </div>
@@ -199,109 +68,75 @@ header h1 {
 </nav>
 
 <script>
-const CONFIG = {
-    pageTitle: "JavGG",
-    hero: {
-        id: "JUL-908",
-        title: "JUL-908 Especial",
-        image: "https://i.ibb.co/v4p52FgD/JUL-908.png", // Usamos la horizontal aquí
-        background: "https://i.ibb.co/v4p52FgD/JUL-908.png", // Repetimos para detalles
-        video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4",
-        estudio: "Madman",
-        actriz: "Lily Hart"
+// --- TU LISTA DE PELÍCULAS AQUÍ MISMO PARA QUE NO FALLE ---
+const baseDeDatos = [
+    { 
+        id: "JUL-908", 
+        titulo: "JUL-908 Especial", 
+        poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", 
+        bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", 
+        estudio: "Madman" 
     },
-    sections: [
-        {
-            title: "Agregados Recientes",
-            subtitle: "Las últimas películas",
-            items: [
-                { 
-                    id: "NGOD-170", 
-                    src: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
-                    background: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg",
-                    label: "NGOD-170",
-                    titulo_largo: "I Got Fingered By My Husband's Mean Boss...",
-                    video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4",
-                    estudio: "Jet Eizo",
-                    actriz: "Nene Tanaka"
-                },
-                { 
-                    id: "IPIT-012", 
-                    src: "https://i.ibb.co/svJswVLW/IPIT-012.webp", 
-                    background: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg",
-                    label: "IPIT-012",
-                    titulo_largo: "Business Trip Destination Room NTR Blond Female Employee",
-                    video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4",
-                    estudio: "Idea Pocket",
-                    actriz: "Lily Hart"
-                },
-                { 
-                    id: "FC2PPV-4862565", 
-                    src: "https://cdn001.imggle.net/webp/poster/06032026/1773376012.webp", 
-                    background: "https://contents-thumbnail2.fc2.com/w1280/storage200000.contents.fc2.com/file/297/29683723/1773281076.95.jpg",
-                    label: "FC2PPV-4862565",
-                    titulo_largo: "Huge breasted nurse wife with a bust of 100 cm.",
-                    video: "https://appcine.b-cdn.net/Codegg/Fc2ppv-4862565-Rm%20Reducing%20Mosaic%20Huge%20Breasted%20Nurse%20Wife%20With.mp4",
-                    estudio: "FC2PPV",
-                    actriz: "Varios"
-                }
-            ]
-        }
-    ]
-};
+    { 
+        id: "NGOD-170", 
+        titulo: "NGOD-170 Uncensored", 
+        poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", 
+        estudio: "Jet Eizo" 
+    },
+    { 
+        id: "IPIT-012", 
+        titulo: "IPIT-012 Película", 
+        poster: "https://i.ibb.co/svJswVLW/IPIT-012.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4", 
+        estudio: "Idea Pocket" 
+    }
+];
 
-document.getElementById("logo-title").innerText = CONFIG.pageTitle;
-document.getElementById("hero-img").src = CONFIG.hero.image;
-document.getElementById("hero-title").innerText = CONFIG.hero.title;
-
-// Botón HERO configurado para enviar background
-document.getElementById("hero-button").onclick = () => {
-    abrirDetalles(CONFIG.hero.id, CONFIG.hero.title, CONFIG.hero.image, CONFIG.hero.video, CONFIG.hero.estudio, CONFIG.hero.actriz, CONFIG.hero.background);
-};
-
-function abrirDetalles(id, titulo, imagen, video, estudio, actriz, background) {
-    localStorage.setItem('peli_id', id);
-    localStorage.setItem('peli_titulo', titulo);
-    localStorage.setItem('peli_imagen', imagen); // Poster
-    localStorage.setItem('peli_video', video);
-    localStorage.setItem('peli_estudio', estudio);
-    localStorage.setItem('peli_actriz', actriz);
-    localStorage.setItem('peli_background', background || ""); // Fondo horizontal
-    window.location.href = "detalles.html";
+// --- LÓGICA DEL HERO ---
+const pHero = baseDeDatos[0]; // Carga la primera peli de la lista como hero
+if(pHero) {
+    document.getElementById("hero-img").src = pHero.bg || pHero.poster;
+    document.getElementById("hero-title").innerText = pHero.titulo;
+    document.getElementById("hero-button").onclick = () => abrirDetalles(pHero.id);
 }
 
-function revealHero(img) {
-    img.style.opacity = "1";
-    document.getElementById("hero-box").classList.remove("skeleton");
+// --- FUNCIÓN PARA IR A DETALLES ---
+function abrirDetalles(id) {
+    // Buscamos la peli en la lista para mandar TODOS los datos
+    const p = baseDeDatos.find(item => item.id === id);
+    if(p) {
+        localStorage.setItem('peli_id', p.id);
+        localStorage.setItem('peli_titulo', p.titulo);
+        localStorage.setItem('peli_imagen', p.poster);
+        localStorage.setItem('peli_background', p.bg || "");
+        localStorage.setItem('peli_video', p.video);
+        localStorage.setItem('peli_estudio', p.estudio);
+        window.location.href = "detalles.html";
+    }
 }
 
-function removeSkeleton(img) {
-    img.style.opacity = "1";
-    img.parentElement.classList.remove("skeleton");
-}
+// --- GENERAR LAS FILAS ---
+const container = document.getElementById("sections-container");
+const sec = document.createElement("div");
+sec.className = "section";
+sec.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-recientes"></div>`;
+container.appendChild(sec);
 
-const sectionsContainer = document.getElementById("sections-container");
-CONFIG.sections.forEach(section => {
-    const sectionDiv = document.createElement("div");
-    sectionDiv.className = "section";
-    sectionDiv.innerHTML = `<h2>${section.title}</h2><p>${section.subtitle}</p><div class="image-grid"></div>`;
-    const grid = sectionDiv.querySelector(".image-grid");
-
-    section.items.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card-item";
-        // Pasamos item.background al final
-        card.onclick = () => abrirDetalles(item.id, item.titulo_largo, item.src, item.video, item.estudio, item.actriz, item.background);
-        
-        card.innerHTML = `
-            <div class="img-wrapper skeleton">
-                <img src="${item.src}" onload="removeSkeleton(this)" loading="lazy">
-                <div class="image-title">${item.label}</div>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-    sectionsContainer.appendChild(sectionDiv);
+const grid = document.getElementById("grid-recientes");
+baseDeDatos.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card-item";
+    card.onclick = () => abrirDetalles(p.id);
+    card.innerHTML = `
+        <div class="img-wrapper skeleton">
+            <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">
+            <div class="image-title">${p.id}</div>
+        </div>`;
+    grid.appendChild(card);
 });
 </script>
 </body>
