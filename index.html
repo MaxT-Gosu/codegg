@@ -67,8 +67,7 @@
             <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
             <input type="text" id="input-buscador" placeholder="Buscar por ID...">
         </div>
-        <div id="resultados-busqueda">
-            </div>
+        <div id="resultados-busqueda"></div>
     </div>
     
     <div class="hero skeleton" id="hero-box">
@@ -91,7 +90,7 @@
 <script src="peliculas.js"></script>
 
 <script>
-// La base de datos se carga desde peliculas.js. Si no existe, usamos esta de respaldo:
+// --- TU BASE DE DATOS DE RESPALDO (MANTENIDA) ---
 if (typeof baseDeDatos === 'undefined') {
     var baseDeDatos = [
         { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", estudio: "Madman", fecha: "2024-03-10", actriz: "Nombre de Actriz 1", tags: "Special, Madman, HD" },
@@ -122,7 +121,6 @@ function abrirDetalles(id) {
     }
 }
 
-// Generar Fila de Recientes (del Index)
 const container = document.getElementById("sections-container");
 const sec = document.createElement("div");
 sec.className = "section";
@@ -130,7 +128,7 @@ sec.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-re
 container.appendChild(sec);
 
 const grid = document.getElementById("grid-recientes");
-baseDeDatos.slice(0, 10).forEach(p => {
+baseDeDatos.slice(0, 20).forEach(p => {
     const card = document.createElement("div");
     card.className = "card-item";
     card.onclick = () => abrirDetalles(p.id);
@@ -138,7 +136,6 @@ baseDeDatos.slice(0, 10).forEach(p => {
     grid.appendChild(card);
 });
 
-/* LÓGICA DE BÚSQUEDA INTEGRADA */
 function abrirBuscador() {
     document.getElementById('modal-busqueda').style.display = 'block';
     document.getElementById('input-buscador').focus();
@@ -150,6 +147,7 @@ function cerrarBuscador() {
     document.getElementById('input-buscador').value = "";
 }
 
+// --- BUSCADOR GLOBAL QUE USA LA BASE DE DATOS COMPLETA ---
 const buscador = document.getElementById('input-buscador');
 buscador.addEventListener('input', (e) => {
     const texto = e.target.value.toLowerCase().trim();
@@ -158,13 +156,12 @@ buscador.addEventListener('input', (e) => {
 
     if (texto.length < 2) return;
 
-    // Filtramos directamente de la base de datos global
     const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
 
     filtrados.forEach(p => {
         const item = document.createElement('div');
         item.className = 'res-item';
-        item.onclick = () => abrirDetalles(p.id); // Redirige a Detalles con la peli clickeada
+        item.onclick = () => abrirDetalles(p.id);
         item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
         resultadosDiv.appendChild(item);
     });

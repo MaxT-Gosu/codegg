@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UnCensored - JavGG</title>
+    <title>Uncensored - JavGG</title>
     <style>
         :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #222; }
         *{margin:0;padding:0;box-sizing:border-box}
@@ -49,36 +49,37 @@
 </div>
 
 <div class="container">
-    <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Movies List</h2>
+    <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Uncensored Movies</h2>
     <div class="anime-grid" id="anime-grid"></div>
 </div>
 
 <nav class="bottom-menu">
     <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="censored.html" class="menu-item active"><i class="fas fa-film"></i><span>Censored</span></a>
-    <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
+    <a href="censored.html" class="menu-item"><i class="fas fa-film"></i><span>Censored</span></a>
+    <a href="uncensored.html" class="menu-item active"><i class="fas fa-tv"></i><span>Uncensored</span></a>
     <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
 <script src="peliculas.js"></script>
 
 <script>
+// Lista específica de Uncensored
 const peliculasLocal = [
-    { id: "IPIT-012", src: "https://i.ibb.co/svJswVLW/IPIT-012.webp" },
-    { id: "SYKH-129", src: "https://i.ibb.co/144129d/SYKH-129.webp" },
-    { id: "IPIT-009", src: "https://i.ibb.co/twWgBg3M/IPIT-009.webp" },
-    { id: "SONE-574", src: "https://i.ibb.co/mV2yJZcW/SONE-574.jpg" },
-    { id: "RKI-614", src: "https://i.ibb.co/XxK56GsD/RKI-614.jpg" },
-    { id: "JUL-941", src: "https://i.ibb.co/b5Wx9CTw/JUL-941.webp" },
-    { id: "IPX-958", src: "https://i.ibb.co/dw4jdgrp/IPX-958.jpg" },
-    { id: "JUL-843", src: "https://i.postimg.cc/FsGJHW3c/JUL-843.webp" },
-    { id: "JUL-703", src: "https://i.postimg.cc/44MMqHvV/JUL-703.webp" },
-    { id: "FNS-165", src: "https://i.postimg.cc/4NdbrCcr/FNS-165.webp" },
-    { id: "MSQD-005", src: "https://i.postimg.cc/kgz5QfXD/MSQD-005.webp" },
-    { id: "JUR-209", src: "https://i.postimg.cc/fRg7MhGh/JUR-209.webp" },
-    { id: "MIKR-076", src: "https://i.postimg.cc/PxCBnwrK/MIKR-076.webp" },
-    { id: "MIDA-543", src: "https://i.postimg.cc/BnzJdJWS/MIDA-543.webp" },
-    { id: "LULU-338", src: "https://i.postimg.cc/Mp3MKMNK/LULU-338.webp" }
+    { id: "NGOD-170", src: "https://i.ibb.co/wNV1TShf/NGOD-170.webp" },
+    { id: "GVH-255", src: "https://i.ibb.co/jPd7hpHB/GVH-255.jpg" },
+    { id: "MIAA-685", src: "https://i.ibb.co/pj8PhVfH/MIAA-685.jpg" },
+    { id: "MEYD-671", src: "https://i.ibb.co/HLTmDv2b/MEYD-671.jpg" },
+    { id: "IPIT-006", src: "https://i.postimg.cc/NjRkdLVq/IPIT-006.webp" },
+    { id: "JUR-669", src: "https://i.postimg.cc/tTSbvWGf/JUR-669.webp" },
+    { id: "IPIT-004", src: "https://i.postimg.cc/7ZHcNWWV/IPIT-004.webp" },
+    { id: "FPRE-222", src: "https://i.postimg.cc/nzZqv4C7/FPRE-222-(1).webp" },
+    { id: "099NTK-892", src: "https://i.postimg.cc/yNcgspLV/099NTK-892-(1).webp" },
+    { id: "DLDSS-483", src: "https://i.postimg.cc/XJFkgc9s/DLDSS-483.webp" },
+    { id: "AMBI-108", src: "https://i.postimg.cc/LXnPD5Lz/AMBI-108.webp" },
+    { id: "NUKA-081", src: "https://i.postimg.cc/TPH7jsz8/NUKA-081.webp" },
+    { id: "MIAB-433", src: "https://i.postimg.cc/3xXkyrJ4/MIAB-433.webp" },
+    { id: "VAGU-158", src: "https://i.postimg.cc/G3kbh7K2/VAGU-158.webp" },
+    { id: "fkLPYb9", src: "https://iili.io/fkLPYb9.jpg" }
 ];
 
 function cargarContenido() {
@@ -113,7 +114,7 @@ function abrirDetalles(id, imgFallback) {
     window.location.href = "detalles.html";
 }
 
-/* LÓGICA DEL BUSCADOR INTEGRADA (BUSCA EN peliculas.js) */
+/* BUSCADOR MODAL */
 function abrirBuscador() {
     document.getElementById('modal-busqueda').style.display = 'block';
     document.getElementById('input-buscador').focus();

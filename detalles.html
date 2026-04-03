@@ -29,21 +29,21 @@
         .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
         .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
 
-        /* BUSCADOR MODAL MEJORADO */
         #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
         .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
         .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
         
-        /* RESULTADOS DENTRO DEL BUSCADOR */
         #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
         .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
         .res-item img { width: 100%; height: 100%; object-fit: cover; }
         .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
+        /* MENÚ CORREGIDO */
         .menu { position: fixed; bottom: 0; width: 100%; background: rgba(15,15,15,0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
-        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; }
+        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; width: 25%; }
         .menu-item i { font-size: 20px; margin-bottom: 4px; }
+        .menu-item:active { color: var(--primary); }
 
         #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 2000; }
         video { width: 100%; height: 100%; }
@@ -58,8 +58,7 @@
         <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
         <input type="text" id="input-buscador" placeholder="Buscar por ID...">
     </div>
-    <div id="resultados-busqueda">
-        </div>
+    <div id="resultados-busqueda"></div>
 </div>
 
 <div class="hero"><div id="hero-bg"></div></div>
@@ -77,10 +76,10 @@
 </div>
 
 <nav class="menu">
-    <a href="index.html" class="menu-item"><i class="fas fa-home"></i>Home</a>
-    <a href="censored.html" class="menu-item"><i class="fas fa-film"></i>Censored</a>
-    <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i>Uncensored</a>
-    <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i>Buscar</button>
+    <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="censored.html" class="menu-item"><i class="fas fa-film"></i><span>Censored</span></a>
+    <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
+    <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
 <div id="player-overlay"><button class="close" onclick="closePlayer()">&times;</button><video id="v" controls></video></div>
@@ -118,7 +117,6 @@
         });
     }
 
-    /* LÓGICA DEL BUSCADOR INDEPENDIENTE */
     function abrirBuscador() {
         document.getElementById('modal-busqueda').style.display = 'block';
         document.getElementById('input-buscador').focus();
@@ -133,17 +131,12 @@
         const texto = e.target.value.toLowerCase().trim();
         const resultadosDiv = document.getElementById('resultados-busqueda');
         resultadosDiv.innerHTML = "";
-
         if (texto.length < 2) return;
-
-        // Buscamos en peliculas.js (baseDeDatos)
         const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
-
         filtrados.forEach(p => {
             const item = document.createElement('div');
             item.className = 'res-item';
             item.onclick = () => {
-                // Guardar datos y RECARGAR la página con la nueva peli
                 localStorage.setItem('peli_id', p.id);
                 localStorage.setItem('peli_titulo', p.titulo);
                 localStorage.setItem('peli_imagen', p.poster);
@@ -173,8 +166,5 @@
         document.getElementById('player-overlay').style.display = 'none';
     }
 </script>
-
-<script src="https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js"></script>
-
 </body>
 </html>
