@@ -16,27 +16,23 @@
     header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); position: absolute; width: 100%; z-index: 10; }
     header h1 { font-size: 26px; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
 
-    /* BUSCADOR MODAL (OCULTO POR DEFECTO) */
+    /* BUSCADOR MODAL MEJORADO */
     #modal-busqueda { 
-        display: none; 
-        position: fixed; 
-        inset: 0; 
-        background: rgba(0,0,0,0.95); 
-        z-index: 2000; 
-        padding: 40px 20px; 
-        backdrop-filter: blur(10px); 
+        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); 
+        z-index: 2000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; 
     }
     .search-box-modal { 
-        background: #1a1a1a; 
-        border-radius: 8px; 
-        display: flex; 
-        align-items: center; 
-        padding: 15px; 
-        border: 1px solid var(--accent-color); 
-        margin-top: 20px;
+        background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; 
+        padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; 
     }
     .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
-    .close-search { position: absolute; top: 20px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+    .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+    
+    /* RESULTADOS DENTRO DEL BUSCADOR */
+    #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
+    .res-item img { width: 100%; height: 100%; object-fit: cover; }
+    .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
     .hero { position: relative; width: 100%; height: 60vh; overflow: hidden; margin-bottom: 20px; background: #000; }
     .hero img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.8s ease; }
@@ -67,12 +63,12 @@
 
     <div id="modal-busqueda">
         <button class="close-search" onclick="cerrarBuscador()">&times;</button>
-        <h2 style="text-align: center; margin-top: 50px;">¿Qué estás buscando?</h2>
         <div class="search-box-modal">
             <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
-            <input type="text" id="input-buscador" placeholder="Buscar por ID (ej: JUL-908)...">
+            <input type="text" id="input-buscador" placeholder="Buscar por ID...">
         </div>
-        <p style="color: #666; text-align: center; margin-top: 20px; font-size: 14px;">La lista se filtrará automáticamente.</p>
+        <div id="resultados-busqueda">
+            </div>
     </div>
     
     <div class="hero skeleton" id="hero-box">
@@ -92,31 +88,16 @@
     <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
+<script src="peliculas.js"></script>
+
 <script>
-const baseDeDatos = [
-    { 
-        id: "JUL-908", 
-        titulo: "JUL-908 Especial", 
-        poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", 
-        bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
-        video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", 
-        estudio: "Madman",
-        fecha: "2024-03-10",
-        actriz: "Nombre de Actriz 1", 
-        tags: "Special, Madman, HD"
-    },
-    { 
-        id: "NGOD-170", 
-        titulo: "NGOD-170 Uncensored", 
-        poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", 
-        bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", 
-        video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", 
-        estudio: "Jet Eizo",
-        fecha: "2024-02-28",
-        actriz: "Nombre de Actriz 2",
-        tags: "Uncensored, Jet Eizo, Creampie"
-    }
-];
+// La base de datos se carga desde peliculas.js. Si no existe, usamos esta de respaldo:
+if (typeof baseDeDatos === 'undefined') {
+    var baseDeDatos = [
+        { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", estudio: "Madman", fecha: "2024-03-10", actriz: "Nombre de Actriz 1", tags: "Special, Madman, HD" },
+        { id: "NGOD-170", titulo: "NGOD-170 Uncensored", poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", estudio: "Jet Eizo", fecha: "2024-02-28", actriz: "Nombre de Actriz 2", tags: "Uncensored, Jet Eizo, Creampie" }
+    ];
+}
 
 const pHero = baseDeDatos[0]; 
 if(pHero) {
@@ -141,6 +122,7 @@ function abrirDetalles(id) {
     }
 }
 
+// Generar Fila de Recientes (del Index)
 const container = document.getElementById("sections-container");
 const sec = document.createElement("div");
 sec.className = "section";
@@ -148,7 +130,7 @@ sec.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-re
 container.appendChild(sec);
 
 const grid = document.getElementById("grid-recientes");
-baseDeDatos.forEach(p => {
+baseDeDatos.slice(0, 10).forEach(p => {
     const card = document.createElement("div");
     card.className = "card-item";
     card.onclick = () => abrirDetalles(p.id);
@@ -156,7 +138,7 @@ baseDeDatos.forEach(p => {
     grid.appendChild(card);
 });
 
-/* LÓGICA DE LA VENTANA DE BÚSQUEDA */
+/* LÓGICA DE BÚSQUEDA INTEGRADA */
 function abrirBuscador() {
     document.getElementById('modal-busqueda').style.display = 'block';
     document.getElementById('input-buscador').focus();
@@ -164,14 +146,27 @@ function abrirBuscador() {
 
 function cerrarBuscador() {
     document.getElementById('modal-busqueda').style.display = 'none';
+    document.getElementById('resultados-busqueda').innerHTML = "";
+    document.getElementById('input-buscador').value = "";
 }
 
 const buscador = document.getElementById('input-buscador');
 buscador.addEventListener('input', (e) => {
     const texto = e.target.value.toLowerCase().trim();
-    document.querySelectorAll('.card-item').forEach(card => {
-        const idpeli = card.querySelector('.image-title').innerText.toLowerCase();
-        card.style.display = idpeli.includes(texto) ? "block" : "none";
+    const resultadosDiv = document.getElementById('resultados-busqueda');
+    resultadosDiv.innerHTML = "";
+
+    if (texto.length < 2) return;
+
+    // Filtramos directamente de la base de datos global
+    const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
+
+    filtrados.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'res-item';
+        item.onclick = () => abrirDetalles(p.id); // Redirige a Detalles con la peli clickeada
+        item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
+        resultadosDiv.appendChild(item);
     });
 });
 </script>

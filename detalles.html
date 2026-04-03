@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; }
+        :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; --accent-color: #E50914; }
         body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; }
         
         .hero { position: relative; width: 100%; height: 42vh; background: #000; overflow: hidden; }
@@ -18,36 +18,32 @@
         .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
         h1 { font-size: 24px; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         
-        .btn-play { 
-            background: #fff; 
-            color: #000; 
-            border: none; 
-            width: 100%; 
-            padding: 14px; 
-            border-radius: 6px; 
-            font-weight: 900; 
-            font-size: 16px; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px;
-            margin-bottom: 25px;
-        }
+        .btn-play { background: #fff; color: #000; border: none; width: 100%; padding: 14px; border-radius: 6px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 25px; }
 
         .info-box { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
         .row { display: flex; align-items: center; font-size: 14px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
-        .row i.arrow { color: #fff; margin-right: 10px; font-size: 10px; }
+        .row i.arrow { color: var(--primary); margin-right: 10px; font-size: 10px; }
         .label { color: #888; margin-right: 6px; font-weight: 400; width: 100px; }
-        .value { color: var(--link); text-decoration: none; }
+        .value { color: var(--link); text-decoration: none; font-weight: 700; }
 
-        .tag-list { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
-        .tag { color: var(--link); display: flex; align-items: center; gap: 6px; font-size: 14px; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+        .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
+
+        /* BUSCADOR MODAL MEJORADO */
+        #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
+        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
+        .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
+        .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+        
+        /* RESULTADOS DENTRO DEL BUSCADOR */
+        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+        .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
+        .res-item img { width: 100%; height: 100%; object-fit: cover; }
+        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
         .menu { position: fixed; bottom: 0; width: 100%; background: rgba(15,15,15,0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
-        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; }
         .menu-item i { font-size: 20px; margin-bottom: 4px; }
-        .menu-item.active { color: var(--primary); }
 
         #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 2000; }
         video { width: 100%; height: 100%; }
@@ -56,54 +52,42 @@
 </head>
 <body>
 
-<div class="hero">
-    <div id="hero-bg"></div>
+<div id="modal-busqueda">
+    <button class="close-search" onclick="cerrarBuscador()">&times;</button>
+    <div class="search-box-modal">
+        <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
+        <input type="text" id="input-buscador" placeholder="Buscar por ID...">
+    </div>
+    <div id="resultados-busqueda">
+        </div>
 </div>
 
+<div class="hero"><div id="hero-bg"></div></div>
 <div class="header-content">
     <span class="badge" id="p-id">---</span>
     <h1 id="p-title">Cargando...</h1>
-    
-    <button class="btn-play" onclick="play()">
-        <i class="fas fa-play"></i> REPRODUCIR AHORA
-    </button>
+    <button class="btn-play" onclick="play()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
 </div>
 
 <div class="info-box">
-    <div class="row">
-        <i class="fas fa-caret-right arrow"></i>
-        <span class="label">Release:</span>
-        <span class="value" id="p-fecha">---</span>
-    </div>
-    <div class="row">
-        <i class="fas fa-caret-right arrow"></i>
-        <span class="label">Studio:</span>
-        <span class="value" id="p-studio">---</span>
-    </div>
-    <div class="row">
-        <i class="fas fa-caret-right arrow"></i>
-        <span class="label">Actriz:</span> <span class="value" id="p-actriz">---</span> </div>
-    <div class="row" style="border:none;">
-        <i class="fas fa-caret-right arrow"></i>
-        <span class="label">Tags:</span>
-        <div class="tag-list" id="p-tags"></div>
-    </div>
+    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Release:</span><span class="value" id="p-fecha">---</span></div>
+    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Studio:</span><span class="value" id="p-studio">---</span></div>
+    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Actriz:</span><span class="value" id="p-actriz">---</span></div>
+    <div class="row" style="border:none;"><i class="fas fa-caret-right arrow"></i><span class="label">Tags:</span><div class="tag-list" id="p-tags"></div></div>
 </div>
 
 <nav class="menu">
     <a href="index.html" class="menu-item"><i class="fas fa-home"></i>Home</a>
     <a href="censored.html" class="menu-item"><i class="fas fa-film"></i>Censored</a>
     <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i>Uncensored</a>
-    <a href="index.html" class="menu-item"><i class="fas fa-search"></i>Buscar</a>
+    <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i>Buscar</button>
 </nav>
 
-<div id="player-overlay">
-    <button class="close" onclick="closePlayer()">&times;</button>
-    <video id="v" controls preload="none"></video>
-</div>
+<div id="player-overlay"><button class="close" onclick="closePlayer()">&times;</button><video id="v" controls></video></div>
+
+<script src="peliculas.js"></script>
 
 <script>
-    // Recuperamos todos los datos guardados en el navegador
     const data = {
         id: localStorage.getItem('peli_id'),
         title: localStorage.getItem('peli_titulo'),
@@ -112,55 +96,80 @@
         video: localStorage.getItem('peli_video'),
         studio: localStorage.getItem('peli_estudio'),
         fecha: localStorage.getItem('peli_fecha'),
-        actriz: localStorage.getItem('peli_actriz'), // Busca la clave peli_actriz
+        actriz: localStorage.getItem('peli_actriz'),
         tags: localStorage.getItem('peli_tags')
     };
 
-    // Fondo (Background)
     const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
-    if(finalBg) {
-        document.getElementById('hero-bg').style.backgroundImage = "url('" + finalBg + "')";
-    }
-    
-    // Título e ID
+    if(finalBg) document.getElementById('hero-bg').style.backgroundImage = "url('" + finalBg + "')";
     document.getElementById('p-title').innerText = data.title || "Sin título";
     document.getElementById('p-id').innerText = data.id || "N/A";
-    
-    // Información Detallada Dinámica
     document.getElementById('p-studio').innerText = data.studio || "Desconocido";
     document.getElementById('p-fecha').innerText = data.fecha || "No disponible";
-    document.getElementById('p-actriz').innerText = data.actriz || "Desconocida"; // Rellena el nuevo ID
+    document.getElementById('p-actriz').innerText = data.actriz || "Desconocida";
 
-    // Generar Tags Dinámicos
     const tagContainer = document.getElementById('p-tags');
-    if(data.tags && data.tags !== "null" && data.tags !== "") {
-        const tagsArray = data.tags.split(','); 
-        tagsArray.forEach(tagText => {
+    if(data.tags) {
+        data.tags.split(',').forEach(t => {
             const span = document.createElement('span');
             span.className = 'tag';
-            span.innerHTML = `<i class="fas fa-tag"></i> ${tagText.trim()}`;
+            span.innerHTML = `<i class="fas fa-tag"></i> ${t.trim()}`;
             tagContainer.appendChild(span);
         });
-    } else {
-        tagContainer.innerHTML = '<span class="tag">Sin etiquetas</span>';
     }
 
+    /* LÓGICA DEL BUSCADOR INDEPENDIENTE */
+    function abrirBuscador() {
+        document.getElementById('modal-busqueda').style.display = 'block';
+        document.getElementById('input-buscador').focus();
+    }
+    function cerrarBuscador() {
+        document.getElementById('modal-busqueda').style.display = 'none';
+        document.getElementById('resultados-busqueda').innerHTML = "";
+        document.getElementById('input-buscador').value = "";
+    }
+
+    document.getElementById('input-buscador').addEventListener('input', (e) => {
+        const texto = e.target.value.toLowerCase().trim();
+        const resultadosDiv = document.getElementById('resultados-busqueda');
+        resultadosDiv.innerHTML = "";
+
+        if (texto.length < 2) return;
+
+        // Buscamos en peliculas.js (baseDeDatos)
+        const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
+
+        filtrados.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'res-item';
+            item.onclick = () => {
+                // Guardar datos y RECARGAR la página con la nueva peli
+                localStorage.setItem('peli_id', p.id);
+                localStorage.setItem('peli_titulo', p.titulo);
+                localStorage.setItem('peli_imagen', p.poster);
+                localStorage.setItem('peli_background', p.bg || "");
+                localStorage.setItem('peli_video', p.video);
+                localStorage.setItem('peli_estudio', p.estudio);
+                localStorage.setItem('peli_fecha', p.fecha || "");
+                localStorage.setItem('peli_actriz', p.actriz || "");
+                localStorage.setItem('peli_tags', p.tags || "");
+                location.reload(); 
+            };
+            item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
+            resultadosDiv.appendChild(item);
+        });
+    });
+
     function play() {
-        if(!data.video || data.video === "null") {
-            alert("⚠️ Enlace de video no disponible actualmente.");
-            return;
-        }
         const v = document.getElementById('v');
+        if(!data.video) return alert("Video no disponible");
         v.src = data.video;
         document.getElementById('player-overlay').style.display = 'block';
         v.play();
     }
-
     function closePlayer() {
         const v = document.getElementById('v');
-        v.pause();
-        v.src = "";
-        document.getElementById('player-overlay').style.none = 'none';
+        v.pause(); v.src = "";
         document.getElementById('player-overlay').style.display = 'none';
     }
 </script>

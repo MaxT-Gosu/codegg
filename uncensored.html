@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uncensored - JavGG</title>
+    <title>UnCensored - JavGG</title>
     <style>
         :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #222; }
         *{margin:0;padding:0;box-sizing:border-box}
@@ -13,19 +13,22 @@
         .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
         
         .container { padding: 0 12px; }
-
-        /* BUSCADOR */
-        .search-container { margin-bottom: 20px; padding: 0 5px; }
-        .search-box { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 10px 15px; border: 1px solid #333; }
-        .search-box i { color: #888; margin-right: 10px; }
-        .search-box input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 14px; }
-
         .anime-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .anime-card { position: relative; background: var(--card-bg); border-radius: 10px; overflow: hidden; aspect-ratio: 2 / 3; box-shadow: 0 4px 15px rgba(0,0,0,0.6); transition: transform 0.2s ease; cursor: pointer; }
         .anime-card img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.6s ease; }
-        
-        /* ID Flotante en la card para que el buscador lo encuentre */
         .card-id-tag { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); font-size: 9px; text-align: center; padding: 2px 0; color: #aaa; }
+
+        /* BUSCADOR MODAL PRO */
+        #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
+        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
+        .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
+        .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+        
+        /* RESULTADOS DENTRO DEL BUSCADOR */
+        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+        .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
+        .res-item img { width: 100%; height: 100%; object-fit: cover; }
+        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
         .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
         .menu-item { text-decoration: none; color: #888; font-size: 11px; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; }
@@ -36,53 +39,46 @@
 </head>
 <body>
 
-<div class="container">
-    <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Uncensored Movies</h2>
-
-    <div class="search-container">
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="input-buscador" placeholder="Buscar ID...">
-        </div>
+<div id="modal-busqueda">
+    <button class="close-search" onclick="cerrarBuscador()">&times;</button>
+    <div class="search-box-modal">
+        <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
+        <input type="text" id="input-buscador" placeholder="Buscar por ID en la BD...">
     </div>
+    <div id="resultados-busqueda"></div>
+</div>
 
+<div class="container">
+    <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Movies List</h2>
     <div class="anime-grid" id="anime-grid"></div>
 </div>
 
 <nav class="bottom-menu">
     <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="censored.html" class="menu-item"><i class="fas fa-film"></i><span>Censored</span></a>
-    <a href="uncensored.html" class="menu-item active"><i class="fas fa-tv"></i><span>Uncensored</span></a>
-    <button class="menu-item" onclick="document.getElementById('input-buscador').focus()"><i class="fas fa-search"></i><span>Buscar</span></button>
+    <a href="censored.html" class="menu-item active"><i class="fas fa-film"></i><span>Censored</span></a>
+    <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
+    <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
 <script src="peliculas.js"></script>
 
 <script>
 const peliculasLocal = [
-    { id: "NGOD-170", src: "https://i.ibb.co/wNV1TShf/NGOD-170.webp" },
-    { id: "1773376012", src: "https://cdn001.imggle.net/webp/poster/06032026/1773376012.webp" },
-    { id: "GVH-255", src: "https://i.ibb.co/jPd7hpHB/GVH-255.jpg" },
-    { id: "MIAA-685", src: "https://i.ibb.co/pj8PhVfH/MIAA-685.jpg" },
-    { id: "MEYD-671", src: "https://i.ibb.co/HLTmDv2b/MEYD-671.jpg" },
-    { id: "JUL-908", src: "https://i.ibb.co/Y48wTByV/JUL-908.jpg" },
-    { id: "81-RFPM05-TL-AC-SL1500", src: "https://i.ibb.co/9J0B3TY/81-RFPM05-TL-AC-SL1500.jpg" },
-    { id: "IPIT-006", src: "https://i.postimg.cc/NjRkdLVq/IPIT-006.webp" },
-    { id: "JUR-669", src: "https://i.postimg.cc/tTSbvWGf/JUR-669.webp" },
-    { id: "IPIT-004", src: "https://i.postimg.cc/7ZHcNWWV/IPIT-004.webp" },
-    { id: "FPRE-222", src: "https://i.postimg.cc/nzZqv4C7/FPRE-222-(1).webp" },
-    { id: "099NTK-892", src: "https://i.postimg.cc/yNcgspLV/099NTK-892-(1).webp" },
-    { id: "DLDSS-483", src: "https://i.postimg.cc/XJFkgc9s/DLDSS-483.webp" },
-    { id: "AMBI-108", src: "https://i.postimg.cc/LXnPD5Lz/AMBI-108.webp" },
-    { id: "NUKA-081", src: "https://i.postimg.cc/TPH7jsz8/NUKA-081.webp" },
-    { id: "MIAB-433", src: "https://i.postimg.cc/3xXkyrJ4/MIAB-433.webp" },
-    { id: "VAGU-158", src: "https://i.postimg.cc/G3kbh7K2/VAGU-158.webp" },
-    { id: "FPRE-112", src: "https://i.postimg.cc/5NybS4Z1/FPRE-112.jpg" },
-    { id: "SNOS-063", src: "https://i.postimg.cc/HWtPsBXd/SNOS-063.webp" },
-    { id: "SNOS-050", src: "https://i.postimg.cc/MH2jbXQh/SNOS-050.webp" },
-    { id: "1730688308", src: "https://cdn001.imggle.net/webp/poster/20240410/1730688308.webp" },
-    { id: "1633910108", src: "https://cdn001.imggle.net/webp/poster/20212709/1633910108.webp" },
-    { id: "fkLPYb9", src: "https://iili.io/fkLPYb9.jpg" }
+    { id: "IPIT-012", src: "https://i.ibb.co/svJswVLW/IPIT-012.webp" },
+    { id: "SYKH-129", src: "https://i.ibb.co/144129d/SYKH-129.webp" },
+    { id: "IPIT-009", src: "https://i.ibb.co/twWgBg3M/IPIT-009.webp" },
+    { id: "SONE-574", src: "https://i.ibb.co/mV2yJZcW/SONE-574.jpg" },
+    { id: "RKI-614", src: "https://i.ibb.co/XxK56GsD/RKI-614.jpg" },
+    { id: "JUL-941", src: "https://i.ibb.co/b5Wx9CTw/JUL-941.webp" },
+    { id: "IPX-958", src: "https://i.ibb.co/dw4jdgrp/IPX-958.jpg" },
+    { id: "JUL-843", src: "https://i.postimg.cc/FsGJHW3c/JUL-843.webp" },
+    { id: "JUL-703", src: "https://i.postimg.cc/44MMqHvV/JUL-703.webp" },
+    { id: "FNS-165", src: "https://i.postimg.cc/4NdbrCcr/FNS-165.webp" },
+    { id: "MSQD-005", src: "https://i.postimg.cc/kgz5QfXD/MSQD-005.webp" },
+    { id: "JUR-209", src: "https://i.postimg.cc/fRg7MhGh/JUR-209.webp" },
+    { id: "MIKR-076", src: "https://i.postimg.cc/PxCBnwrK/MIKR-076.webp" },
+    { id: "MIDA-543", src: "https://i.postimg.cc/BnzJdJWS/MIDA-543.webp" },
+    { id: "LULU-338", src: "https://i.postimg.cc/Mp3MKMNK/LULU-338.webp" }
 ];
 
 function cargarContenido() {
@@ -97,11 +93,7 @@ function cargarContenido() {
 
 function abrirDetalles(id, imgFallback) {
     localStorage.clear();
-
-    let p = null;
-    if (typeof baseDeDatos !== 'undefined') {
-        p = baseDeDatos.find(item => item.id === id);
-    }
+    let p = (typeof baseDeDatos !== 'undefined') ? baseDeDatos.find(item => item.id === id) : null;
 
     if(p) {
         localStorage.setItem('peli_id', p.id);
@@ -111,24 +103,42 @@ function abrirDetalles(id, imgFallback) {
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
         localStorage.setItem('peli_fecha', p.fecha || "No disponible");
-        localStorage.setItem('peli_actriz', p.actriz || "Desconocida"); // CORREGIDO PARA ACTRIZ
+        localStorage.setItem('peli_actriz', p.actriz || "Desconocida");
         localStorage.setItem('peli_tags', p.tags || "");
     } else {
         localStorage.setItem('peli_id', id);
         localStorage.setItem('peli_imagen', imgFallback);
         localStorage.setItem('peli_titulo', id);
-        localStorage.setItem('peli_actriz', "Desconocida");
     }
-
     window.location.href = "detalles.html";
 }
 
-// LÓGICA DEL BUSCADOR
+/* LÓGICA DEL BUSCADOR INTEGRADA (BUSCA EN peliculas.js) */
+function abrirBuscador() {
+    document.getElementById('modal-busqueda').style.display = 'block';
+    document.getElementById('input-buscador').focus();
+}
+function cerrarBuscador() {
+    document.getElementById('modal-busqueda').style.display = 'none';
+    document.getElementById('resultados-busqueda').innerHTML = "";
+    document.getElementById('input-buscador').value = "";
+}
+
 document.getElementById('input-buscador').addEventListener('input', (e) => {
     const texto = e.target.value.toLowerCase().trim();
-    document.querySelectorAll('.anime-card').forEach(card => {
-        const idpeli = card.querySelector('.card-id-tag').innerText.toLowerCase();
-        card.style.display = idpeli.includes(texto) ? "block" : "none";
+    const resultadosDiv = document.getElementById('resultados-busqueda');
+    resultadosDiv.innerHTML = "";
+
+    if (texto.length < 2 || typeof baseDeDatos === 'undefined') return;
+
+    const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
+
+    filtrados.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'res-item';
+        item.onclick = () => abrirDetalles(p.id, p.poster);
+        item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
+        resultadosDiv.appendChild(item);
     });
 });
 

@@ -6,119 +6,55 @@
     <title>Censored - JavGG</title>
 
     <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --accent-color: #E50914; 
-            --card-bg: #1a1a1a;
-            --skeleton-bg: #222;
-        }
-
+        :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #222; }
         *{margin:0;padding:0;box-sizing:border-box}
-
-        body{
-            font-family: 'Roboto', Arial, sans-serif;
-            background: var(--bg-color);
-            color: #fff;
-            padding-top: 20px;
-            padding-bottom: 100px;
-        }
+        body{ font-family: 'Roboto', Arial, sans-serif; background: var(--bg-color); color: #fff; padding-top: 20px; padding-bottom: 100px; }
 
         /* ---------- ANIMACIÓN CARGA ---------- */
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        .skeleton {
-            background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
 
         .container { padding: 0 10px; }
 
-        /* BUSCADOR */
-        .search-container { margin-bottom: 20px; padding: 0 5px; }
-        .search-box { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 10px 15px; border: 1px solid #333; }
-        .search-box i { color: #888; margin-right: 10px; }
-        .search-box input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 14px; }
+        /* BUSCADOR MODAL PRO (OCULTO) */
+        #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
+        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
+        .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
+        .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+        
+        /* RESULTADOS DENTRO DEL BUSCADOR */
+        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+        .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
+        .res-item img { width: 100%; height: 100%; object-fit: cover; }
+        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
-        /* ---------- GRID 3X3 ---------- */
-        .anime-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 10px;
-        }
-
-        .anime-card {
-            position: relative;
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            aspect-ratio: 2 / 3;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .anime-card:active { transform: scale(0.95); }
-
-        .anime-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        /* ID Flotante para el buscador */
+        /* ---------- GRID ---------- */
+        .anime-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .anime-card { position: relative; background: var(--card-bg); border-radius: 8px; overflow: hidden; aspect-ratio: 2 / 3; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: transform 0.3s ease; cursor: pointer; }
+        .anime-card img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.5s ease; }
         .card-id-tag { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); font-size: 9px; text-align: center; padding: 2px 0; color: #aaa; font-weight: bold; }
 
         /* ---------- MENU INFERIOR ---------- */
-        .bottom-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(15px);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            z-index: 1000;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .menu-item {
-            text-decoration: none;
-            color: #888;
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
+        .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .menu-item { text-decoration: none; color: #888; font-size: 11px; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; }
         .menu-item i { font-size: 18px; margin-bottom: 5px; }
         .menu-item.active { color: var(--accent-color); }
     </style>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
+<div id="modal-busqueda">
+    <button class="close-search" onclick="cerrarBuscador()">&times;</button>
+    <div class="search-box-modal">
+        <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
+        <input type="text" id="input-buscador" placeholder="Buscar ID en toda la App...">
+    </div>
+    <div id="resultados-busqueda"></div>
+</div>
+
 <div class="container">
     <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Censored Movies</h2>
-
-    <div class="search-container">
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="input-buscador" placeholder="Buscar ID (ej: IPIT)...">
-        </div>
-    </div>
-
     <div class="anime-grid" id="anime-grid"></div>
 </div>
 
@@ -126,13 +62,12 @@
     <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="censored.html" class="menu-item active"><i class="fas fa-film"></i><span>Censored</span></a>
     <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
-    <button class="menu-item" onclick="document.getElementById('input-buscador').focus()"><i class="fas fa-search"></i><span>Buscar</span></button>
+    <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
 <script src="peliculas.js"></script>
 
 <script>
-// LISTA LOCAL
 const peliculasLocal = [
     { id: "IPIT-012", src: "https://i.ibb.co/svJswVLW/IPIT-012.webp" },
     { id: "SYKH-129", src: "https://i.ibb.co/144129d/SYKH-129.webp" },
@@ -148,10 +83,7 @@ const peliculasLocal = [
     { id: "JUR-209", src: "https://i.postimg.cc/fRg7MhGh/JUR-209.webp" },
     { id: "MIKR-076", src: "https://i.postimg.cc/PxCBnwrK/MIKR-076.webp" },
     { id: "MIDA-543", src: "https://i.postimg.cc/BnzJdJWS/MIDA-543.webp" },
-    { id: "LULU-338", src: "https://i.postimg.cc/Mp3MKMNK/LULU-338.webp" },
-    { id: "MIDE-992", src: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp" },
-    { id: "MOSJ-017", src: "https://cdn001.imggle.net/webp/poster/01202026/1772038390.webp" },
-    { id: "STARS-111", src: "https://cdn001.imggle.net/webp/poster/20242012/1735437448.webp" }
+    { id: "LULU-338", src: "https://i.postimg.cc/Mp3MKMNK/LULU-338.webp" }
 ];
 
 function cargarImagenes() {
@@ -166,11 +98,7 @@ function cargarImagenes() {
 
 function abrirDetalles(id, imgFallback) {
     localStorage.clear();
-
-    let p = null;
-    if (typeof baseDeDatos !== 'undefined') {
-        p = baseDeDatos.find(item => item.id === id);
-    }
+    let p = (typeof baseDeDatos !== 'undefined') ? baseDeDatos.find(item => item.id === id) : null;
 
     if(p) {
         localStorage.setItem('peli_id', p.id);
@@ -180,24 +108,43 @@ function abrirDetalles(id, imgFallback) {
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
         localStorage.setItem('peli_fecha', p.fecha || "No disponible");
-        localStorage.setItem('peli_actriz', p.actriz || "Desconocida"); // CORREGIDO PARA ACTRIZ
+        localStorage.setItem('peli_actriz', p.actriz || "Desconocida");
         localStorage.setItem('peli_tags', p.tags || "");
     } else {
         localStorage.setItem('peli_id', id);
         localStorage.setItem('peli_imagen', imgFallback);
         localStorage.setItem('peli_titulo', id);
-        localStorage.setItem('peli_actriz', "Desconocida");
     }
-    
     window.location.href = "detalles.html";
 }
 
-// LÓGICA DEL BUSCADOR
+/* LÓGICA DEL BUSCADOR MODAL */
+function abrirBuscador() {
+    document.getElementById('modal-busqueda').style.display = 'block';
+    document.getElementById('input-buscador').focus();
+}
+function cerrarBuscador() {
+    document.getElementById('modal-busqueda').style.display = 'none';
+    document.getElementById('resultados-busqueda').innerHTML = "";
+    document.getElementById('input-buscador').value = "";
+}
+
 document.getElementById('input-buscador').addEventListener('input', (e) => {
     const texto = e.target.value.toLowerCase().trim();
-    document.querySelectorAll('.anime-card').forEach(card => {
-        const idpeli = card.querySelector('.card-id-tag').innerText.toLowerCase();
-        card.style.display = idpeli.includes(texto) ? "block" : "none";
+    const resultadosDiv = document.getElementById('resultados-busqueda');
+    resultadosDiv.innerHTML = "";
+
+    if (texto.length < 2 || typeof baseDeDatos === 'undefined') return;
+
+    // BUSCA EN LA BASE DE DATOS GLOBAL (peliculas.js)
+    const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
+
+    filtrados.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'res-item';
+        item.onclick = () => abrirDetalles(p.id, p.poster);
+        item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
+        resultadosDiv.appendChild(item);
     });
 });
 
@@ -208,6 +155,5 @@ function imgLoaded(img) {
 
 document.addEventListener("DOMContentLoaded", cargarImagenes);
 </script>
-
 </body>
 </html>
