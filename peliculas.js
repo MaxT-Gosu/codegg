@@ -374,6 +374,72 @@ const baseDeDatos = [
         actriz: "Ruisa Totsuki",
         tags: "Reducing Mosaic"
     }
+	{ 
+        id: "JUL-941", 
+        titulo: "A Foreign Wife Who Is Not Familiar With The Housing", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221904/1650607404.webp", 
+        bg: "https://i.ibb.co/XfYhCfrZ/JUL-941.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-941.mp4", 
+        estudio: "Madonna",
+        fecha: "Apr. 26, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "MEYD-671", 
+        titulo: "The Company That Applied For The Part Recruitment Called", 
+        poster: "https://cdn002.imggle.net/webp/poster/meyd-671.webp", 
+        bg: "https://i.ibb.co/fsrG0HQ/MEYD-671.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Meyd-671.mp4", 
+        estudio: "Tameike Goro",
+        fecha: "Apr. 13, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "MIAA-685", 
+        titulo: "Foreign Bride Who Does Not Know Foreplay Was Trained", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221108/1660627911.webp", 
+        bg: "https://i.ibb.co/1tyfK72M/MIAA-685.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIAA-685.mp4", 
+        estudio: "Moodyz",
+        fecha: "Aug. 02, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "RKI-614", 
+        titulo: "Ultra-Sexy Dirty Talk Master Lily Heart's", 
+        poster: "https://cdn002.imggle.net/webp/poster/rki-614.webp", 
+        bg: "https://i.ibb.co/M51v2Swp/RKI-614.png", 
+        video: "https://appcine.b-cdn.net/Codegg/RKI-614.mp4", 
+        estudio: "Moodyz",
+        fecha: "Jul. 14, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "SONE-574", 
+        titulo: "When your partner is in front of you, you", 
+        poster: "https://cdn001.imggle.net/webp/poster/20253001/1738866422.webp", 
+        bg: "https://i.ibb.co/LhxSkPcg/SONE-574.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sone-574.mp4", 
+        estudio: "S1 No.1 Style",
+        fecha: "Feb. 07, 2025",
+        actriz: "Aka Asuka",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "GVH-255", 
+        titulo: "A Lascivious Wife Who Provokes With No Bra", 
+        poster: "https://cdn002.imggle.net/webp/poster/gvh-255.webp", 
+        bg: "https://i.ibb.co/35NDYkJk/GVH-255.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Gvh-255.mp4", 
+        estudio: "Jul. 01, 2021",
+        fecha: "Feb. 07, 2025",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
