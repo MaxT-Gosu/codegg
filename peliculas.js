@@ -77,6 +77,17 @@ const baseDeDatos = [
         actriz: "Noa Haruna",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "MOSJ-017", 
+        titulo: "A Sadistic Older Sister's Educational Eroticism", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772038390.webp", 
+        bg: "https://i.postimg.cc/qBZ9Znj4/MOSJ-017.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mosj-017.mp4.mp4", 
+        estudio: "Orustak Pictures",
+        fecha: "Aug. 29, 2025",
+        actriz: "Rena Sayama",
+        tags: "Idol & Celebrity"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
