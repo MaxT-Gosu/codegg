@@ -1,3 +1,4 @@
+// Este es tu archivo peliculas.js corregido
 const baseDeDatos = [
     { 
         id: "NGOD-170", 
@@ -328,7 +329,7 @@ const baseDeDatos = [
         fecha: "Oct. 13, 2020",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "JUL-535", 
         titulo: "A Beautiful Married Woman Drowing In Pleasure At", 
@@ -339,7 +340,7 @@ const baseDeDatos = [
         fecha: "Apr. 07, 2021",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "JUL-908", 
         titulo: "Continued To Be Squid In Uncontrollable Unequaled", 
@@ -350,7 +351,7 @@ const baseDeDatos = [
         fecha: "Mar. 22, 2022",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "JIPX-958", 
         titulo: "Wild Iku Muscle Slender Beauty's Acme Super", 
@@ -361,7 +362,7 @@ const baseDeDatos = [
         fecha: "Mar. 22, 2022",
         actriz: "Ruisa Totsuki",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "JUL-941", 
         titulo: "A Foreign Wife Who Is Not Familiar With The Housing", 
@@ -372,7 +373,7 @@ const baseDeDatos = [
         fecha: "Apr. 26, 2022",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "MEYD-671", 
         titulo: "The Company That Applied For The Part Recruitment Called", 
@@ -383,7 +384,7 @@ const baseDeDatos = [
         fecha: "Apr. 13, 2021",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "MIAA-685", 
         titulo: "Foreign Bride Who Does Not Know Foreplay Was Trained", 
@@ -394,7 +395,7 @@ const baseDeDatos = [
         fecha: "Aug. 02, 2022",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "RKI-614", 
         titulo: "Ultra-Sexy Dirty Talk Master Lily Heart's", 
@@ -405,7 +406,7 @@ const baseDeDatos = [
         fecha: "Jul. 14, 2021",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "SONE-574", 
         titulo: "When your partner is in front of you, you", 
@@ -416,7 +417,7 @@ const baseDeDatos = [
         fecha: "Feb. 07, 2025",
         actriz: "Aka Asuka",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "GVH-255", 
         titulo: "A Lascivious Wife Who Provokes With No Bra", 
@@ -427,7 +428,18 @@ const baseDeDatos = [
         fecha: "Feb. 07, 2025",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    },
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "IPIT-009", 
+        titulo: "Bad Teacher - The Hot Blonde Who Fucking Devours", 
+        poster: "https://cdn001.imggle.net/webp/poster/20222612/1674519023.webp", 
+        bg: "https://i.ibb.co/tpTbHTgd/IPIT-009.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-009.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Nov. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
     { 
         id: "IPIT-009", 
         titulo: "Bad Teacher - The Hot Blonde Who Fucking Devours", 
