@@ -1,4 +1,3 @@
-// Este es tu archivo peliculas.js
 const baseDeDatos = [
     { 
         id: "NGOD-170", 
@@ -22,7 +21,7 @@ const baseDeDatos = [
         actriz: "Lily Hart",
         tags: "Older Sister"
     },
-	    { 
+    { 
         id: "URE-131", 
         titulo: "A Story About A Mother Who Gets Addicted To Sex With A Gangster", 
         poster: "https://cdn001.imggle.net/webp/poster/12082025/1767892920.webp", 
@@ -33,7 +32,7 @@ const baseDeDatos = [
         actriz: "Reika Natsume",
         tags: "Reducing Mosaic"
     },
-		{ 
+    { 
         id: "STARS-160", 
         titulo: "Getting Their Fuck On In The Club", 
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1775217128.webp", 
@@ -44,7 +43,7 @@ const baseDeDatos = [
         actriz: "Ichikawa Masami....",
         tags: "Slut, Hardcore"
     },
-		{ 
+    { 
         id: "AKB-023", 
         titulo: "Imamura Miho Cosplayer", 
         poster: "https://cdn001.imggle.net/webp/poster/20240410/1730688308.webp", 
@@ -55,7 +54,7 @@ const baseDeDatos = [
         actriz: "Miho Imamura",
         tags: "Cosplay"
     },
-	{ 
+    { 
         id: "EBWH-186", 
         titulo: "We Got Turned On By The Busty College Girl", 
         poster: "https://cdn001.imggle.net/webp/poster/20242012/1737085766.webp", 
@@ -66,7 +65,7 @@ const baseDeDatos = [
         actriz: "Hibiki Amemiya",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "PPPE-300", 
         titulo: "Brainwashing Your Boobs With Your Eyes And Ears", 
         poster: "https://cdn001.imggle.net/webp/poster/20242012/1737083638.webp", 
@@ -77,7 +76,7 @@ const baseDeDatos = [
         actriz: "Noa Haruna",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "MOSJ-017", 
         titulo: "A Sadistic Older Sister's Educational Eroticism", 
         poster: "https://cdn001.imggle.net/webp/poster/01202026/1772038390.webp", 
@@ -88,7 +87,7 @@ const baseDeDatos = [
         actriz: "Rena Sayama",
         tags: "Idol & Celebrity"
     },
-	{ 
+    { 
         id: "259LUXU-1875", 
         titulo: "I love licking your dick.", 
         poster: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp", 
@@ -99,18 +98,7 @@ const baseDeDatos = [
         actriz: "Desconocida",
         tags: "Reducing Mosaic"
     },
-	{ 
-        id: "259LUXU-1875", 
-        titulo: "I love licking your dick.", 
-        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp", 
-        bg: "https://i.ibb.co/BK3QDYmP/259-LUXU-1875.jpg", 
-        video: "https://appcine.b-cdn.net/Codegg/259LUXU-1875.mp4.mp4", 
-        estudio: "Luxury Tv",
-        fecha: "Feb. 27, 2026",
-        actriz: "Desconocida",
-        tags: "Reducing Mosaic"
-    },
-	{ 
+    { 
         id: "SNOS-050", 
         titulo: "On A Hot Spring Trip With My Girlfriend And Her Sister", 
         poster: "https://cdn001.imggle.net/webp/poster/12082025/1767893299.webp", 
@@ -121,7 +109,7 @@ const baseDeDatos = [
         actriz: "Niko Kawagoe",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "LULU-338", 
         titulo: "During Overtime, When We Were Alone In The Office", 
         poster: "https://cdn001.imggle.net/webp/poster/20242108/1727408240.webp", 
@@ -132,7 +120,7 @@ const baseDeDatos = [
         actriz: "Waka Misono",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "MIDA-543", 
         titulo: "Covered In Yua Juice, Nonstop 320 Climaxes X Convulsions 2201", 
         poster: "https://cdn001.imggle.net/webp/poster/01202026/1772385327.webp", 
@@ -143,7 +131,7 @@ const baseDeDatos = [
         actriz: " Yua Fukuda",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "MIKR-076", 
         titulo: "A Mother Who Was Repeatedly Made To Cum By A Man With An", 
         poster: "https://cdn001.imggle.net/webp/poster/01202026/1772128191.webp", 
@@ -154,7 +142,7 @@ const baseDeDatos = [
         actriz: "Aki Sasaki",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "SNOS-063", 
         titulo: "Overflowing Breasts Will Make You Cum To Your Death", 
         poster: "https://cdn001.imggle.net/webp/poster/12082025/1767893239.webp", 
@@ -165,7 +153,7 @@ const baseDeDatos = [
         actriz: "Miyuu Kiyohara",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "FPRE-112", 
         titulo: "A Voluptuous Slut Who Plays With Her Cock Pet", 
         poster: "https://cdn001.imggle.net/webp/poster/20240410/1730429980.webp", 
@@ -176,7 +164,7 @@ const baseDeDatos = [
         actriz: "Ran Kikuno",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "JUR-209", 
         titulo: "Who Used To Like Me, Has Transformed Into A Sexy", 
         poster: "https://cdn001.imggle.net/webp/poster/20242012/1737686201.webp", 
@@ -187,7 +175,7 @@ const baseDeDatos = [
         actriz: "Noa Haruna",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "VAGU-158", 
         titulo: "Making Daughter-in-law Of Nozomi And My Love", 
         poster: "https://cdn001.imggle.net/webp/poster/20242012/1735698775.webp", 
@@ -198,7 +186,7 @@ const baseDeDatos = [
         actriz: "Nozomi Tanihara",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "MIAB-433", 
         titulo: "Breast Crushing, Infinite Piston, Sperm Reflux", 
         poster: "https://cdn001.imggle.net/webp/poster/20250903/1744304112.webp", 
@@ -209,7 +197,7 @@ const baseDeDatos = [
         actriz: "Noa Haruna",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "NUKA-081", 
         titulo: "Six Creampies Without Pulling Out", 
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1773367130.webp", 
@@ -220,7 +208,7 @@ const baseDeDatos = [
         actriz: "Fumika Nagasawa",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "MSQD-005", 
         titulo: "Oral sex class Haruno Ando", 
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1773532012826.webp", 
@@ -231,7 +219,7 @@ const baseDeDatos = [
         actriz: "Haruno Ando",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "AMBI-108", 
         titulo: "Devil Father's Sex Toy Conceived And Torn", 
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1773453514.webp", 
@@ -242,7 +230,7 @@ const baseDeDatos = [
         actriz: "Planet Plus",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "DLDSS-483", 
         titulo: "Turn My Winning Mother Into A Female", 
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1772842892505.webp", 
@@ -253,7 +241,7 @@ const baseDeDatos = [
         actriz: "Suzume Mino",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "FNS-165", 
         titulo: "Who Was Unable To Return Home Due To A Typhoon", 
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1773901863398.webp", 
@@ -264,7 +252,7 @@ const baseDeDatos = [
         actriz: "Nene Yoshitaka",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "099NTK-892", 
         titulo: "A slutty body with maximum huggability and raw sex 2", 
         poster: "https://cdn001.imggle.net/webp/poster/20241115/1733784913.webp", 
@@ -275,7 +263,7 @@ const baseDeDatos = [
         actriz: "Desconocida",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "FPRE-222", 
         titulo: "Clothed Fuck With A Tall, Busty Model-type Slut", 
         poster: "https://cdn001.imggle.net/webp/poster/01202026/1770919055.webp", 
@@ -286,7 +274,7 @@ const baseDeDatos = [
         actriz: "Ran Kikuno ",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "IPIT-004", 
         titulo: "Emma Lawrence Oral SEX Queen Advent", 
         poster: "https://cdn001.imggle.net/webp/poster/20252204/1746500965.webp", 
@@ -297,7 +285,7 @@ const baseDeDatos = [
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "JUL-703", 
         titulo: "Married Secretary, President's Office Creampie Sexual Intercourse", 
         poster: "https://cdn001.imggle.net/webp/poster/20230206/1687829315.webp", 
@@ -308,7 +296,7 @@ const baseDeDatos = [
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "JUL-843", 
         titulo: "On The 7th Day, I Lost My Reason", 
         poster: "https://cdn001.imggle.net/webp/poster/20230207/1688264926.webp", 
@@ -319,7 +307,7 @@ const baseDeDatos = [
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "JUR-669", 
         titulo: "My Stepson Broke His Arms And Legs", 
         poster: "https://cdn001.imggle.net/webp/poster/06032026/1773948927.webp", 
@@ -330,7 +318,7 @@ const baseDeDatos = [
         actriz: "Miyuu Imai",
         tags: "Reducing Mosaic"
     },
-	{ 
+    { 
         id: "IPIT-006", 
         titulo: "SEX CLIMAX Pleasure Climax 3 Production Special", 
         poster: "https://cdn001.imggle.net/webp/poster/20252204/1746587696.webp", 
@@ -340,8 +328,8 @@ const baseDeDatos = [
         fecha: "Oct. 13, 2020",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "JUL-535", 
         titulo: "A Beautiful Married Woman Drowing In Pleasure At", 
         poster: "https://cdn002.imggle.net/webp/poster/jul-535.webp", 
@@ -351,8 +339,8 @@ const baseDeDatos = [
         fecha: "Apr. 07, 2021",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "JUL-908", 
         titulo: "Continued To Be Squid In Uncontrollable Unequaled", 
         poster: "https://cdn001.imggle.net/webp/poster/20221202/1647624162.webp", 
@@ -362,8 +350,8 @@ const baseDeDatos = [
         fecha: "Mar. 22, 2022",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "JIPX-958", 
         titulo: "Wild Iku Muscle Slender Beauty's Acme Super", 
         poster: "https://cdn001.imggle.net/webp/poster/20222410/1668821998.webp", 
@@ -373,8 +361,8 @@ const baseDeDatos = [
         fecha: "Mar. 22, 2022",
         actriz: "Ruisa Totsuki",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "JUL-941", 
         titulo: "A Foreign Wife Who Is Not Familiar With The Housing", 
         poster: "https://cdn001.imggle.net/webp/poster/20221904/1650607404.webp", 
@@ -384,8 +372,8 @@ const baseDeDatos = [
         fecha: "Apr. 26, 2022",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "MEYD-671", 
         titulo: "The Company That Applied For The Part Recruitment Called", 
         poster: "https://cdn002.imggle.net/webp/poster/meyd-671.webp", 
@@ -395,8 +383,8 @@ const baseDeDatos = [
         fecha: "Apr. 13, 2021",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "MIAA-685", 
         titulo: "Foreign Bride Who Does Not Know Foreplay Was Trained", 
         poster: "https://cdn001.imggle.net/webp/poster/20221108/1660627911.webp", 
@@ -406,8 +394,8 @@ const baseDeDatos = [
         fecha: "Aug. 02, 2022",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "RKI-614", 
         titulo: "Ultra-Sexy Dirty Talk Master Lily Heart's", 
         poster: "https://cdn002.imggle.net/webp/poster/rki-614.webp", 
@@ -417,8 +405,8 @@ const baseDeDatos = [
         fecha: "Jul. 14, 2021",
         actriz: "Lily Hart ",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "SONE-574", 
         titulo: "When your partner is in front of you, you", 
         poster: "https://cdn001.imggle.net/webp/poster/20253001/1738866422.webp", 
@@ -428,19 +416,27 @@ const baseDeDatos = [
         fecha: "Feb. 07, 2025",
         actriz: "Aka Asuka",
         tags: "Reducing Mosaic"
-    }
-	{ 
+    },
+    { 
         id: "GVH-255", 
         titulo: "A Lascivious Wife Who Provokes With No Bra", 
         poster: "https://cdn002.imggle.net/webp/poster/gvh-255.webp", 
         bg: "https://i.ibb.co/35NDYkJk/GVH-255.png", 
         video: "https://appcine.b-cdn.net/Codegg/Gvh-255.mp4", 
-        estudio: "Jul. 01, 2021",
+        estudio: "Idea Pocket ",
         fecha: "Feb. 07, 2025",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
+    },
+    { 
+        id: "IPIT-009", 
+        titulo: "Bad Teacher - The Hot Blonde Who Fucking Devours", 
+        poster: "https://cdn001.imggle.net/webp/poster/20222612/1674519023.webp", 
+        bg: "https://i.ibb.co/tpTbHTgd/IPIT-009.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-009.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Nov. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
     }
-	
-	
-    // Sigue pegando aquí todos los bloques que tenías en Codes.html
 ];
