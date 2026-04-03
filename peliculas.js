@@ -143,6 +143,17 @@ const baseDeDatos = [
         actriz: " Yua Fukuda",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "MIKR-076", 
+        titulo: "A Mother Who Was Repeatedly Made To Cum By A Man With An", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772128191.webp", 
+        bg: "https://i.postimg.cc/DZSt3XyD/MIKR-076.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIKR-076.mp4.mp4", 
+        estudio: "Moodyz",
+        fecha: "Mar. 03, 2026",
+        actriz: "Aki Sasaki",
+        tags: "Reducing Mosaic"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
