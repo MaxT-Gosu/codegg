@@ -286,6 +286,94 @@ const baseDeDatos = [
         actriz: "Ran Kikuno ",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "IPIT-004", 
+        titulo: "Emma Lawrence Oral SEX Queen Advent", 
+        poster: "https://cdn001.imggle.net/webp/poster/20252204/1746500965.webp", 
+        bg: "https://i.postimg.cc/SxS5GvvT/IPIT-004.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-004.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Sep. 13, 2020",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "JUL-703", 
+        titulo: "Married Secretary, President's Office Creampie Sexual Intercourse", 
+        poster: "https://cdn001.imggle.net/webp/poster/20230206/1687829315.webp", 
+        bg: "https://i.postimg.cc/kXbZmMwD/JUL-703.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-703.mp4", 
+        estudio: "Madonna",
+        fecha: "Sep. 14, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "JUL-843", 
+        titulo: "On The 7th Day, I Lost My Reason", 
+        poster: "https://cdn001.imggle.net/webp/poster/20230207/1688264926.webp", 
+        bg: "https://i.postimg.cc/MpTfM7mX/JUL-843.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-843.mp4", 
+        estudio: "Madonna",
+        fecha: "Jan. 25, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "JUR-669", 
+        titulo: "My Stepson Broke His Arms And Legs", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773948927.webp", 
+        bg: "https://i.postimg.cc/3NkTsN3n/JUR-669.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-669.mp4", 
+        estudio: "Madonna",
+        fecha: "Mar. 24, 2026",
+        actriz: "Miyuu Imai",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "IPIT-006", 
+        titulo: "SEX CLIMAX Pleasure Climax 3 Production Special", 
+        poster: "https://cdn001.imggle.net/webp/poster/20252204/1746587696.webp", 
+        bg: "https://i.postimg.cc/7LDMdwvR/IPIT-006.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-006.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Oct. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "JUL-535", 
+        titulo: "A Beautiful Married Woman Drowing In Pleasure At", 
+        poster: "https://cdn002.imggle.net/webp/poster/jul-535.webp", 
+        bg: "https://i.ibb.co/cXvRfq9M/vlcsnap-2026-03-25-17h19m16s857.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-006.mp4", 
+        estudio: "Madonna",
+        fecha: "Apr. 07, 2021",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "JUL-908", 
+        titulo: "Continued To Be Squid In Uncontrollable Unequaled", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221202/1647624162.webp", 
+        bg: "https://i.ibb.co/4wwcN6Mz/JUL-908.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jul-908.mp4", 
+        estudio: "Madonna",
+        fecha: "Mar. 22, 2022",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }
+	{ 
+        id: "JIPX-958", 
+        titulo: "Wild Iku Muscle Slender Beauty's Acme Super", 
+        poster: "https://cdn001.imggle.net/webp/poster/20222410/1668821998.webp", 
+        bg: "https://i.ibb.co/R4hNj8zP/IPX-958.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipx-958.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Mar. 22, 2022",
+        actriz: "Ruisa Totsuki",
+        tags: "Reducing Mosaic"
+    }
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
