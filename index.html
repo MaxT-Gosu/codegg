@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JavGG</title>
-<style>
-    :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #252525; }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color:#fff; overflow-x:hidden; }
-    
-    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-    .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-    
-    .container{width:100%;padding-bottom:100px}
-    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); position: absolute; width: 100%; z-index: 10; }
-    header h1 { font-size: 26px; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavGG - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #252525; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color:#fff; overflow-x:hidden; }
+        
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        
+        .container{width:100%;padding-bottom:100px}
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); position: absolute; width: 100%; z-index: 10; }
+        header h1 { font-size: 26px; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
 
-    /* BUSCADOR MODAL MEJORADO */
-    #modal-busqueda { 
-        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); 
-        z-index: 2000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; 
-    }
-    .search-box-modal { 
-        background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; 
-        padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; 
-    }
-    .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
-    .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
-    
-    /* RESULTADOS DENTRO DEL BUSCADOR */
-    #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-    .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
-    .res-item img { width: 100%; height: 100%; object-fit: cover; }
-    .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
+        /* BUSCADOR MODAL GLOBAL */
+        #modal-busqueda { 
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); 
+            z-index: 2000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; 
+        }
+        .search-box-modal { 
+            background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; 
+            padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; 
+        }
+        .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
+        .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+        
+        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+        .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
+        .res-item img { width: 100%; height: 100%; object-fit: cover; }
+        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
-    .hero { position: relative; width: 100%; height: 60vh; overflow: hidden; margin-bottom: 20px; background: #000; }
-    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.8s ease; }
-    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--bg-color), transparent); }
-    .hero-content { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 20px; z-index: 5; text-align: center; }
-    .hero-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-    .hero-content button { background: var(--accent-color); color: #fff; border: none; padding: 12px 30px; font-size: 16px; font-weight: 700; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto; }
-    
-    .section { margin: 25px 0; padding-left: 15px; }
-    .section h2 { font-size: 18px; margin-bottom: 15px; font-weight: 700; }
-    .image-grid { display: flex; overflow-x: auto; gap: 12px; padding-right: 15px; scrollbar-width: none; }
-    .card-item { flex-shrink: 0; width: 140px; cursor: pointer; transition: transform 0.3s; }
-    .img-wrapper { position: relative; width: 140px; height: 200px; border-radius: 8px; overflow: hidden; background: var(--skeleton-bg); }
-    .image-grid img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
-    .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; font-weight: bold; }
-    
-    .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-    .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; background: none; border: none; cursor: pointer; }
-    .menu-item i { font-size: 18px; margin-bottom: 5px; }
-    .menu-item.active { color: var(--accent-color); }
-</style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        .hero { position: relative; width: 100%; height: 60vh; overflow: hidden; margin-bottom: 20px; background: #000; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.8s ease; }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--bg-color), transparent); }
+        .hero-content { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 20px; z-index: 5; text-align: center; }
+        .hero-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .hero-content button { background: var(--accent-color); color: #fff; border: none; padding: 12px 30px; font-size: 16px; font-weight: 700; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto; }
+        
+        .section { margin: 25px 0; padding-left: 15px; }
+        .section h2 { font-size: 18px; margin-bottom: 15px; font-weight: 700; }
+        .image-grid { display: flex; overflow-x: auto; gap: 12px; padding-right: 15px; scrollbar-width: none; }
+        .card-item { flex-shrink: 0; width: 140px; cursor: pointer; transition: transform 0.3s; }
+        .img-wrapper { position: relative; width: 140px; height: 200px; border-radius: 8px; overflow: hidden; background: var(--skeleton-bg); }
+        .image-grid img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
+        .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; font-weight: bold; }
+        
+        .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; background: none; border: none; cursor: pointer; }
+        .menu-item i { font-size: 18px; margin-bottom: 5px; }
+        .menu-item.active { color: var(--accent-color); }
+    </style>
 </head>
 <body>
 
@@ -65,7 +64,7 @@
         <button class="close-search" onclick="cerrarBuscador()">&times;</button>
         <div class="search-box-modal">
             <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
-            <input type="text" id="input-buscador" placeholder="Buscar por ID...">
+            <input type="text" id="input-buscador" placeholder="Buscar ID en base de datos...">
         </div>
         <div id="resultados-busqueda"></div>
     </div>
@@ -90,7 +89,7 @@
 <script src="peliculas.js"></script>
 
 <script>
-// --- TU BASE DE DATOS DE RESPALDO (MANTENIDA) ---
+// --- TU BASE DE DATOS DE RESPALDO (MANTENIDA COMO PIDIERAS) ---
 if (typeof baseDeDatos === 'undefined') {
     var baseDeDatos = [
         { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", estudio: "Madman", fecha: "2024-03-10", actriz: "Nombre de Actriz 1", tags: "Special, Madman, HD" },
@@ -98,13 +97,7 @@ if (typeof baseDeDatos === 'undefined') {
     ];
 }
 
-const pHero = baseDeDatos[0]; 
-if(pHero) {
-    document.getElementById("hero-img").src = pHero.bg || pHero.poster;
-    document.getElementById("hero-title").innerText = pHero.titulo;
-    document.getElementById("hero-button").onclick = () => abrirDetalles(pHero.id);
-}
-
+// Funciones globales (fuera de onload)
 function abrirDetalles(id) {
     const p = baseDeDatos.find(item => item.id === id);
     if(p) {
@@ -121,21 +114,6 @@ function abrirDetalles(id) {
     }
 }
 
-const container = document.getElementById("sections-container");
-const sec = document.createElement("div");
-sec.className = "section";
-sec.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-recientes"></div>`;
-container.appendChild(sec);
-
-const grid = document.getElementById("grid-recientes");
-baseDeDatos.slice(0, 20).forEach(p => {
-    const card = document.createElement("div");
-    card.className = "card-item";
-    card.onclick = () => abrirDetalles(p.id);
-    card.innerHTML = `<div class="img-wrapper skeleton"><img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy"><div class="image-title">${p.id}</div></div>`;
-    grid.appendChild(card);
-});
-
 function abrirBuscador() {
     document.getElementById('modal-busqueda').style.display = 'block';
     document.getElementById('input-buscador').focus();
@@ -147,25 +125,54 @@ function cerrarBuscador() {
     document.getElementById('input-buscador').value = "";
 }
 
-// --- BUSCADOR GLOBAL QUE USA LA BASE DE DATOS COMPLETA ---
-const buscador = document.getElementById('input-buscador');
-buscador.addEventListener('input', (e) => {
-    const texto = e.target.value.toLowerCase().trim();
-    const resultadosDiv = document.getElementById('resultados-busqueda');
-    resultadosDiv.innerHTML = "";
+// Ejecutar cuando el navegador esté listo
+window.onload = function() {
+    
+    // Cargar Hero
+    const pHero = baseDeDatos[0]; 
+    if(pHero) {
+        document.getElementById("hero-img").src = pHero.bg || pHero.poster;
+        document.getElementById("hero-title").innerText = pHero.titulo;
+        document.getElementById("hero-button").onclick = () => abrirDetalles(pHero.id);
+    }
 
-    if (texto.length < 2) return;
+    // Generar Grid Recientes
+    const container = document.getElementById("sections-container");
+    const sec = document.createElement("div");
+    sec.className = "section";
+    sec.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-recientes"></div>`;
+    container.appendChild(sec);
 
-    const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
-
-    filtrados.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'res-item';
-        item.onclick = () => abrirDetalles(p.id);
-        item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
-        resultadosDiv.appendChild(item);
+    const grid = document.getElementById("grid-recientes");
+    baseDeDatos.slice(0, 20).forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card-item";
+        card.onclick = () => abrirDetalles(p.id);
+        card.innerHTML = `<div class="img-wrapper skeleton"><img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy"><div class="image-title">${p.id}</div></div>`;
+        grid.appendChild(card);
     });
-});
+
+    // Motor del buscador real
+    const buscador = document.getElementById('input-buscador');
+    buscador.addEventListener('input', (e) => {
+        const texto = e.target.value.toLowerCase().trim();
+        const resultadosDiv = document.getElementById('resultados-busqueda');
+        resultadosDiv.innerHTML = "";
+
+        if (texto.length < 2) return;
+
+        // Filtra en el array de peliculas.js
+        const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
+
+        filtrados.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'res-item';
+            item.onclick = () => abrirDetalles(p.id);
+            item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
+            resultadosDiv.appendChild(item);
+        });
+    });
+};
 </script>
 </body>
 </html>

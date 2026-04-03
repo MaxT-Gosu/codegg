@@ -29,6 +29,7 @@
         .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
         .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
 
+        /* BUSCADOR MODAL */
         #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
         .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
@@ -39,7 +40,6 @@
         .res-item img { width: 100%; height: 100%; object-fit: cover; }
         .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
-        /* MENÚ CORREGIDO */
         .menu { position: fixed; bottom: 0; width: 100%; background: rgba(15,15,15,0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
         .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; width: 25%; }
         .menu-item i { font-size: 20px; margin-bottom: 4px; }
@@ -56,7 +56,7 @@
     <button class="close-search" onclick="cerrarBuscador()">&times;</button>
     <div class="search-box-modal">
         <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
-        <input type="text" id="input-buscador" placeholder="Buscar por ID...">
+        <input type="text" id="input-buscador" placeholder="Buscar por ID en base de datos...">
     </div>
     <div id="resultados-busqueda"></div>
 </div>
@@ -99,8 +99,10 @@
         tags: localStorage.getItem('peli_tags')
     };
 
+    // Pintar interfaz
     const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
     if(finalBg) document.getElementById('hero-bg').style.backgroundImage = "url('" + finalBg + "')";
+    
     document.getElementById('p-title').innerText = data.title || "Sin título";
     document.getElementById('p-id').innerText = data.id || "N/A";
     document.getElementById('p-studio').innerText = data.studio || "Desconocido";
@@ -108,7 +110,8 @@
     document.getElementById('p-actriz').innerText = data.actriz || "Desconocida";
 
     const tagContainer = document.getElementById('p-tags');
-    if(data.tags) {
+    tagContainer.innerHTML = ""; // CORRECCIÓN: Limpiar tags previos
+    if(data.tags && data.tags !== "null") {
         data.tags.split(',').forEach(t => {
             const span = document.createElement('span');
             span.className = 'tag';
@@ -117,22 +120,26 @@
         });
     }
 
+    /* BUSCADOR GLOBAL */
     function abrirBuscador() {
         document.getElementById('modal-busqueda').style.display = 'block';
         document.getElementById('input-buscador').focus();
     }
     function cerrarBuscador() {
         document.getElementById('modal-busqueda').style.display = 'none';
-        document.getElementById('resultados-busqueda').innerHTML = "";
-        document.getElementById('input-buscador').value = "";
+        resultadosDiv.innerHTML = "";
     }
 
     document.getElementById('input-buscador').addEventListener('input', (e) => {
         const texto = e.target.value.toLowerCase().trim();
         const resultadosDiv = document.getElementById('resultados-busqueda');
         resultadosDiv.innerHTML = "";
+        
         if (texto.length < 2) return;
+        
+        // Buscamos en peliculas.js
         const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
+        
         filtrados.forEach(p => {
             const item = document.createElement('div');
             item.className = 'res-item';
@@ -146,7 +153,7 @@
                 localStorage.setItem('peli_fecha', p.fecha || "");
                 localStorage.setItem('peli_actriz', p.actriz || "");
                 localStorage.setItem('peli_tags', p.tags || "");
-                location.reload(); 
+                location.reload(); // Recarga la página con la nueva peli
             };
             item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
             resultadosDiv.appendChild(item);
@@ -155,7 +162,7 @@
 
     function play() {
         const v = document.getElementById('v');
-        if(!data.video) return alert("Video no disponible");
+        if(!data.video || data.video === "null") return alert("Video no disponible");
         v.src = data.video;
         document.getElementById('player-overlay').style.display = 'block';
         v.play();
