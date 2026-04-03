@@ -450,5 +450,38 @@ const baseDeDatos = [
         fecha: "Nov. 13, 2020",
         actriz: "Lily Hart",
         tags: "Reducing Mosaic"
-    }
+    },
+	{ 
+        id: "SYKH-129", 
+        titulo: "Boots Beauty Witch PREMIUM Black-robed Demon Nozomi", 
+        poster: "https://cdn001.imggle.net/webp/poster/20241115/1734150801.webp", 
+        bg: "https://i.ibb.co/MyQ86B0k/SYKH-129.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sykh-129.mp4", 
+        estudio: "Emaniel",
+        fecha: "Dec. 17, 2024",
+        actriz: "Nozomi Arimura",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "IPIT-012", 
+        titulo: "Business Trip Destination Room NTR Blond Female Employee", 
+        poster: "https://cdn001.imggle.net/webp/poster/20212709/1637387937.webp", 
+        bg: "https://i.ibb.co/Vff50pc/IPIT-012.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-012.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Dec. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "FC2PPV-4862565", 
+        titulo: "Huge breasted nurse wife with a bust of 100 cm.", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773376012.webp", 
+        bg: "https://i.ibb.co/pvBpdghQ/FC2-PPV-4862565.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-012.mp4", 
+        estudio: "Fc2ppv",
+        fecha: "Mar. 12, 2026",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
 ];
