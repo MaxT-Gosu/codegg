@@ -8,21 +8,43 @@
     :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #252525; }
     *{margin:0;padding:0;box-sizing:border-box}
     body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color:#fff; overflow-x:hidden; }
+    
     @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    
     .container{width:100%;padding-bottom:100px}
     header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); position: absolute; width: 100%; z-index: 10; }
     header h1 { font-size: 26px; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
-    .search-container { padding: 0 20px; margin-top: 70px; margin-bottom: 10px; position: relative; z-index: 11; }
-    .search-box { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 12px 15px; border: 1px solid #333; }
-    .search-box i { color: #888; margin-right: 10px; }
-    .search-box input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 14px; }
+
+    /* BUSCADOR MODAL (OCULTO POR DEFECTO) */
+    #modal-busqueda { 
+        display: none; 
+        position: fixed; 
+        inset: 0; 
+        background: rgba(0,0,0,0.95); 
+        z-index: 2000; 
+        padding: 40px 20px; 
+        backdrop-filter: blur(10px); 
+    }
+    .search-box-modal { 
+        background: #1a1a1a; 
+        border-radius: 8px; 
+        display: flex; 
+        align-items: center; 
+        padding: 15px; 
+        border: 1px solid var(--accent-color); 
+        margin-top: 20px;
+    }
+    .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
+    .close-search { position: absolute; top: 20px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+
     .hero { position: relative; width: 100%; height: 60vh; overflow: hidden; margin-bottom: 20px; background: #000; }
     .hero img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.8s ease; }
     .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--bg-color), transparent); }
     .hero-content { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 20px; z-index: 5; text-align: center; }
     .hero-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
     .hero-content button { background: var(--accent-color); color: #fff; border: none; padding: 12px 30px; font-size: 16px; font-weight: 700; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto; }
+    
     .section { margin: 25px 0; padding-left: 15px; }
     .section h2 { font-size: 18px; margin-bottom: 15px; font-weight: 700; }
     .image-grid { display: flex; overflow-x: auto; gap: 12px; padding-right: 15px; scrollbar-width: none; }
@@ -30,6 +52,7 @@
     .img-wrapper { position: relative; width: 140px; height: 200px; border-radius: 8px; overflow: hidden; background: var(--skeleton-bg); }
     .image-grid img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
     .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; font-weight: bold; }
+    
     .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
     .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; background: none; border: none; cursor: pointer; }
     .menu-item i { font-size: 18px; margin-bottom: 5px; }
@@ -42,11 +65,14 @@
 <div class="container">
     <header><h1>JavGG</h1></header>
 
-    <div class="search-container">
-        <div class="search-box">
-            <i class="fas fa-search"></i>
+    <div id="modal-busqueda">
+        <button class="close-search" onclick="cerrarBuscador()">&times;</button>
+        <h2 style="text-align: center; margin-top: 50px;">¿Qué estás buscando?</h2>
+        <div class="search-box-modal">
+            <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
             <input type="text" id="input-buscador" placeholder="Buscar por ID (ej: JUL-908)...">
         </div>
+        <p style="color: #666; text-align: center; margin-top: 20px; font-size: 14px;">La lista se filtrará automáticamente.</p>
     </div>
     
     <div class="hero skeleton" id="hero-box">
@@ -63,7 +89,7 @@
     <a href="index.html" class="menu-item active"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="censored.html" class="menu-item"><i class="fas fa-film"></i><span>Censored</span></a>
     <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
-    <button class="menu-item" onclick="focusSearch()"><i class="fas fa-search"></i><span>Buscar</span></button>
+    <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
 <script>
@@ -109,7 +135,7 @@ function abrirDetalles(id) {
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
         localStorage.setItem('peli_fecha', p.fecha || "No disponible");
-        localStorage.setItem('peli_actriz', p.actriz || "Desconocida"); // CAMBIADO
+        localStorage.setItem('peli_actriz', p.actriz || "Desconocida"); 
         localStorage.setItem('peli_tags', p.tags || "");
         window.location.href = "detalles.html";
     }
@@ -130,6 +156,16 @@ baseDeDatos.forEach(p => {
     grid.appendChild(card);
 });
 
+/* LÓGICA DE LA VENTANA DE BÚSQUEDA */
+function abrirBuscador() {
+    document.getElementById('modal-busqueda').style.display = 'block';
+    document.getElementById('input-buscador').focus();
+}
+
+function cerrarBuscador() {
+    document.getElementById('modal-busqueda').style.display = 'none';
+}
+
 const buscador = document.getElementById('input-buscador');
 buscador.addEventListener('input', (e) => {
     const texto = e.target.value.toLowerCase().trim();
@@ -138,8 +174,6 @@ buscador.addEventListener('input', (e) => {
         card.style.display = idpeli.includes(texto) ? "block" : "none";
     });
 });
-
-function focusSearch() { buscador.focus(); }
 </script>
 </body>
 </html>
