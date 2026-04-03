@@ -50,7 +50,6 @@
         .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; font-weight: bold; }
         
         .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        /* AÑADIDO WIDTH 25% PARA EVITAR ERRORES EN EL MENÚ */
         .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; background: none; border: none; cursor: pointer; width: 25%; }
         .menu-item i { font-size: 18px; margin-bottom: 5px; }
         .menu-item.active { color: var(--accent-color); }
@@ -92,7 +91,6 @@
 <script>
 // Funciones globales (fuera de onload)
 function abrirDetalles(id) {
-    // Definir db aquí asegura que no haya errores si algo falla
     let db = (typeof baseDeDatos !== 'undefined') ? baseDeDatos : window.baseDeDatos;
     const p = db.find(item => item.id === id);
     
@@ -124,7 +122,7 @@ function cerrarBuscador() {
 // Ejecutar cuando el navegador esté listo
 window.onload = function() {
     
-    // --- TU BASE DE DATOS DE RESPALDO (CORREGIDA SIN "VAR") ---
+    // --- TU BASE DE DATOS DE RESPALDO ---
     if (typeof baseDeDatos === 'undefined') {
         window.baseDeDatos = [
             { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", estudio: "Madman", fecha: "2024-03-10", actriz: "Nombre de Actriz 1", tags: "Special, Madman, HD" },
@@ -143,23 +141,76 @@ window.onload = function() {
         document.getElementById("hero-button").onclick = () => abrirDetalles(pHero.id);
     }
 
-    // Generar Grid Recientes
     const container = document.getElementById("sections-container");
-    const sec = document.createElement("div");
-    sec.className = "section";
-    sec.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-recientes"></div>`;
-    container.appendChild(sec);
 
-    const grid = document.getElementById("grid-recientes");
-    db.slice(0, 20).forEach(p => {
+    // ==========================================
+    // 1. SECCIÓN: AGREGADOS RECIENTES (ÚLTIMOS 5)
+    // ==========================================
+    const secRecientes = document.createElement("div");
+    secRecientes.className = "section";
+    secRecientes.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-recientes"></div>`;
+    container.appendChild(secRecientes);
+
+    const gridRecientes = document.getElementById("grid-recientes");
+    
+    // Invertimos el orden para tener los últimos y cortamos los primeros 5
+    const ultimosCinco = db.slice().reverse().slice(0, 5);
+
+    ultimosCinco.forEach(p => {
         const card = document.createElement("div");
         card.className = "card-item";
         card.onclick = () => abrirDetalles(p.id);
         card.innerHTML = `<div class="img-wrapper skeleton"><img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy"><div class="image-title">${p.id}</div></div>`;
-        grid.appendChild(card);
+        gridRecientes.appendChild(card);
     });
 
-    // Motor del buscador real
+    // ==========================================
+    // 2. SECCIÓN: JAVS MÁS VISTOS (5 ALEATORIOS CADA 24H)
+    // ==========================================
+    const secVistos = document.createElement("div");
+    secVistos.className = "section";
+    secVistos.innerHTML = `<h2>Javs más vistos</h2><div class="image-grid" id="grid-vistos"></div>`;
+    container.appendChild(secVistos);
+
+    const gridVistos = document.getElementById("grid-vistos");
+
+    const horas24EnMs = 24 * 60 * 60 * 1000; 
+    const tiempoActual = new Date().getTime();
+    let peliculasAleatorias = [];
+
+    const tiempoGuardado = localStorage.getItem('vistos_timer');
+    const idsGuardados = localStorage.getItem('vistos_ids');
+
+    function generarNuevosAleatorios() {
+        const dbMezclada = db.slice().sort(() => 0.5 - Math.random());
+        peliculasAleatorias = dbMezclada.slice(0, 5);
+        const idsParaGuardar = peliculasAleatorias.map(p => p.id);
+        localStorage.setItem('vistos_ids', JSON.stringify(idsParaGuardar));
+        localStorage.setItem('vistos_timer', tiempoActual.toString());
+    }
+
+    if (tiempoGuardado && idsGuardados && (tiempoActual - parseInt(tiempoGuardado)) < horas24EnMs) {
+        const arrayDeIds = JSON.parse(idsGuardados);
+        peliculasAleatorias = db.filter(p => arrayDeIds.includes(p.id));
+        
+        if(peliculasAleatorias.length < 5) {
+            generarNuevosAleatorios();
+        }
+    } else {
+        generarNuevosAleatorios();
+    }
+
+    peliculasAleatorias.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card-item";
+        card.onclick = () => abrirDetalles(p.id);
+        card.innerHTML = `<div class="img-wrapper skeleton"><img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy"><div class="image-title">${p.id}</div></div>`;
+        gridVistos.appendChild(card);
+    });
+
+    // ==========================================
+    // BUSCADOR REAL
+    // ==========================================
     const buscador = document.getElementById('input-buscador');
     buscador.addEventListener('input', (e) => {
         const texto = e.target.value.toLowerCase().trim();
@@ -168,7 +219,6 @@ window.onload = function() {
 
         if (texto.length < 2) return;
 
-        // Filtra en el array seguro
         const filtrados = db.filter(p => p.id.toLowerCase().includes(texto));
 
         filtrados.forEach(p => {
