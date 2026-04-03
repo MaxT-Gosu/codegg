@@ -209,6 +209,28 @@ const baseDeDatos = [
         actriz: "Noa Haruna",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "NUKA-081", 
+        titulo: "Six Creampies Without Pulling Out", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773367130.webp", 
+        bg: "https://i.postimg.cc/43FLv0Dk/NUKA-081.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Nuka-081.mp4", 
+        estudio: "Center Village",
+        fecha: "Mar. 05, 2026",
+        actriz: "Fumika Nagasawa",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "MSQD-005", 
+        titulo: "Oral sex class Haruno Ando", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773532012826.webp", 
+        bg: "https://i.postimg.cc/9QKfdJFD/MSQD-005.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MSQD-005.mp4", 
+        estudio: "Masquerade",
+        fecha: "Feb. 21, 2026",
+        actriz: "Haruno Ando",
+        tags: "Reducing Mosaic"
+    },
 	
 	
     // Sigue pegando aquí todos los bloques que tenías en Codes.html
