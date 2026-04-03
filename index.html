@@ -4,59 +4,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JavGG</title>
-
 <style>
     :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #252525; }
     *{margin:0;padding:0;box-sizing:border-box}
     body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color:#fff; overflow-x:hidden; }
-    
     @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-    
     .container{width:100%;padding-bottom:100px}
     header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); position: absolute; width: 100%; z-index: 10; }
     header h1 { font-size: 26px; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
-    
-    .hero { position: relative; width: 100%; height: 65vh; overflow: hidden; margin-bottom: 20px; background: #000; }
+    .search-container { padding: 0 20px; margin-top: 70px; margin-bottom: 10px; position: relative; z-index: 11; }
+    .search-box { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 12px 15px; border: 1px solid #333; }
+    .search-box i { color: #888; margin-right: 10px; }
+    .search-box input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 14px; }
+    .hero { position: relative; width: 100%; height: 60vh; overflow: hidden; margin-bottom: 20px; background: #000; }
     .hero img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.8s ease; }
     .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--bg-color), transparent); }
-    
     .hero-content { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 20px; z-index: 5; text-align: center; }
-    .hero-content h2 { font-size: 28px; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    .hero-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
     .hero-content button { background: var(--accent-color); color: #fff; border: none; padding: 12px 30px; font-size: 16px; font-weight: 700; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto; }
-    
     .section { margin: 25px 0; padding-left: 15px; }
     .section h2 { font-size: 18px; margin-bottom: 15px; font-weight: 700; }
-    
     .image-grid { display: flex; overflow-x: auto; gap: 12px; padding-right: 15px; scrollbar-width: none; }
-    .image-grid::-webkit-scrollbar { display: none; }
-    
-    .card-item { flex-shrink: 0; width: 140px; cursor: pointer; }
+    .card-item { flex-shrink: 0; width: 140px; cursor: pointer; transition: transform 0.3s; }
     .img-wrapper { position: relative; width: 140px; height: 200px; border-radius: 8px; overflow: hidden; background: var(--skeleton-bg); }
     .image-grid img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
-    .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; }
-    
+    .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; font-weight: bold; }
     .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-    .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; }
+    .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; background: none; border: none; cursor: pointer; }
     .menu-item i { font-size: 18px; margin-bottom: 5px; }
     .menu-item.active { color: var(--accent-color); }
 </style>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
 <div class="container">
     <header><h1>JavGG</h1></header>
+
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="input-buscador" placeholder="Buscar por ID (ej: JUL-908)...">
+        </div>
+    </div>
     
     <div class="hero skeleton" id="hero-box">
         <img id="hero-img" src="" onload="this.style.opacity='1'; document.getElementById('hero-box').classList.remove('skeleton')">
         <div class="hero-content">
             <h2 id="hero-title">Cargando...</h2>
-            <button id="hero-button"><i class="fas fa-play"></i> REPRODUCIR</button>
+            <button id="hero-button"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
         </div>
     </div>
-
     <div id="sections-container"></div>
 </div>
 
@@ -64,11 +63,10 @@
     <a href="index.html" class="menu-item active"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="censored.html" class="menu-item"><i class="fas fa-film"></i><span>Censored</span></a>
     <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
-    <a href="#" class="menu-item"><i class="fas fa-search"></i><span>Buscar</span></a>
+    <button class="menu-item" onclick="focusSearch()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
 <script>
-// --- BASE DE DATOS ACTUALIZADA CON LOS NUEVOS CAMPOS ---
 const baseDeDatos = [
     { 
         id: "JUL-908", 
@@ -77,9 +75,9 @@ const baseDeDatos = [
         bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
         video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", 
         estudio: "Madman",
-        fecha: "2024-03-10",  // NUEVO
-        pais: "Japan",        // NUEVO
-        tags: "Special, Madman, HD" // NUEVO
+        fecha: "2024-03-10",
+        actriz: "Nombre de Actriz 1", 
+        tags: "Special, Madman, HD"
     },
     { 
         id: "NGOD-170", 
@@ -89,23 +87,11 @@ const baseDeDatos = [
         video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", 
         estudio: "Jet Eizo",
         fecha: "2024-02-28",
-        pais: "Japan",
+        actriz: "Nombre de Actriz 2",
         tags: "Uncensored, Jet Eizo, Creampie"
-    },
-    { 
-        id: "IPIT-012", 
-        titulo: "IPIT-012 Película", 
-        poster: "https://i.ibb.co/svJswVLW/IPIT-012.webp", 
-        bg: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg", 
-        video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4", 
-        estudio: "Idea Pocket",
-        fecha: "2024-01-15",
-        pais: "Japan",
-        tags: "Idea Pocket, Debut, Cosplay"
     }
 ];
 
-// --- LÓGICA DEL HERO ---
 const pHero = baseDeDatos[0]; 
 if(pHero) {
     document.getElementById("hero-img").src = pHero.bg || pHero.poster;
@@ -113,28 +99,22 @@ if(pHero) {
     document.getElementById("hero-button").onclick = () => abrirDetalles(pHero.id);
 }
 
-// --- FUNCIÓN PARA IR A DETALLES CORREGIDA ---
 function abrirDetalles(id) {
     const p = baseDeDatos.find(item => item.id === id);
     if(p) {
-        // Guardamos los datos clásicos
         localStorage.setItem('peli_id', p.id);
         localStorage.setItem('peli_titulo', p.titulo);
         localStorage.setItem('peli_imagen', p.poster);
         localStorage.setItem('peli_background', p.bg || "");
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
-        
-        // --- GUARDAMOS LOS DATOS NUEVOS PARA QUE "DETALLES" LOS PUEDA LEER ---
         localStorage.setItem('peli_fecha', p.fecha || "No disponible");
-        localStorage.setItem('peli_pais', p.pais || "Japan");
+        localStorage.setItem('peli_actriz', p.actriz || "Desconocida"); // CAMBIADO
         localStorage.setItem('peli_tags', p.tags || "");
-
         window.location.href = "detalles.html";
     }
 }
 
-// --- GENERAR LAS FILAS ---
 const container = document.getElementById("sections-container");
 const sec = document.createElement("div");
 sec.className = "section";
@@ -146,13 +126,20 @@ baseDeDatos.forEach(p => {
     const card = document.createElement("div");
     card.className = "card-item";
     card.onclick = () => abrirDetalles(p.id);
-    card.innerHTML = `
-        <div class="img-wrapper skeleton">
-            <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">
-            <div class="image-title">${p.id}</div>
-        </div>`;
+    card.innerHTML = `<div class="img-wrapper skeleton"><img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy"><div class="image-title">${p.id}</div></div>`;
     grid.appendChild(card);
 });
+
+const buscador = document.getElementById('input-buscador');
+buscador.addEventListener('input', (e) => {
+    const texto = e.target.value.toLowerCase().trim();
+    document.querySelectorAll('.card-item').forEach(card => {
+        const idpeli = card.querySelector('.image-title').innerText.toLowerCase();
+        card.style.display = idpeli.includes(texto) ? "block" : "none";
+    });
+});
+
+function focusSearch() { buscador.focus(); }
 </script>
 </body>
 </html>

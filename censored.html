@@ -36,6 +36,12 @@
 
         .container { padding: 0 10px; }
 
+        /* BUSCADOR */
+        .search-container { margin-bottom: 20px; padding: 0 5px; }
+        .search-box { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 10px 15px; border: 1px solid #333; }
+        .search-box i { color: #888; margin-right: 10px; }
+        .search-box input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 14px; }
+
         /* ---------- GRID 3X3 ---------- */
         .anime-grid {
             display: grid;
@@ -65,7 +71,10 @@
             transition: opacity 0.5s ease;
         }
 
-        /* ---------- MENU INFERIOR (ESTILO INDEX) ---------- */
+        /* ID Flotante para el buscador */
+        .card-id-tag { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); font-size: 9px; text-align: center; padding: 2px 0; color: #aaa; font-weight: bold; }
+
+        /* ---------- MENU INFERIOR ---------- */
         .bottom-menu {
             position: fixed;
             bottom: 0;
@@ -87,6 +96,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
         .menu-item i { font-size: 18px; margin-bottom: 5px; }
@@ -99,6 +111,14 @@
 
 <div class="container">
     <h2 style="margin-bottom: 15px; font-size: 18px; padding-left: 5px;">Censored Movies</h2>
+
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="input-buscador" placeholder="Buscar ID (ej: IPIT)...">
+        </div>
+    </div>
+
     <div class="anime-grid" id="anime-grid"></div>
 </div>
 
@@ -106,13 +126,13 @@
     <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="censored.html" class="menu-item active"><i class="fas fa-film"></i><span>Censored</span></a>
     <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
-    <a href="#" class="menu-item"><i class="fas fa-search"></i><span>Buscar</span></a>
+    <button class="menu-item" onclick="document.getElementById('input-buscador').focus()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
 <script src="peliculas.js"></script>
 
 <script>
-// LISTA LOCAL: Solo ID y SRC para cargar el Grid
+// LISTA LOCAL
 const peliculasLocal = [
     { id: "IPIT-012", src: "https://i.ibb.co/svJswVLW/IPIT-012.webp" },
     { id: "SYKH-129", src: "https://i.ibb.co/144129d/SYKH-129.webp" },
@@ -130,8 +150,8 @@ const peliculasLocal = [
     { id: "MIDA-543", src: "https://i.postimg.cc/BnzJdJWS/MIDA-543.webp" },
     { id: "LULU-338", src: "https://i.postimg.cc/Mp3MKMNK/LULU-338.webp" },
     { id: "MIDE-992", src: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp" },
-    { id: "MOSJ-017", src: "https://i.postimg.cc/y6rwr9vC/MOSJ-017.webp" },
-    { id: "STARS-111", src: "https://cdn001.imggle.net/webp/poster/20242012/1737085766.webp" }
+    { id: "MOSJ-017", src: "https://cdn001.imggle.net/webp/poster/01202026/1772038390.webp" },
+    { id: "STARS-111", src: "https://cdn001.imggle.net/webp/poster/20242012/1735437448.webp" }
 ];
 
 function cargarImagenes() {
@@ -139,6 +159,7 @@ function cargarImagenes() {
     grid.innerHTML = peliculasLocal.map(p => `
         <div class="anime-card skeleton" onclick="abrirDetalles('${p.id}', '${p.src}')">
             <img src="${p.src}" onload="imgLoaded(this)" loading="lazy">
+            <div class="card-id-tag">${p.id}</div>
         </div>
     `).join("");
 }
@@ -146,7 +167,6 @@ function cargarImagenes() {
 function abrirDetalles(id, imgFallback) {
     localStorage.clear();
 
-    // Buscamos la info completa en peliculas.js
     let p = null;
     if (typeof baseDeDatos !== 'undefined') {
         p = baseDeDatos.find(item => item.id === id);
@@ -159,15 +179,27 @@ function abrirDetalles(id, imgFallback) {
         localStorage.setItem('peli_background', p.bg || "");
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
+        localStorage.setItem('peli_fecha', p.fecha || "No disponible");
+        localStorage.setItem('peli_actriz', p.actriz || "Desconocida"); // CORREGIDO PARA ACTRIZ
+        localStorage.setItem('peli_tags', p.tags || "");
     } else {
-        // Respaldo por si no está en peliculas.js aún
         localStorage.setItem('peli_id', id);
         localStorage.setItem('peli_imagen', imgFallback);
         localStorage.setItem('peli_titulo', id);
+        localStorage.setItem('peli_actriz', "Desconocida");
     }
     
     window.location.href = "detalles.html";
 }
+
+// LÓGICA DEL BUSCADOR
+document.getElementById('input-buscador').addEventListener('input', (e) => {
+    const texto = e.target.value.toLowerCase().trim();
+    document.querySelectorAll('.anime-card').forEach(card => {
+        const idpeli = card.querySelector('.card-id-tag').innerText.toLowerCase();
+        card.style.display = idpeli.includes(texto) ? "block" : "none";
+    });
+});
 
 function imgLoaded(img) {
     img.style.opacity = "1";

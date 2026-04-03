@@ -38,7 +38,7 @@
         .info-box { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
         .row { display: flex; align-items: center; font-size: 14px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
         .row i.arrow { color: #fff; margin-right: 10px; font-size: 10px; }
-        .label { color: #fff; margin-right: 6px; font-weight: 400; }
+        .label { color: #888; margin-right: 6px; font-weight: 400; width: 100px; }
         .value { color: var(--link); text-decoration: none; }
 
         .tag-list { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
@@ -72,7 +72,7 @@
 <div class="info-box">
     <div class="row">
         <i class="fas fa-caret-right arrow"></i>
-        <span class="label">Release Day:</span>
+        <span class="label">Release:</span>
         <span class="value" id="p-fecha">---</span>
     </div>
     <div class="row">
@@ -82,14 +82,11 @@
     </div>
     <div class="row">
         <i class="fas fa-caret-right arrow"></i>
-        <span class="label">Country:</span>
-        <span class="value" id="p-pais">---</span>
-    </div>
+        <span class="label">Actriz:</span> <span class="value" id="p-actriz">---</span> </div>
     <div class="row" style="border:none;">
         <i class="fas fa-caret-right arrow"></i>
         <span class="label">Tags:</span>
-        <div class="tag-list" id="p-tags">
-            </div>
+        <div class="tag-list" id="p-tags"></div>
     </div>
 </div>
 
@@ -97,7 +94,7 @@
     <a href="index.html" class="menu-item"><i class="fas fa-home"></i>Home</a>
     <a href="censored.html" class="menu-item"><i class="fas fa-film"></i>Censored</a>
     <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i>Uncensored</a>
-    <a href="#" class="menu-item"><i class="fas fa-search"></i>Buscar</a>
+    <a href="index.html" class="menu-item"><i class="fas fa-search"></i>Buscar</a>
 </nav>
 
 <div id="player-overlay">
@@ -115,7 +112,7 @@
         video: localStorage.getItem('peli_video'),
         studio: localStorage.getItem('peli_estudio'),
         fecha: localStorage.getItem('peli_fecha'),
-        pais: localStorage.getItem('peli_pais'),
+        actriz: localStorage.getItem('peli_actriz'), // Busca la clave peli_actriz
         tags: localStorage.getItem('peli_tags')
     };
 
@@ -132,12 +129,12 @@
     // Información Detallada Dinámica
     document.getElementById('p-studio').innerText = data.studio || "Desconocido";
     document.getElementById('p-fecha').innerText = data.fecha || "No disponible";
-    document.getElementById('p-pais').innerText = data.pais || "Japan";
+    document.getElementById('p-actriz').innerText = data.actriz || "Desconocida"; // Rellena el nuevo ID
 
     // Generar Tags Dinámicos
     const tagContainer = document.getElementById('p-tags');
-    if(data.tags && data.tags !== "null") {
-        const tagsArray = data.tags.split(','); // Separa por comas
+    if(data.tags && data.tags !== "null" && data.tags !== "") {
+        const tagsArray = data.tags.split(','); 
         tagsArray.forEach(tagText => {
             const span = document.createElement('span');
             span.className = 'tag';
@@ -163,6 +160,7 @@
         const v = document.getElementById('v');
         v.pause();
         v.src = "";
+        document.getElementById('player-overlay').style.none = 'none';
         document.getElementById('player-overlay').style.display = 'none';
     }
 </script>
