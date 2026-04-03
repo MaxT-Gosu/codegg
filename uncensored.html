@@ -4,97 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uncensored - JavGG</title>
-
     <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --accent-color: #E50914; 
-            --card-bg: #1a1a1a;
-            --skeleton-bg: #222;
-        }
-
+        :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #222; }
         *{margin:0;padding:0;box-sizing:border-box}
-
-        body{
-            font-family: 'Roboto', Arial, sans-serif;
-            background: var(--bg-color);
-            color: #fff;
-            padding-top: 20px;
-            padding-bottom: 100px;
-        }
-
-        /* ---------- ANIMACIÓN CARGA ---------- */
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        .skeleton {
-            background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-        }
-
+        body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color: #fff; padding: 20px 0 100px 0; }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
         .container { padding: 0 12px; }
-
-        /* GRID 3X3 COMO EL ORIGINAL */
-        .anime-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 10px;
-        }
-
-        .anime-card {
-            position: relative;
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            aspect-ratio: 2 / 3;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            transition: transform 0.2s ease;
-            cursor: pointer;
-        }
-
-        .anime-card:active { transform: scale(0.96); }
-
-        .anime-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        /* ---------- MENU INFERIOR (ESTILO INDEX) ---------- */
-        .bottom-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(15px);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            z-index: 1000;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .menu-item {
-            text-decoration: none;
-            color: #888;
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        .anime-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .anime-card { position: relative; background: var(--card-bg); border-radius: 10px; overflow: hidden; aspect-ratio: 2 / 3; box-shadow: 0 4px 15px rgba(0,0,0,0.6); transition: transform 0.2s ease; cursor: pointer; }
+        .anime-card img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.6s ease; }
+        .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .menu-item { text-decoration: none; color: #888; font-size: 11px; display: flex; flex-direction: column; align-items: center; }
         .menu-item i { font-size: 18px; margin-bottom: 5px; }
         .menu-item.active { color: var(--accent-color); }
-
-        @media(min-width:768px){
-            .anime-grid { grid-template-columns: repeat(5, 1fr); gap: 15px; }
-        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -115,7 +38,7 @@
 <script src="peliculas.js"></script>
 
 <script>
-// SOLO ID Y SRC PARA CARGAR LA IMAGEN
+// LISTA LOCAL (ID y SRC)
 const peliculasLocal = [
     { id: "NGOD-170", src: "https://i.ibb.co/wNV1TShf/NGOD-170.webp" },
     { id: "JUL-908", src: "https://i.ibb.co/Y48wTByV/JUL-908.jpg" },
@@ -125,24 +48,41 @@ const peliculasLocal = [
 function cargarContenido() {
     const grid = document.getElementById("anime-grid");
     grid.innerHTML = peliculasLocal.map(p => `
-        <div class="anime-card skeleton" onclick="abrirDetalles('${p.id}')">
+        <div class="anime-card skeleton" onclick="abrirDetalles('${p.id}', '${p.src}')">
             <img src="${p.src}" onload="revealImg(this)" loading="lazy">
         </div>
     `).join("");
 }
 
-function abrirDetalles(id) {
-    // BUSCAMOS TODA LA INFO EN peliculas.js USANDO EL ID
-    const p = baseDeDatos.find(item => item.id === id);
+function abrirDetalles(id, imgFallback) {
+    console.log("Intentando abrir:", id);
+    
+    // 1. Limpiamos memoria vieja por si acaso
+    localStorage.clear();
+
+    // 2. Intentamos buscar en peliculas.js
+    let p = null;
+    if (typeof baseDeDatos !== 'undefined') {
+        p = baseDeDatos.find(item => item.id === id);
+    }
+
     if(p) {
+        // Si lo encuentra en peliculas.js, mandamos todo
         localStorage.setItem('peli_id', p.id);
         localStorage.setItem('peli_titulo', p.titulo);
         localStorage.setItem('peli_imagen', p.poster);
         localStorage.setItem('peli_background', p.bg || "");
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
-        window.location.href = "detalles.html";
+    } else {
+        // SI NO LO ENCUENTRA, mandamos lo mínimo para que no salga vacío
+        localStorage.setItem('peli_id', id);
+        localStorage.setItem('peli_imagen', imgFallback);
+        localStorage.setItem('peli_titulo', id);
     }
+
+    // 3. Forzamos el cambio de página
+    window.location.href = "detalles.html";
 }
 
 function revealImg(img) {
