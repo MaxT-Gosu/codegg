@@ -68,7 +68,7 @@
 </nav>
 
 <script>
-// --- TU LISTA DE PELÍCULAS AQUÍ MISMO PARA QUE NO FALLE ---
+// --- BASE DE DATOS ACTUALIZADA CON LOS NUEVOS CAMPOS ---
 const baseDeDatos = [
     { 
         id: "JUL-908", 
@@ -76,7 +76,10 @@ const baseDeDatos = [
         poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", 
         bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
         video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", 
-        estudio: "Madman" 
+        estudio: "Madman",
+        fecha: "2024-03-10",  // NUEVO
+        pais: "Japan",        // NUEVO
+        tags: "Special, Madman, HD" // NUEVO
     },
     { 
         id: "NGOD-170", 
@@ -84,7 +87,10 @@ const baseDeDatos = [
         poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", 
         bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", 
         video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", 
-        estudio: "Jet Eizo" 
+        estudio: "Jet Eizo",
+        fecha: "2024-02-28",
+        pais: "Japan",
+        tags: "Uncensored, Jet Eizo, Creampie"
     },
     { 
         id: "IPIT-012", 
@@ -92,29 +98,38 @@ const baseDeDatos = [
         poster: "https://i.ibb.co/svJswVLW/IPIT-012.webp", 
         bg: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-11.jpg", 
         video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4", 
-        estudio: "Idea Pocket" 
+        estudio: "Idea Pocket",
+        fecha: "2024-01-15",
+        pais: "Japan",
+        tags: "Idea Pocket, Debut, Cosplay"
     }
 ];
 
 // --- LÓGICA DEL HERO ---
-const pHero = baseDeDatos[0]; // Carga la primera peli de la lista como hero
+const pHero = baseDeDatos[0]; 
 if(pHero) {
     document.getElementById("hero-img").src = pHero.bg || pHero.poster;
     document.getElementById("hero-title").innerText = pHero.titulo;
     document.getElementById("hero-button").onclick = () => abrirDetalles(pHero.id);
 }
 
-// --- FUNCIÓN PARA IR A DETALLES ---
+// --- FUNCIÓN PARA IR A DETALLES CORREGIDA ---
 function abrirDetalles(id) {
-    // Buscamos la peli en la lista para mandar TODOS los datos
     const p = baseDeDatos.find(item => item.id === id);
     if(p) {
+        // Guardamos los datos clásicos
         localStorage.setItem('peli_id', p.id);
         localStorage.setItem('peli_titulo', p.titulo);
         localStorage.setItem('peli_imagen', p.poster);
         localStorage.setItem('peli_background', p.bg || "");
         localStorage.setItem('peli_video', p.video);
         localStorage.setItem('peli_estudio', p.estudio);
+        
+        // --- GUARDAMOS LOS DATOS NUEVOS PARA QUE "DETALLES" LOS PUEDA LEER ---
+        localStorage.setItem('peli_fecha', p.fecha || "No disponible");
+        localStorage.setItem('peli_pais', p.pais || "Japan");
+        localStorage.setItem('peli_tags', p.tags || "");
+
         window.location.href = "detalles.html";
     }
 }
