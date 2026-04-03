@@ -1,0 +1,20 @@
+// Este es tu archivo central de películas
+const baseDeDatos = [
+    { 
+        id: "NGOD-170", 
+        titulo: "NGOD-170 Uncensored", 
+        poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", 
+        bg: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", 
+        video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", 
+        estudio: "Jet Eizo" 
+    },
+    { 
+        id: "JUL-908", 
+        titulo: "JUL-908 Especial", 
+        poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", 
+        bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", 
+        estudio: "Madman" 
+    },
+    // Sigue agregando aquí abajo...
+];
