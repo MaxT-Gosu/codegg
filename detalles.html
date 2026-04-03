@@ -15,6 +15,7 @@
             --bg: #050505;
             --surface: #121212;
             --text-secondary: #a0a0a0;
+            --link-blue: #58a6ff; /* El azul de los links de tu imagen */
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
@@ -25,33 +26,13 @@
             font-family: 'Roboto', sans-serif;
             color: #fff;
             padding-bottom: 110px;
-            overflow-x: hidden;
-        }
-
-        /* --- BOTÓN VOLVER --- */
-        .back-floating {
-            position: fixed;
-            top: 25px;
-            left: 20px;
-            z-index: 100;
-            background: rgba(0,0,0,0.5);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-decoration: none;
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
         /* --- CABECERA HERO --- */
         .hero-container {
             position: relative;
             width: 100%;
-            height: 55vh;
-            overflow: hidden;
+            height: 50vh;
             background: #000;
         }
 
@@ -60,140 +41,116 @@
             height: 100%;
             background-size: cover;
             background-position: center top;
-            opacity: 0;
-            transition: opacity 0.8s ease;
+            opacity: 0.7;
         }
 
         .hero-container::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, var(--bg) 0%, transparent 60%);
+            background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
         }
 
         /* --- INFO PRINCIPAL --- */
-        .main-content {
+        .main-content { padding: 0 20px; margin-top: -40px; position: relative; z-index: 10; }
+        .id-badge { background: var(--primary); padding: 4px 10px; border-radius: 4px; font-weight: 900; font-size: 14px; display: inline-block; margin-bottom: 10px; }
+        h1 { font-size: 24px; margin: 0 0 20px 0; line-height: 1.3; }
+
+        /* --- SECCIÓN DE DETALLES (ESTILO IMAGEN) --- */
+        .info-section {
             padding: 0 20px;
-            margin-top: -60px;
-            position: relative;
-            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .id-badge {
-            background: var(--primary);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-weight: 900;
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            font-size: 15px;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 8px;
+        }
+
+        .info-row i {
+            width: 20px;
+            margin-right: 10px;
+            color: #fff;
             font-size: 14px;
-            display: inline-block;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4);
+            margin-top: 4px;
         }
 
-        h1 { font-size: 28px; margin: 0; font-weight: 900; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .label-text {
+            color: #fff;
+            font-weight: 400;
+            margin-right: 5px;
+        }
+
+        .value-text {
+            color: var(--link-blue);
+            text-decoration: none;
+        }
+
+        /* --- TAGS / ETIQUETAS --- */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .tag-item {
+            color: var(--link-blue);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
 
         /* --- BOTÓN REPRODUCIR --- */
-        .play-section {
-            display: flex;
-            justify-content: center;
-            padding: 30px 20px;
-        }
-
+        .play-section { padding: 25px 20px; }
         .play-btn {
-            background: var(--primary);
-            color: #fff;
+            background: #fff;
+            color: #000;
             border: none;
             width: 100%;
-            max-width: 400px;
-            padding: 16px;
+            padding: 15px;
             border-radius: 8px;
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 16px;
+            font-weight: 900;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
         }
 
-        /* --- FICHA TÉCNICA --- */
-        .specs-container { padding: 0 20px; }
-
-        .spec-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 12px;
-        }
-
-        .spec-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .spec-value { font-size: 15px; font-weight: 700; color: #eee; }
-
-        /* --- MENÚ INFERIOR (Sincronizado con Index) --- */
+        /* --- MENÚ INFERIOR --- */
         .bottom-menu {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(15, 15, 15, 0.98);
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
             z-index: 1000;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .menu-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #888;
-            text-decoration: none;
-            font-size: 11px;
-        }
+        .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; }
         .menu-item i { font-size: 18px; margin-bottom: 5px; }
         .menu-item.active { color: var(--primary); }
 
-        /* --- PLAYER --- */
-        #movie-player {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 10000;
-        }
+        /* PLAYER */
+        #movie-player { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; }
         #movie-player video { width: 100%; height: 100%; }
-        .close-player {
-            position: absolute;
-            top: 30px;
-            right: 20px;
-            background: rgba(0,0,0,0.6);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            z-index: 10001;
-            border: 1px solid #444;
-        }
+        .close-player { position: absolute; top: 30px; right: 20px; color: #fff; font-size: 30px; z-index: 10001; background: none; border: none; }
     </style>
 </head>
 <body>
-
-<a href="javascript:history.back()" class="back-floating">
-    <i class="fas fa-arrow-left"></i>
-</a>
 
 <div class="hero-container">
     <div id="hero-bg"></div>
@@ -204,17 +161,37 @@
     <h1 id="movie-title">Cargando...</h1>
 </div>
 
+<div class="info-section">
+    <div class="info-row">
+        <i class="fas fa-caret-right"></i>
+        <span class="label-text">Release Day:</span>
+        <span class="value-text" id="val-date">2026-04-07</span>
+    </div>
+
+    <div class="info-row">
+        <i class="fas fa-caret-right"></i>
+        <span class="label-text">Studio:</span>
+        <span class="value-text" id="val-estudio">---</span>
+    </div>
+
+    <div class="info-row">
+        <i class="fas fa-caret-right"></i>
+        <span class="label-text">Country:</span>
+        <span class="value-text">Japan</span>
+    </div>
+
+    <div class="info-row" style="border-bottom: none;">
+        <i class="fas fa-caret-right"></i>
+        <span class="label-text">Tags:</span>
+        <div class="tags-container" id="val-tags">
+            </div>
+    </div>
+</div>
+
 <div class="play-section">
     <button class="play-btn" onclick="playMovie()">
         <i class="fas fa-play"></i> REPRODUCIR AHORA
     </button>
-</div>
-
-<div class="specs-container">
-    <div class="spec-card">
-        <span class="spec-label">Estudio</span>
-        <span class="spec-value" id="val-estudio">---</span>
-    </div>
 </div>
 
 <nav class="bottom-menu">
@@ -225,14 +202,11 @@
 </nav>
 
 <div id="movie-player">
-    <button class="close-player" onclick="closeMovie()">
-        <i class="fas fa-times"></i>
-    </button>
-    <video id="player" controls controlsList="nodownload"></video>
+    <button class="close-player" onclick="closeMovie()">&times;</button>
+    <video id="player" controls></video>
 </div>
 
 <script>
-    // 1. OBTENER INFORMACIÓN
     const peliInfo = {
         id: localStorage.getItem('peli_id') || "N/A",
         titulo: localStorage.getItem('peli_titulo') || "Sin título",
@@ -242,48 +216,38 @@
         estudio: localStorage.getItem('peli_estudio') || "Desconocido"
     };
 
-    // 2. MOSTRAR DATOS
-    const bgImg = document.getElementById("hero-bg");
-    const fondoFinal = (peliInfo.background && peliInfo.background !== "" && peliInfo.background !== "null") 
-                       ? peliInfo.background 
-                       : peliInfo.imagen;
-
-    if(fondoFinal) {
-        bgImg.style.backgroundImage = "url('" + fondoFinal + "')";
-        bgImg.style.opacity = "1";
-    }
-    
+    // Inyectar fondo y textos
+    const fondo = peliInfo.background || peliInfo.imagen;
+    document.getElementById("hero-bg").style.backgroundImage = `url('${fondo}')`;
     document.getElementById("movie-title").innerText = peliInfo.titulo;
     document.getElementById("badge-id").innerText = peliInfo.id;
     document.getElementById("val-estudio").innerText = peliInfo.estudio;
 
-    const playerContainer = document.getElementById("movie-player");
-    const videoTag = document.getElementById("player");
+    // SIMULACIÓN DE TAGS (Como pediste, con el icono de etiqueta)
+    const tagsMock = ["Affair", "Bride", "Creampie", "Cuckold", "Married Woman"];
+    const tagsContainer = document.getElementById("val-tags");
+    
+    tagsMock.forEach(tag => {
+        tagsContainer.innerHTML += `<span class="tag-item"><i class="fas fa-tag"></i> ${tag}</span>`;
+    });
 
-function playMovie() {
-        if(!peliInfo.video || peliInfo.video === "") {
-            alert("⚠️ Error: El enlace de video no está disponible.");
-            return;
-        }
-
-        // --- TU LINK DE PUBLICIDAD (ADSTERRA/MONETAG) ---
-        // Esto crea el script de anuncio cada vez que el usuario intenta ver la película
+    // Función de video y publicidad
+    function playMovie() {
+        if(!peliInfo.video) return alert("Video no disponible");
+        
+        // Publicidad
         var ads = document.createElement('script');
         ads.src = "https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js";
         document.body.appendChild(ads);
-        // -----------------------------------------------
 
-        videoTag.src = peliInfo.video;
-        playerContainer.style.display = "block";
-        videoTag.play();
-        document.body.style.overflow = "hidden"; 
+        document.getElementById("player").src = peliInfo.video;
+        document.getElementById("movie-player").style.display = "block";
+        document.getElementById("player").play();
     }
 
     function closeMovie() {
-        videoTag.pause();
-        videoTag.src = "";
-        playerContainer.style.display = "none";
-        document.body.style.overflow = "auto";
+        document.getElementById("player").pause();
+        document.getElementById("movie-player").style.display = "none";
     }
 </script>
 
