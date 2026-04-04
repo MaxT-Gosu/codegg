@@ -18,8 +18,8 @@
             height: 100%; 
             background-size: cover; 
             background-position: center top; 
-            opacity: 0; /* Inicia invisible para la transición suave */
-            transition: opacity 0.5s ease-in-out; /* Efecto Fade-in */
+            opacity: 0; 
+            transition: opacity 0.5s ease-in-out; 
         }
 
         .hero::after { 
@@ -40,14 +40,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Queda detrás del degradado y textos */
+            z-index: 1;
         }
 
         @keyframes skeleton-loading {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-        /* ----------------------- */
 
         .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; text-align: left; }
         .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
@@ -121,7 +120,10 @@
     <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
-<div id="player-overlay"><button class="close" onclick="closePlayer()">&times;</button><video id="v" controls></video></div>
+<div id="player-overlay">
+    <button class="close" onclick="closePlayer()">&times;</button>
+    <video id="v" controls></video>
+</div>
 
 <script src="peliculas.js"></script>
 
@@ -144,19 +146,14 @@
     const skeletonElement = document.getElementById('hero-skeleton');
 
     if(finalBg) {
-        // Creamos una imagen "fantasma" en memoria para saber cuándo termina de cargar
         const imgLoader = new Image();
         imgLoader.src = finalBg;
-        
         imgLoader.onload = () => {
-            // Cuando carga: ocultamos el skeleton, ponemos el fondo y lo hacemos visible
             skeletonElement.style.display = 'none';
             heroBgElement.style.backgroundImage = "url('" + finalBg + "')";
             heroBgElement.style.opacity = '1'; 
         };
-        
         imgLoader.onerror = () => {
-             // Si falla la imagen por error de red, igual quitamos el skeleton
              skeletonElement.style.display = 'none';
         }
     } else {
@@ -195,11 +192,8 @@
         const texto = e.target.value.toLowerCase().trim();
         const resultadosDiv = document.getElementById('resultados-busqueda');
         resultadosDiv.innerHTML = "";
-        
         if (texto.length < 2) return;
-        
         const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
-        
         filtrados.forEach(p => {
             const item = document.createElement('div');
             item.className = 'res-item';
@@ -224,12 +218,9 @@
         const v = document.getElementById('v');
         if(!data.video || data.video === "null") return alert("Video no disponible");
 
-        // --- CONEXIÓN CON UNITY ADS ---
-        if (typeof AndroidAds !== "undefined") {
-            AndroidAds.lanzarAnuncio(); 
-        } else {
-            console.log("Anuncio de Unity omitido (no estás en la app de Android).");
-        }
+        // --- PUBLICIDAD AL DAR PLAY (Plan B: Smartlink) ---
+        // Aquí abrimos tu Smartlink en una pestaña nueva (reemplaza por tu URL real si cambió)
+        window.open("https://www.profitablecpmratenetwork.com/TU_ID_SMARTLINK_AQUI", "_blank");
 
         // Mostrar reproductor
         v.src = data.video;
@@ -243,6 +234,8 @@
         document.getElementById('player-overlay').style.display = 'none';
     }
 </script>
+
+<script src="https://pl29062449.profitablecpmratenetwork.com/8c/d5/43/8cd5434138a8ba8dbe80676cd61a2885.js"></script>
 
 </body>
 </html>
