@@ -65,7 +65,7 @@
 <div class="header-content">
     <span class="badge" id="p-id">---</span>
     <h1 id="p-title">Cargando...</h1>
-    <button class="btn-play" id="btn-play-action" onclick="handlePlayClick()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
+    <button class="btn-play" onclick="abrirPublicidadYVideo()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
 </div>
 
 <div class="info-box">
@@ -87,7 +87,6 @@
 <script src="peliculas.js"></script>
 
 <script>
-    // Recuperar datos de localStorage
     const data = {
         id: localStorage.getItem('peli_id'),
         title: localStorage.getItem('peli_titulo'),
@@ -121,25 +120,22 @@
         });
     }
 
-    // --- LÓGICA DE REPRODUCCIÓN Y PUBLICIDAD ---
-    function handlePlayClick() {
-        // REEMPLAZA ESTE LINK CON TU SMART LINK DE ADSTERRA
-        const smartLink = "https://www.highratecpm.com/tu-codigo-aqui"; 
+    // --- LÓGICA DE PUBLICIDAD CON SMART LINK ---
+    function abrirPublicidadYVideo() {
+        const smartLink = "https://www.profitablecpmratenetwork.com/jb6cyc4g?key=d42800bba4100981ec7c43105b7ea5e0";
+        
+        // Abre el Smart Link en una pestaña nueva del navegador
+        window.open(smartLink, '_blank');
 
-        // 1. Intentamos abrir la publicidad en una pestaña aparte inmediatamente
-        const adWindow = window.open(smartLink, '_blank');
-
-        // 2. Ejecutar la función de reproducción después de un pequeño retraso
-        // Esto le da tiempo al navegador de procesar la apertura de la pestaña
+        // Lanza el video después de 400ms para asegurar la apertura de la publicidad
         setTimeout(() => {
-            playVideo();
-        }, 300);
+            play();
+        }, 400);
     }
 
-    function playVideo() {
+    function play() {
         const v = document.getElementById('v');
         if(!data.video || data.video === "null") return alert("Video no disponible");
-        
         v.src = data.video;
         document.getElementById('player-overlay').style.display = 'block';
         v.play();
@@ -151,7 +147,7 @@
         document.getElementById('player-overlay').style.display = 'none';
     }
 
-    // --- BUSCADOR ---
+    /* BUSCADOR */
     function abrirBuscador() {
         document.getElementById('modal-busqueda').style.display = 'block';
         document.getElementById('input-buscador').focus();
@@ -160,7 +156,6 @@
         document.getElementById('modal-busqueda').style.display = 'none';
         document.getElementById('resultados-busqueda').innerHTML = "";
     }
-
     document.getElementById('input-buscador').addEventListener('input', (e) => {
         const texto = e.target.value.toLowerCase().trim();
         const resultadosDiv = document.getElementById('resultados-busqueda');
@@ -188,7 +183,7 @@
     });
 </script>
 
-<script async src="https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js" onerror="console.warn('Adblock detectado o error en script publicitario')"></script>
+<script src="https://pl28009264.profitablecpmratenetwork.com/c0/d9/16/c0d91680a86a8674c7ea6ff6a910d928.js"></script>
 
 </body>
 </html>
