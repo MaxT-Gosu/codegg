@@ -10,7 +10,7 @@
         :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; --accent-color: #E50914; }
         body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; }
         
-        /* CORRECCIÓN DE OPACIDAD Y VISIBILIDAD */
+        /* HERO Y EFECTOS DE IMAGEN */
         .hero { position: relative; width: 100%; height: 45vh; background: #000; overflow: hidden; }
         
         #hero-bg { 
@@ -18,16 +18,36 @@
             height: 100%; 
             background-size: cover; 
             background-position: center top; 
-            opacity: 1; /* Ahora la imagen tiene brillo total */
+            opacity: 0; /* Inicia invisible para la transición suave */
+            transition: opacity 0.5s ease-in-out; /* Efecto Fade-in */
         }
 
         .hero::after { 
             content: ''; 
             position: absolute; 
             inset: 0; 
-            /* El degradado ahora es más sutil: solo oscurece del centro hacia abajo */
             background: linear-gradient(to top, var(--bg) 0%, transparent 60%); 
         }
+
+        /* --- SKELETON LOADER --- */
+        .skeleton {
+            background: #1a1a1a;
+            background-image: linear-gradient(90deg, #1a1a1a 0px, #333 40px, #1a1a1a 80px);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite linear;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Queda detrás del degradado y textos */
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        /* ----------------------- */
 
         .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; text-align: left; }
         .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
@@ -76,7 +96,11 @@
     <div id="resultados-busqueda"></div>
 </div>
 
-<div class="hero"><div id="hero-bg"></div></div>
+<div class="hero">
+    <div id="hero-skeleton" class="skeleton"></div>
+    <div id="hero-bg"></div>
+</div>
+
 <div class="header-content">
     <span class="badge" id="p-id">---</span>
     <h1 id="p-title">Cargando...</h1>
@@ -114,10 +138,32 @@
         tags: localStorage.getItem('peli_tags')
     };
 
-    // Pintar interfaz
+    // --- CARGA SUAVE DE IMAGEN (SKELETON A FADE-IN) ---
     const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
-    if(finalBg) document.getElementById('hero-bg').style.backgroundImage = "url('" + finalBg + "')";
+    const heroBgElement = document.getElementById('hero-bg');
+    const skeletonElement = document.getElementById('hero-skeleton');
+
+    if(finalBg) {
+        // Creamos una imagen "fantasma" en memoria para saber cuándo termina de cargar
+        const imgLoader = new Image();
+        imgLoader.src = finalBg;
+        
+        imgLoader.onload = () => {
+            // Cuando carga: ocultamos el skeleton, ponemos el fondo y lo hacemos visible
+            skeletonElement.style.display = 'none';
+            heroBgElement.style.backgroundImage = "url('" + finalBg + "')";
+            heroBgElement.style.opacity = '1'; 
+        };
+        
+        imgLoader.onerror = () => {
+             // Si falla la imagen por error de red, igual quitamos el skeleton
+             skeletonElement.style.display = 'none';
+        }
+    } else {
+        skeletonElement.style.display = 'none';
+    }
     
+    // Pintar resto de interfaz
     document.getElementById('p-title').innerText = data.title || "Sin título";
     document.getElementById('p-id').innerText = data.id || "N/A";
     document.getElementById('p-studio').innerText = data.studio || "Desconocido";
