@@ -65,7 +65,7 @@
 <div class="header-content">
     <span class="badge" id="p-id">---</span>
     <h1 id="p-title">Cargando...</h1>
-    <button class="btn-play" onclick="abrirPublicidadYVideo()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
+    <button class="btn-play" onclick="play()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
 </div>
 
 <div class="info-box">
@@ -120,22 +120,11 @@
         });
     }
 
-    // --- LÓGICA DE PUBLICIDAD CON SMART LINK ---
-    function abrirPublicidadYVideo() {
-        const smartLink = "https://www.profitablecpmratenetwork.com/jb6cyc4g?key=d42800bba4100981ec7c43105b7ea5e0";
-        
-        // Abre el Smart Link en una pestaña nueva del navegador
-        window.open(smartLink, '_blank');
-
-        // Lanza el video después de 400ms para asegurar la apertura de la publicidad
-        setTimeout(() => {
-            play();
-        }, 400);
-    }
-
+    // --- REPRODUCCIÓN DIRECTA ---
     function play() {
         const v = document.getElementById('v');
         if(!data.video || data.video === "null") return alert("Video no disponible");
+        
         v.src = data.video;
         document.getElementById('player-overlay').style.display = 'block';
         v.play();
