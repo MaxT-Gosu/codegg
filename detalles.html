@@ -8,63 +8,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; --accent-color: #E50914; }
-        body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; overflow-x: hidden; }
+        body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; }
         
-        /* Hero Section */
+        /* CORRECCIÓN DE OPACIDAD Y VISIBILIDAD */
         .hero { position: relative; width: 100%; height: 45vh; background: #000; overflow: hidden; }
+        
         #hero-bg { 
             width: 100%; 
             height: 100%; 
             background-size: cover; 
             background-position: center top; 
-            opacity: 0.8;
-            transition: opacity 0.5s ease;
+            opacity: 1; /* Ahora la imagen tiene brillo total */
         }
+
         .hero::after { 
             content: ''; 
             position: absolute; 
             inset: 0; 
-            background: linear-gradient(to top, var(--bg) 0%, transparent 80%); 
+            /* El degradado ahora es más sutil: solo oscurece del centro hacia abajo */
+            background: linear-gradient(to top, var(--bg) 0%, transparent 60%); 
         }
 
-        .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; }
-        .badge { background: var(--primary); padding: 4px 10px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 10px; display: inline-block; }
-        h1 { font-size: 26px; margin: 0 0 20px 0; line-height: 1.2; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
+        .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; text-align: left; }
+        .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
+        h1 { font-size: 24px; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
         
-        .btn-play { background: #fff; color: #000; border: none; width: 100%; padding: 15px; border-radius: 6px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 25px; transition: transform 0.2s; }
-        .btn-play:active { transform: scale(0.98); }
+        .btn-play { background: #fff; color: #000; border: none; width: 100%; padding: 14px; border-radius: 6px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 25px; }
 
-        /* Info Grid */
-        .info-box { padding: 0 20px; display: flex; flex-direction: column; gap: 15px; }
-        .row { display: flex; align-items: flex-start; font-size: 14px; border-bottom: 1px solid #1a1a1a; padding-bottom: 12px; }
-        .row i.arrow { color: var(--primary); margin-right: 12px; margin-top: 4px; font-size: 10px; }
-        .label { color: #888; width: 90px; flex-shrink: 0; }
-        .value { color: var(--link); font-weight: 700; word-break: break-word; }
+        .info-box { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
+        .row { display: flex; align-items: center; font-size: 14px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
+        .row i.arrow { color: var(--primary); margin-right: 10px; font-size: 10px; }
+        .label { color: #888; margin-right: 6px; font-weight: 400; width: 100px; }
+        .value { color: var(--link); text-decoration: none; font-weight: 700; }
 
-        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
-        .tag { background: #1a1a1a; color: #ccc; padding: 4px 10px; border-radius: 4px; font-size: 12px; border: 1px solid #333; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+        .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
 
-        /* Buscador Modal */
+        /* BUSCADOR MODAL */
         #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
-        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 50px 0 20px 0; }
+        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
         .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
-        .close-search { position: absolute; top: 15px; right: 20px; font-size: 35px; color: #fff; cursor: pointer; border: none; background: none; }
+        .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
         
-        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
         .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
         .res-item img { width: 100%; height: 100%; object-fit: cover; }
-        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.9); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 3px 0; }
+        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
-        /* Nav Menu */
         .menu { position: fixed; bottom: 0; width: 100%; background: rgba(15,15,15,0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
-        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; flex: 1; }
+        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; width: 25%; }
         .menu-item i { font-size: 20px; margin-bottom: 4px; }
-        .menu-item.active, .menu-item:active { color: var(--primary); }
+        .menu-item:active { color: var(--primary); }
 
-        /* Player */
-        #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 4000; }
+        #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 2000; }
         video { width: 100%; height: 100%; }
-        .close-player { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 40px; background: rgba(0,0,0,0.5); border: none; z-index: 4001; cursor: pointer; width: 50px; height: 50px; border-radius: 50%; }
+        .close { position: absolute; top: 30px; right: 20px; color: #fff; font-size: 35px; background: none; border: none; z-index: 2001; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -73,13 +71,12 @@
     <button class="close-search" onclick="cerrarBuscador()">&times;</button>
     <div class="search-box-modal">
         <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
-        <input type="text" id="input-buscador" placeholder="Buscar ID (ej: MIDE-123)...">
+        <input type="text" id="input-buscador" placeholder="Buscar por ID en base de datos...">
     </div>
     <div id="resultados-busqueda"></div>
 </div>
 
 <div class="hero"><div id="hero-bg"></div></div>
-
 <div class="header-content">
     <span class="badge" id="p-id">---</span>
     <h1 id="p-title">Cargando...</h1>
@@ -100,15 +97,11 @@
     <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
-<div id="player-overlay">
-    <button class="close-player" onclick="closePlayer()">&times;</button>
-    <video id="v" controls preload="auto"></video>
-</div>
+<div id="player-overlay"><button class="close" onclick="closePlayer()">&times;</button><video id="v" controls></video></div>
 
 <script src="peliculas.js"></script>
 
 <script>
-    // 1. Obtener datos de localStorage
     const data = {
         id: localStorage.getItem('peli_id'),
         title: localStorage.getItem('peli_titulo'),
@@ -121,14 +114,9 @@
         tags: localStorage.getItem('peli_tags')
     };
 
-    // Redirigir al home si no hay datos (evita página vacía)
-    if (!data.id) {
-        window.location.href = "index.html";
-    }
-
-    // 2. Renderizar Interfaz
-    const finalBg = (data.bg && data.bg !== "null" && data.bg !== "") ? data.bg : data.img;
-    if(finalBg) document.getElementById('hero-bg').style.backgroundImage = `url('${finalBg}')`;
+    // Pintar interfaz
+    const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
+    if(finalBg) document.getElementById('hero-bg').style.backgroundImage = "url('" + finalBg + "')";
     
     document.getElementById('p-title').innerText = data.title || "Sin título";
     document.getElementById('p-id').innerText = data.id || "N/A";
@@ -136,19 +124,18 @@
     document.getElementById('p-fecha').innerText = data.fecha || "No disponible";
     document.getElementById('p-actriz').innerText = data.actriz || "Desconocida";
 
-    // Procesar Tags
     const tagContainer = document.getElementById('p-tags');
+    tagContainer.innerHTML = "";
     if(data.tags && data.tags !== "null") {
         data.tags.split(',').forEach(t => {
-            if(t.trim() === "") return;
             const span = document.createElement('span');
             span.className = 'tag';
-            span.innerHTML = `<i class="fas fa-tag" style="font-size:10px; color:var(--primary)"></i> ${t.trim()}`;
+            span.innerHTML = `<i class="fas fa-tag"></i> ${t.trim()}`;
             tagContainer.appendChild(span);
         });
     }
 
-    // 3. Funciones del Buscador
+    /* BUSCADOR GLOBAL */
     function abrirBuscador() {
         document.getElementById('modal-busqueda').style.display = 'block';
         document.getElementById('input-buscador').focus();
@@ -165,7 +152,6 @@
         
         if (texto.length < 2) return;
         
-        // Asumiendo que 'baseDeDatos' existe en peliculas.js
         const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
         
         filtrados.forEach(p => {
@@ -188,33 +174,16 @@
         });
     });
 
-    // 4. Lógica de Reproducción y Anuncio
     function play() {
-        // Validación de URL de video
-        if(!data.video || data.video === "null" || data.video === "") {
-            return alert("Error: El enlace del video no está disponible.");
-        }
-
-        // ABRIR ANUNCIO EN PESTAÑA NUEVA (Cambia el link por tu link real)
-        window.open("https://tu-link-de-anuncio.com", "_blank");
-
-        // MOSTRAR REPRODUCTOR
-        const playerOverlay = document.getElementById('player-overlay');
-        const videoElement = document.getElementById('v');
-        
-        videoElement.src = data.video;
-        playerOverlay.style.display = 'block';
-        
-        // Intentar reproducir automáticamente
-        videoElement.play().catch(e => {
-            console.log("Autoplay bloqueado, el usuario debe dar click al video.");
-        });
+        const v = document.getElementById('v');
+        if(!data.video || data.video === "null") return alert("Video no disponible");
+        v.src = data.video;
+        document.getElementById('player-overlay').style.display = 'block';
+        v.play();
     }
-
     function closePlayer() {
         const v = document.getElementById('v');
-        v.pause();
-        v.src = ""; // Limpia el buffer
+        v.pause(); v.src = "";
         document.getElementById('player-overlay').style.display = 'none';
     }
 </script>
