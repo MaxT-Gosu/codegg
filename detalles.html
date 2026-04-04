@@ -1,215 +1,487 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles - JavGG</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; --accent-color: #E50914; }
-        body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; }
-        
-        /* MEJORA: Skeleton Loading (Efecto de carga) */
-        @keyframes pulse {
-            0% { background-color: #1a1a1a; }
-            50% { background-color: #252525; }
-            100% { background-color: #1a1a1a; }
-        }
-
-        .hero { 
-            position: relative; 
-            width: 100%; 
-            height: 45vh; 
-            background: #1a1a1a; 
-            overflow: hidden; 
-            animation: pulse 1.5s infinite ease-in-out; /* Pulso mientras carga */
-        }
-        
-        #hero-bg { 
-            width: 100%; 
-            height: 100%; 
-            background-size: cover; 
-            background-position: center top; 
-            opacity: 0; /* Empieza invisible para el fade-in */
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        /* Cuando la imagen carga, quitamos el pulso y mostramos la foto */
-        .hero.loaded { animation: none; background: #000; }
-        .hero.loaded #hero-bg { opacity: 1; }
-
-        .hero::after { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background: linear-gradient(to top, var(--bg) 0%, transparent 60%); 
-        }
-
-        /* Resto de estilos igual para mantener tu diseño */
-        .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; text-align: left; }
-        .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
-        h1 { font-size: 24px; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 15px rgba(0,0,0,0.9); }
-        
-        .btn-play { background: #fff; color: #000; border: none; width: 100%; padding: 14px; border-radius: 6px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 25px; transition: transform 0.1s; }
-        .btn-play:active { transform: scale(0.98); }
-
-        .info-box { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
-        .row { display: flex; align-items: center; font-size: 14px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
-        .row i.arrow { color: var(--primary); margin-right: 10px; font-size: 10px; }
-        .label { color: #888; margin-right: 6px; font-weight: 400; width: 100px; }
-        .value { color: var(--link); text-decoration: none; font-weight: 700; }
-
-        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-        .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
-
-        /* MODAL BUSQUEDA */
-        #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
-        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
-        .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
-        .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
-        
-        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-        .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
-        .res-item img { width: 100%; height: 100%; object-fit: cover; }
-
-        .menu { position: fixed; bottom: 0; width: 100%; background: rgba(15,15,15,0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
-        .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; width: 25%; }
-        .menu-item i { font-size: 20px; margin-bottom: 4px; }
-
-        #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 2000; }
-        video { width: 100%; height: 100%; }
-        .close { position: absolute; top: 30px; right: 20px; color: #fff; font-size: 35px; background: none; border: none; z-index: 2001; cursor: pointer; }
-    </style>
-</head>
-<body>
-
-<div id="modal-busqueda">
-    <button class="close-search" onclick="cerrarBuscador()">&times;</button>
-    <div class="search-box-modal">
-        <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
-        <input type="text" id="input-buscador" placeholder="Buscar por ID en base de datos...">
-    </div>
-    <div id="resultados-busqueda"></div>
-</div>
-
-<div class="hero" id="hero-container"><div id="hero-bg"></div></div>
-<div class="header-content">
-    <span class="badge" id="p-id">---</span>
-    <h1 id="p-title">Cargando...</h1>
-    <button class="btn-play" onclick="play()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
-</div>
-
-<div class="info-box">
-    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Release:</span><span class="value" id="p-fecha">---</span></div>
-    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Studio:</span><span class="value" id="p-studio">---</span></div>
-    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Actriz:</span><span class="value" id="p-actriz">---</span></div>
-    <div class="row" style="border:none;"><i class="fas fa-caret-right arrow"></i><span class="label">Tags:</span><div class="tag-list" id="p-tags"></div></div>
-</div>
-
-<nav class="menu">
-    <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="censored.html" class="menu-item"><i class="fas fa-film"></i><span>Censored</span></a>
-    <a href="uncensored.html" class="menu-item"><i class="fas fa-tv"></i><span>Uncensored</span></a>
-    <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
-</nav>
-
-<div id="player-overlay"><button class="close" onclick="closePlayer()">&times;</button><video id="v" controls></video></div>
-
-<script src="peliculas.js"></script>
-
-<script>
-    const data = {
-        id: localStorage.getItem('peli_id'),
-        title: localStorage.getItem('peli_titulo'),
-        img: localStorage.getItem('peli_imagen'),
-        bg: localStorage.getItem('peli_background'),
-        video: localStorage.getItem('peli_video'),
-        studio: localStorage.getItem('peli_estudio'),
-        fecha: localStorage.getItem('peli_fecha'),
-        actriz: localStorage.getItem('peli_actriz'),
-        tags: localStorage.getItem('peli_tags')
-    };
-
-    // --- MEJORA: PRECARGA DE IMAGEN INTELIGENTE ---
-    const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
-    if(finalBg) {
-        const imgPreload = new Image();
-        imgPreload.src = finalBg;
-        imgPreload.onload = function() {
-            document.getElementById('hero-bg').style.backgroundImage = "url('" + finalBg + "')";
-            document.getElementById('hero-container').classList.add('loaded');
-        };
-    }
-    
-    document.getElementById('p-title').innerText = data.title || "Sin título";
-    document.getElementById('p-id').innerText = data.id || "N/A";
-    document.getElementById('p-studio').innerText = data.studio || "Desconocido";
-    document.getElementById('p-fecha').innerText = data.fecha || "No disponible";
-    document.getElementById('p-actriz').innerText = data.actriz || "Desconocida";
-
-    const tagContainer = document.getElementById('p-tags');
-    tagContainer.innerHTML = "";
-    if(data.tags && data.tags !== "null") {
-        data.tags.split(',').forEach(t => {
-            const span = document.createElement('span');
-            span.className = 'tag';
-            span.innerHTML = `<i class="fas fa-tag"></i> ${t.trim()}`;
-            tagContainer.appendChild(span);
-        });
-    }
-
-    /* BUSCADOR GLOBAL */
-    function abrirBuscador() {
-        document.getElementById('modal-busqueda').style.display = 'block';
-        document.getElementById('input-buscador').focus();
-    }
-    function cerrarBuscador() {
-        document.getElementById('modal-busqueda').style.display = 'none';
-        document.getElementById('resultados-busqueda').innerHTML = "";
-    }
-
-    document.getElementById('input-buscador').addEventListener('input', (e) => {
-        const texto = e.target.value.toLowerCase().trim();
-        const resultadosDiv = document.getElementById('resultados-busqueda');
-        resultadosDiv.innerHTML = "";
-        if (texto.length < 2) return;
-        const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
-        filtrados.forEach(p => {
-            const item = document.createElement('div');
-            item.className = 'res-item';
-            item.onclick = () => {
-                localStorage.setItem('peli_id', p.id);
-                localStorage.setItem('peli_titulo', p.titulo);
-                localStorage.setItem('peli_imagen', p.poster);
-                localStorage.setItem('peli_background', p.bg || "");
-                localStorage.setItem('peli_video', p.video);
-                localStorage.setItem('peli_estudio', p.estudio);
-                localStorage.setItem('peli_fecha', p.fecha || "");
-                localStorage.setItem('peli_actriz', p.actriz || "");
-                localStorage.setItem('peli_tags', p.tags || "");
-                location.reload();
-            };
-            item.innerHTML = `<img src="${p.poster}" loading="lazy"><div class="res-id">${p.id}</div>`;
-            resultadosDiv.appendChild(item);
-        });
-    });
-
-    function play() {
-        if (typeof AndroidAds !== "undefined") { AndroidAds.lanzarAnuncio(); }
-        const v = document.getElementById('v');
-        if(!data.video || data.video === "null") return alert("Video no disponible");
-        v.src = data.video;
-        document.getElementById('player-overlay').style.display = 'block';
-        v.play();
-    }
-    
-    function closePlayer() {
-        const v = document.getElementById('v');
-        v.pause(); v.src = "";
-        document.getElementById('player-overlay').style.display = 'none';
-    }
-</script>
-
-</body>
-</html>
+// Este es tu archivo peliculas.js corregido
+const baseDeDatos = [
+    { 
+        id: "NGOD-170", 
+        titulo: "I Got Fingered By My Husband's Mean Boss...", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221202/1649409013.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-13.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", 
+        estudio: "Jet Eizo",
+        fecha: "Apr. 08, 2022", 
+        actriz: "Nene Tanaka",
+        tags: "Uncensored, Creampie" 
+    },
+    { 
+        id: "IPIT-012", 
+        titulo: "Business Trip Destination Room NTR Blond Female Employee Who Continued", 
+        poster: "https://cdn001.imggle.net/webp/poster/20212709/1637387937.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-10.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "2023-11-20",
+        actriz: "Lily Hart",
+        tags: "Older Sister"
+    },
+    { 
+        id: "URE-131", 
+        titulo: "A Story About A Mother Who Gets Addicted To Sex With A Gangster", 
+        poster: "https://cdn001.imggle.net/webp/poster/12082025/1767892920.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/ure00131/ure00131jp-6.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Ure-131.mp4.mp4", 
+        estudio: "Madonna",
+        fecha: "Jan. 13, 2026",
+        actriz: "Reika Natsume",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "STARS-160", 
+        titulo: "Getting Their Fuck On In The Club", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1775217128.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/1stars160/1stars160jp-14.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Stars-160.mp4.mp4", 
+        estudio: "Sod Create",
+        fecha: "Nov. 21, 2019",
+        actriz: "Ichikawa Masami....",
+        tags: "Slut, Hardcore"
+    },
+    { 
+        id: "AKB-023", 
+        titulo: "Imamura Miho Cosplayer", 
+        poster: "https://cdn001.imggle.net/webp/poster/20240410/1730688308.webp", 
+        bg: "https://i.ibb.co/twnTm3K5/AKB-023.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Akb-023.mp4.mp4", 
+        estudio: "Tma ",
+        fecha: "Feb. 25, 2011",
+        actriz: "Miho Imamura",
+        tags: "Cosplay"
+    },
+    { 
+        id: "EBWH-186", 
+        titulo: "We Got Turned On By The Busty College Girl", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737085766.webp", 
+        bg: "https://i.ibb.co/F432PgJC/EBWH-186.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Ebwh-186.mp4.mp4", 
+        estudio: "E-body",
+        fecha: "Jan. 21, 2025",
+        actriz: "Hibiki Amemiya",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "PPPE-300", 
+        titulo: "Brainwashing Your Boobs With Your Eyes And Ears", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737083638.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/pppe00300/pppe00300jp-8.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Pppe-300.mp4.mp4", 
+        estudio: "Oppai",
+        fecha: "Jan. 21, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MOSJ-017", 
+        titulo: "A Sadistic Older Sister's Educational Eroticism", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772038390.webp", 
+        bg: "https://i.postimg.cc/qBZ9Znj4/MOSJ-017.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mosj-017.mp4.mp4", 
+        estudio: "Orustak Pictures",
+        fecha: "Aug. 29, 2025",
+        actriz: "Rena Sayama",
+        tags: "Idol & Celebrity"
+    },
+    { 
+        id: "259LUXU-1875", 
+        titulo: "I love licking your dick.", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp", 
+        bg: "https://i.ibb.co/BK3QDYmP/259-LUXU-1875.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/259LUXU-1875.mp4.mp4", 
+        estudio: "Luxury Tv",
+        fecha: "Feb. 27, 2026",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "SNOS-050", 
+        titulo: "On A Hot Spring Trip With My Girlfriend And Her Sister", 
+        poster: "https://cdn001.imggle.net/webp/poster/12082025/1767893299.webp", 
+        bg: "https://i.postimg.cc/zvZRS3hN/SNOS-050.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Snos-050.mp4.mp4", 
+        estudio: "S1 No.1 Style",
+        fecha: "Jan. 13, 2026",
+        actriz: "Niko Kawagoe",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "LULU-338", 
+        titulo: "During Overtime, When We Were Alone In The Office", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242108/1727408240.webp", 
+        bg: "https://i.postimg.cc/P5Vprp9Y/LULU-338.png", 
+        video: "https://appcine.b-cdn.net/Codegg/LULU-338.mp4.mp4", 
+        estudio: "Lunatics",
+        fecha: "Oct. 01, 2024",
+        actriz: "Waka Misono",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MIDA-543", 
+        titulo: "Covered In Yua Juice, Nonstop 320 Climaxes X Convulsions 2201", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772385327.webp", 
+        bg: "https://i.postimg.cc/R0nvm29r/MIDA-543.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mida-543.mp4.mp4", 
+        estudio: "Moodyz",
+        fecha: "Mar. 03, 2026",
+        actriz: " Yua Fukuda",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MIKR-076", 
+        titulo: "A Mother Who Was Repeatedly Made To Cum By A Man With An", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772128191.webp", 
+        bg: "https://i.postimg.cc/DZSt3XyD/MIKR-076.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIKR-076.mp4.mp4", 
+        estudio: "Moodyz",
+        fecha: "Mar. 03, 2026",
+        actriz: "Aki Sasaki",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "SNOS-063", 
+        titulo: "Overflowing Breasts Will Make You Cum To Your Death", 
+        poster: "https://cdn001.imggle.net/webp/poster/12082025/1767893239.webp", 
+        bg: "https://i.postimg.cc/hPPZJT1j/SNOS-063.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Snos-063.mp4.mp4", 
+        estudio: "S1 No.1 Style",
+        fecha: "Jan. 13, 2026",
+        actriz: "Miyuu Kiyohara",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "FPRE-112", 
+        titulo: "A Voluptuous Slut Who Plays With Her Cock Pet", 
+        poster: "https://cdn001.imggle.net/webp/poster/20240410/1730429980.webp", 
+        bg: "https://i.postimg.cc/X7P3HMb6/FPRE-112.png", 
+        video: "https://appcine.b-cdn.net/Codegg/FPRE-112.mp4", 
+        estudio: "Fitch",
+        fecha: "Nov. 05, 2024",
+        actriz: "Ran Kikuno",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUR-209", 
+        titulo: "Who Used To Like Me, Has Transformed Into A Sexy", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737686201.webp", 
+        bg: "https://i.postimg.cc/52k5fMhx/JUR-209.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-209.mp4", 
+        estudio: "Madonna",
+        fecha: " Jan. 28, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "VAGU-158", 
+        titulo: "Making Daughter-in-law Of Nozomi And My Love", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1735698775.webp", 
+        bg: "https://i.postimg.cc/NG1QfJD5/VAGU-158.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-209.mp4", 
+        estudio: "Venus",
+        fecha: "Jul. 13, 2016",
+        actriz: "Nozomi Tanihara",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MIAB-433", 
+        titulo: "Breast Crushing, Infinite Piston, Sperm Reflux", 
+        poster: "https://cdn001.imggle.net/webp/poster/20250903/1744304112.webp", 
+        bg: "https://i.postimg.cc/pLfm9VXn/MIAB-433.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIAB-433.mp4", 
+        estudio: "Moodyz",
+        fecha: "Apr. 15, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "NUKA-081", 
+        titulo: "Six Creampies Without Pulling Out", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773367130.webp", 
+        bg: "https://i.postimg.cc/43FLv0Dk/NUKA-081.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Nuka-081.mp4", 
+        estudio: "Center Village",
+        fecha: "Mar. 05, 2026",
+        actriz: "Fumika Nagasawa",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MSQD-005", 
+        titulo: "Oral sex class Haruno Ando", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773532012826.webp", 
+        bg: "https://i.postimg.cc/9QKfdJFD/MSQD-005.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MSQD-005.mp4", 
+        estudio: "Masquerade",
+        fecha: "Feb. 21, 2026",
+        actriz: "Haruno Ando",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "AMBI-108", 
+        titulo: "Devil Father's Sex Toy Conceived And Torn", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773453514.webp", 
+        bg: "https://i.postimg.cc/9Mr9b0ZY/AMBI-108.png", 
+        video: "https://appcine.b-cdn.net/Codegg/AMBI-108.mp4", 
+        estudio: "Planet Plus",
+        fecha: "Feb. 01, 2020",
+        actriz: "Planet Plus",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "DLDSS-483", 
+        titulo: "Turn My Winning Mother Into A Female", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1772842892505.webp", 
+        bg: "https://i.postimg.cc/85WmbBLy/DLDSS-483.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dldss-483.mp4", 
+        estudio: "Dahlia",
+        fecha: "Apr. 09, 2026",
+        actriz: "Suzume Mino",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "FNS-165", 
+        titulo: "Who Was Unable To Return Home Due To A Typhoon", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773901863398.webp", 
+        bg: "https://i.postimg.cc/m25N4d36/FNS-165.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dldss-483.mp4", 
+        estudio: "Faleno",
+        fecha: "Apr. 09, 2026",
+        actriz: "Nene Yoshitaka",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "099NTK-892", 
+        titulo: "A slutty body with maximum huggability and raw sex 2", 
+        poster: "https://cdn001.imggle.net/webp/poster/20241115/1733784913.webp", 
+        bg: "https://i.postimg.cc/LsLY2Qxs/099NTK-892-(2).png", 
+        video: "https://appcine.b-cdn.net/Codegg/099Ntk-892.mp4", 
+        estudio: "Magic",
+        fecha: "Dec. 09, 2024",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "FPRE-222", 
+        titulo: "Clothed Fuck With A Tall, Busty Model-type Slut", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1770919055.webp", 
+        bg: "https://i.postimg.cc/3R72gXdC/FPRE-222.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Fpre-222.mp4", 
+        estudio: "Fitch",
+        fecha: "Feb. 17, 2026",
+        actriz: "Ran Kikuno ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "IPIT-004", 
+        titulo: "Emma Lawrence Oral SEX Queen Advent", 
+        poster: "https://cdn001.imggle.net/webp/poster/20252204/1746500965.webp", 
+        bg: "https://i.postimg.cc/SxS5GvvT/IPIT-004.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-004.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Sep. 13, 2020",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUL-703", 
+        titulo: "Married Secretary, President's Office Creampie Sexual Intercourse", 
+        poster: "https://cdn001.imggle.net/webp/poster/20230206/1687829315.webp", 
+        bg: "https://i.postimg.cc/kXbZmMwD/JUL-703.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-703.mp4", 
+        estudio: "Madonna",
+        fecha: "Sep. 14, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUL-843", 
+        titulo: "On The 7th Day, I Lost My Reason", 
+        poster: "https://cdn001.imggle.net/webp/poster/20230207/1688264926.webp", 
+        bg: "https://i.postimg.cc/MpTfM7mX/JUL-843.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-843.mp4", 
+        estudio: "Madonna",
+        fecha: "Jan. 25, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUR-669", 
+        titulo: "My Stepson Broke His Arms And Legs", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773948927.webp", 
+        bg: "https://i.postimg.cc/3NkTsN3n/JUR-669.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-669.mp4", 
+        estudio: "Madonna",
+        fecha: "Mar. 24, 2026",
+        actriz: "Miyuu Imai",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "IPIT-006", 
+        titulo: "SEX CLIMAX Pleasure Climax 3 Production Special", 
+        poster: "https://cdn001.imggle.net/webp/poster/20252204/1746587696.webp", 
+        bg: "https://i.postimg.cc/7LDMdwvR/IPIT-006.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-006.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Oct. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JUL-535", 
+        titulo: "A Beautiful Married Woman Drowing In Pleasure At", 
+        poster: "https://cdn002.imggle.net/webp/poster/jul-535.webp", 
+        bg: "https://i.ibb.co/cXvRfq9M/vlcsnap-2026-03-25-17h19m16s857.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-006.mp4", 
+        estudio: "Madonna",
+        fecha: "Apr. 07, 2021",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JUL-908", 
+        titulo: "Continued To Be Squid In Uncontrollable Unequaled", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221202/1647624162.webp", 
+        bg: "https://i.ibb.co/4wwcN6Mz/JUL-908.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jul-908.mp4", 
+        estudio: "Madonna",
+        fecha: "Mar. 22, 2022",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JIPX-958", 
+        titulo: "Wild Iku Muscle Slender Beauty's Acme Super", 
+        poster: "https://cdn001.imggle.net/webp/poster/20222410/1668821998.webp", 
+        bg: "https://i.ibb.co/R4hNj8zP/IPX-958.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipx-958.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Mar. 22, 2022",
+        actriz: "Ruisa Totsuki",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JUL-941", 
+        titulo: "A Foreign Wife Who Is Not Familiar With The Housing", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221904/1650607404.webp", 
+        bg: "https://i.ibb.co/XfYhCfrZ/JUL-941.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-941.mp4", 
+        estudio: "Madonna",
+        fecha: "Apr. 26, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "MEYD-671", 
+        titulo: "The Company That Applied For The Part Recruitment Called", 
+        poster: "https://cdn002.imggle.net/webp/poster/meyd-671.webp", 
+        bg: "https://i.ibb.co/fsrG0HQ/MEYD-671.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Meyd-671.mp4", 
+        estudio: "Tameike Goro",
+        fecha: "Apr. 13, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "MIAA-685", 
+        titulo: "Foreign Bride Who Does Not Know Foreplay Was Trained", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221108/1660627911.webp", 
+        bg: "https://i.ibb.co/1tyfK72M/MIAA-685.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIAA-685.mp4", 
+        estudio: "Moodyz",
+        fecha: "Aug. 02, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "RKI-614", 
+        titulo: "Ultra-Sexy Dirty Talk Master Lily Heart's", 
+        poster: "https://cdn002.imggle.net/webp/poster/rki-614.webp", 
+        bg: "https://i.ibb.co/M51v2Swp/RKI-614.png", 
+        video: "https://appcine.b-cdn.net/Codegg/RKI-614.mp4", 
+        estudio: "Moodyz",
+        fecha: "Jul. 14, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "SONE-574", 
+        titulo: "When your partner is in front of you, you", 
+        poster: "https://cdn001.imggle.net/webp/poster/20253001/1738866422.webp", 
+        bg: "https://i.ibb.co/LhxSkPcg/SONE-574.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sone-574.mp4", 
+        estudio: "S1 No.1 Style",
+        fecha: "Feb. 07, 2025",
+        actriz: "Aka Asuka",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "GVH-255", 
+        titulo: "A Lascivious Wife Who Provokes With No Bra", 
+        poster: "https://cdn002.imggle.net/webp/poster/gvh-255.webp", 
+        bg: "https://i.ibb.co/35NDYkJk/GVH-255.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Gvh-255.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Feb. 07, 2025",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "IPIT-009", 
+        titulo: "Bad Teacher - The Hot Blonde Who Fucking Devours", 
+        poster: "https://cdn001.imggle.net/webp/poster/20222612/1674519023.webp", 
+        bg: "https://i.ibb.co/tpTbHTgd/IPIT-009.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-009.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Nov. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "300MIUM-1257", 
+        titulo: "A smile that only my marshmallow-boobed girlfriend", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773380333372.webp", 
+        bg: "https://image.mgstage.com/images/prestigepremium/300mium/1257/cap_e_12_300mium-1257.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/300MIUM-1257.mp4", 
+        estudio: "Prestige Premium",
+        fecha: "Nov. 13, 2020",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "SYKH-129", 
+        titulo: "Boots Beauty Witch PREMIUM Black-robed Demon Nozomi", 
+        poster: "https://cdn001.imggle.net/webp/poster/20241115/1734150801.webp", 
+        bg: "https://i.ibb.co/MyQ86B0k/SYKH-129.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sykh-129.mp4", 
+        estudio: "Emaniel",
+        fecha: "Dec. 17, 2024",
+        actriz: "Nozomi Arimura",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "IPIT-012", 
+        titulo: "Business Trip Destination Room NTR Blond Female Employee", 
+        poster: "https://cdn001.imggle.net/webp/poster/20212709/1637387937.webp", 
+        bg: "https://i.ibb.co/Vff50pc/IPIT-012.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-012.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Dec. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "FC2PPV-4862565", 
+        titulo: "Huge breasted nurse wife with a bust of 100 cm.", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773376012.webp", 
+        bg: "https://i.ibb.co/pvBpdghQ/FC2-PPV-4862565.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-012.mp4", 
+        estudio: "Fc2ppv",
+        fecha: "Mar. 12, 2026",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+];
