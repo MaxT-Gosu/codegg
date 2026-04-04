@@ -10,24 +10,9 @@
         :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; --accent-color: #E50914; }
         body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; }
         
-        /* CORRECCIÓN DE OPACIDAD Y VISIBILIDAD */
         .hero { position: relative; width: 100%; height: 45vh; background: #000; overflow: hidden; }
-        
-        #hero-bg { 
-            width: 100%; 
-            height: 100%; 
-            background-size: cover; 
-            background-position: center top; 
-            opacity: 1; /* Ahora la imagen tiene brillo total */
-        }
-
-        .hero::after { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            /* El degradado ahora es más sutil: solo oscurece del centro hacia abajo */
-            background: linear-gradient(to top, var(--bg) 0%, transparent 60%); 
-        }
+        #hero-bg { width: 100%; height: 100%; background-size: cover; background-position: center top; opacity: 1; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 0%, transparent 60%); }
 
         .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; text-align: left; }
         .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
@@ -80,7 +65,7 @@
 <div class="header-content">
     <span class="badge" id="p-id">---</span>
     <h1 id="p-title">Cargando...</h1>
-    <button class="btn-play" onclick="play()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
+    <button class="btn-play" id="btn-play-action" onclick="handlePlayClick()"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
 </div>
 
 <div class="info-box">
@@ -102,6 +87,7 @@
 <script src="peliculas.js"></script>
 
 <script>
+    // Recuperar datos de localStorage
     const data = {
         id: localStorage.getItem('peli_id'),
         title: localStorage.getItem('peli_titulo'),
@@ -135,7 +121,37 @@
         });
     }
 
-    /* BUSCADOR GLOBAL */
+    // --- LÓGICA DE REPRODUCCIÓN Y PUBLICIDAD ---
+    function handlePlayClick() {
+        // REEMPLAZA ESTE LINK CON TU SMART LINK DE ADSTERRA
+        const smartLink = "https://www.highratecpm.com/tu-codigo-aqui"; 
+
+        // 1. Intentamos abrir la publicidad en una pestaña aparte inmediatamente
+        const adWindow = window.open(smartLink, '_blank');
+
+        // 2. Ejecutar la función de reproducción después de un pequeño retraso
+        // Esto le da tiempo al navegador de procesar la apertura de la pestaña
+        setTimeout(() => {
+            playVideo();
+        }, 300);
+    }
+
+    function playVideo() {
+        const v = document.getElementById('v');
+        if(!data.video || data.video === "null") return alert("Video no disponible");
+        
+        v.src = data.video;
+        document.getElementById('player-overlay').style.display = 'block';
+        v.play();
+    }
+
+    function closePlayer() {
+        const v = document.getElementById('v');
+        v.pause(); v.src = "";
+        document.getElementById('player-overlay').style.display = 'none';
+    }
+
+    // --- BUSCADOR ---
     function abrirBuscador() {
         document.getElementById('modal-busqueda').style.display = 'block';
         document.getElementById('input-buscador').focus();
@@ -149,11 +165,8 @@
         const texto = e.target.value.toLowerCase().trim();
         const resultadosDiv = document.getElementById('resultados-busqueda');
         resultadosDiv.innerHTML = "";
-        
         if (texto.length < 2) return;
-        
-        const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
-        
+        const filtrados = (typeof baseDeDatos !== 'undefined' ? baseDeDatos : []).filter(p => p.id.toLowerCase().includes(texto));
         filtrados.forEach(p => {
             const item = document.createElement('div');
             item.className = 'res-item';
@@ -173,22 +186,9 @@
             resultadosDiv.appendChild(item);
         });
     });
-
-    function play() {
-        const v = document.getElementById('v');
-        if(!data.video || data.video === "null") return alert("Video no disponible");
-        v.src = data.video;
-        document.getElementById('player-overlay').style.display = 'block';
-        v.play();
-    }
-    function closePlayer() {
-        const v = document.getElementById('v');
-        v.pause(); v.src = "";
-        document.getElementById('player-overlay').style.display = 'none';
-    }
 </script>
 
-<script src="https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js"></script>
+<script async src="https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js" onerror="console.warn('Adblock detectado o error en script publicitario')"></script>
 
 </body>
 </html>
