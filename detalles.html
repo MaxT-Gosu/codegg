@@ -177,18 +177,26 @@
     function play() {
         const v = document.getElementById('v');
         if(!data.video || data.video === "null") return alert("Video no disponible");
+
+        // --- CONEXIÓN CON UNITY ADS ---
+        if (typeof AndroidAds !== "undefined") {
+            AndroidAds.lanzarAnuncio(); 
+        } else {
+            console.log("Anuncio de Unity omitido (no estás en la app de Android).");
+        }
+
+        // Mostrar reproductor
         v.src = data.video;
         document.getElementById('player-overlay').style.display = 'block';
         v.play();
     }
+
     function closePlayer() {
         const v = document.getElementById('v');
         v.pause(); v.src = "";
         document.getElementById('player-overlay').style.display = 'none';
     }
 </script>
-
-<script src="https://pl28830826.effectivegatecpm.com/f3/b4/c4/f3b4c4bf072cc38a7a4398bffc1364e6.js"></script>
 
 </body>
 </html>
