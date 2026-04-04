@@ -441,14 +441,14 @@ const baseDeDatos = [
         tags: "Reducing Mosaic"
     }, // <-- COMA AÑADIDA AQUÍ
     { 
-        id: "IPIT-009", 
-        titulo: "Bad Teacher - The Hot Blonde Who Fucking Devours", 
-        poster: "https://cdn001.imggle.net/webp/poster/20222612/1674519023.webp", 
-        bg: "https://i.ibb.co/tpTbHTgd/IPIT-009.png", 
-        video: "https://appcine.b-cdn.net/Codegg/Ipit-009.mp4", 
-        estudio: "Idea Pocket ",
+        id: "300MIUM-1257", 
+        titulo: "A smile that only my marshmallow-boobed girlfriend", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773380333372.webp", 
+        bg: "https://image.mgstage.com/images/prestigepremium/300mium/1257/cap_e_12_300mium-1257.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/300MIUM-1257.mp4", 
+        estudio: "Prestige Premium",
         fecha: "Nov. 13, 2020",
-        actriz: "Lily Hart",
+        actriz: "Desconocida",
         tags: "Reducing Mosaic"
     },
 	{ 
