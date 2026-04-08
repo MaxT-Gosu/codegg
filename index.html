@@ -3,55 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavGG - Home</title>
+    <title>JavGG - Premium Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --bg-color: #0a0a0a; --accent-color: #E50914; --card-bg: #1a1a1a; --skeleton-bg: #252525; }
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{ font-family: 'Roboto', sans-serif; background: var(--bg-color); color:#fff; overflow-x:hidden; }
+        :root { 
+            --bg-color: #141414; 
+            --bg-color-alt: #1a1a1a; 
+            --accent-color: #E50914; 
+            --text-color: #ffffff;
+            --text-color-sec: #b3b3b3; 
+            --skeleton-bg: #222222; 
+        }
         
+        * { margin:0; padding:0; box-sizing:border-box; outline: none; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); overflow-x:hidden; -webkit-tap-highlight-color: transparent; }
+        
+        /* Animación Shimmer */
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-        .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        .skeleton { background: linear-gradient(90deg, var(--bg-color-alt) 25%, var(--skeleton-bg) 50%, var(--bg-color-alt) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; }
         
-        .container{width:100%;padding-bottom:100px}
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); position: absolute; width: 100%; z-index: 10; }
-        header h1 { font-size: 26px; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+        .container { width:100%; padding-bottom:100px; }
+        
+        /* HEADER ESTILO CINEMAX */
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%); 
+            position: fixed; width: 100%; z-index: 100;
+        }
+        header h1 { font-size: 28px; color: var(--accent-color); font-weight: 900; letter-spacing: -1px; text-transform: uppercase; font-family: 'Arial Black', sans-serif;}
 
-        /* BUSCADOR MODAL GLOBAL */
-        #modal-busqueda { 
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); 
-            z-index: 2000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; 
+        /* HERO PREMIUM */
+        .hero { 
+            position: relative; width: 100%; height: 70vh; overflow: hidden; background: #000; 
         }
-        .search-box-modal { 
-            background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; 
-            padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; 
+        .hero img { 
+            width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity 1.2s ease-in-out; 
         }
-        .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
-        .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
+        .hero::after { 
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, var(--bg-color) 2%, transparent 40%),
+                        linear-gradient(to right, rgba(20,20,20,0.7) 0%, transparent 60%);
+        }
+        .hero-content { position: absolute; bottom: 10%; left: 5%; width: 90%; z-index: 10; }
+        .hero-content h2 { font-size: clamp(22px, 6vw, 38px); font-weight: 900; margin-bottom: 15px; line-height: 1.1; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        .hero-btns button { 
+            background: var(--accent-color); color: #fff; border: none;
+            padding: 12px 24px; font-size: 15px; font-weight: 700; 
+            border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* SECCIONES Y GRIDS */
+        #sections-container { margin-top: -20px; position: relative; z-index: 20; }
+        .section { margin-bottom: 25px; padding-left: 15px; }
+        .section h2 { font-size: 17px; margin-bottom: 12px; font-weight: 700; color: var(--text-color); }
         
-        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-        .res-item { background: #111; border-radius: 5px; overflow: hidden; cursor: pointer; aspect-ratio: 2/3; position: relative; border: 1px solid #222; }
+        .image-grid { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 12px; scrollbar-width: none; padding-right: 20px; }
+        .image-grid::-webkit-scrollbar { display: none; }
+        
+        .card-item { flex-shrink: 0; width: 135px; cursor: pointer; transition: transform 0.2s; position: relative; display: flex; flex-direction: column; }
+        .card-item:active { transform: scale(0.95); }
+        
+        .img-wrapper { width: 100%; aspect-ratio: 2/3; border-radius: 4px; overflow: hidden; background: var(--skeleton-bg); border: 1px solid rgba(255,255,255,0.05); position: relative; }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
+        
+        /* Título (ID) debajo de la imagen */
+        .image-title {
+            font-size: 11px; color: var(--text-color-sec); margin-top: 6px; text-align: center; font-weight: bold;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* BUSCADOR */
+        #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(20, 20, 20, 0.98); z-index: 2000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
+        .search-box-modal { background: rgba(255,255,255,0.1); border-radius: 4px; display: flex; align-items: center; padding: 12px 15px; margin-top: 60px; }
+        .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; font-size: 16px; }
+        .close-search { position: absolute; top: 20px; right: 20px; font-size: 24px; color: #fff; background: none; border: none; }
+        
+        #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .res-item { background: var(--bg-color-alt); border-radius: 4px; overflow: hidden; aspect-ratio: 2/3; position: relative; }
         .res-item img { width: 100%; height: 100%; object-fit: cover; }
-        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
+        .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.9); color: #fff; font-size: 9px; text-align: center; font-weight: bold; padding: 3px 0; }
 
-        .hero { position: relative; width: 100%; height: 60vh; overflow: hidden; margin-bottom: 20px; background: #000; }
-        .hero img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.8s ease; }
-        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, var(--bg-color), transparent); }
-        .hero-content { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 20px; z-index: 5; text-align: center; }
-        .hero-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        .hero-content button { background: var(--accent-color); color: #fff; border: none; padding: 12px 30px; font-size: 16px; font-weight: 700; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto; }
-        
-        .section { margin: 25px 0; padding-left: 15px; }
-        .section h2 { font-size: 18px; margin-bottom: 15px; font-weight: 700; }
-        .image-grid { display: flex; overflow-x: auto; gap: 12px; padding-right: 15px; scrollbar-width: none; }
-        .card-item { flex-shrink: 0; width: 140px; cursor: pointer; transition: transform 0.3s; }
-        .img-wrapper { position: relative; width: 140px; height: 200px; border-radius: 8px; overflow: hidden; background: var(--skeleton-bg); }
-        .image-grid img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
-        .image-title { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 6px 2px; text-align: center; font-weight: bold; }
-        
-        .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 11px; background: none; border: none; cursor: pointer; width: 25%; }
-        .menu-item i { font-size: 18px; margin-bottom: 5px; }
+        /* MENÚ INFERIOR */
+        .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 10px; background: none; border: none; cursor: pointer; width: 25%; font-weight: 500;}
+        .menu-item i { font-size: 20px; margin-bottom: 5px; }
         .menu-item.active { color: var(--accent-color); }
     </style>
 </head>
@@ -63,19 +98,22 @@
     <div id="modal-busqueda">
         <button class="close-search" onclick="cerrarBuscador()">&times;</button>
         <div class="search-box-modal">
-            <i class="fas fa-search" style="margin-right: 15px; color: #888;"></i>
-            <input type="text" id="input-buscador" placeholder="Buscar ID en base de datos...">
+            <i class="fas fa-search" style="margin-right: 12px; color: var(--text-color-sec);"></i>
+            <input type="text" id="input-buscador" placeholder="Buscar ID (ej: JUL-908)...">
         </div>
         <div id="resultados-busqueda"></div>
     </div>
     
     <div class="hero skeleton" id="hero-box">
-        <img id="hero-img" src="" onload="this.style.opacity='1'; document.getElementById('hero-box').classList.remove('skeleton')">
+        <img id="hero-img" src="" alt="">
         <div class="hero-content">
             <h2 id="hero-title">Cargando...</h2>
-            <button id="hero-button"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
+            <div class="hero-btns">
+                <button id="hero-button"><i class="fas fa-play"></i> REPRODUCIR AHORA</button>
+            </div>
         </div>
     </div>
+
     <div id="sections-container"></div>
 </div>
 
@@ -89,11 +127,10 @@
 <script src="peliculas.js"></script>
 
 <script>
-// Funciones globales (fuera de onload)
+// --- LOGICA DE DATOS INTEGRADA ---
 function abrirDetalles(id) {
     let db = (typeof baseDeDatos !== 'undefined') ? baseDeDatos : window.baseDeDatos;
     const p = db.find(item => item.id === id);
-    
     if(p) {
         localStorage.setItem('peli_id', p.id);
         localStorage.setItem('peli_titulo', p.titulo);
@@ -115,113 +152,94 @@ function abrirBuscador() {
 
 function cerrarBuscador() {
     document.getElementById('modal-busqueda').style.display = 'none';
-    document.getElementById('resultados-busqueda').innerHTML = "";
-    document.getElementById('input-buscador').value = "";
 }
 
-// Ejecutar cuando el navegador esté listo
 window.onload = function() {
-    
-    // --- TU BASE DE DATOS DE RESPALDO ---
     if (typeof baseDeDatos === 'undefined') {
         window.baseDeDatos = [
-            { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4", estudio: "Madman", fecha: "2024-03-10", actriz: "Nombre de Actriz 1", tags: "Special, Madman, HD" },
-            { id: "NGOD-170", titulo: "NGOD-170 Uncensored", poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4", estudio: "Jet Eizo", fecha: "2024-02-28", actriz: "Nombre de Actriz 2", tags: "Uncensored, Jet Eizo, Creampie" }
+            { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4" },
+            { id: "NGOD-170", titulo: "NGOD-170 Uncensored", poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4" }
         ];
     }
 
-    // Seleccionamos la base de datos segura
     let db = (typeof baseDeDatos !== 'undefined') ? baseDeDatos : window.baseDeDatos;
 
-    // Cargar Hero
+    // --- CARGAR HERO ---
     const pHero = db[0]; 
     if(pHero) {
-        document.getElementById("hero-img").src = pHero.bg || pHero.poster;
+        const imgHero = document.getElementById("hero-img");
+        imgHero.src = pHero.bg || pHero.poster;
         document.getElementById("hero-title").innerText = pHero.titulo;
         document.getElementById("hero-button").onclick = () => abrirDetalles(pHero.id);
+        imgHero.onload = () => {
+            imgHero.style.opacity = '1';
+            document.getElementById('hero-box').classList.remove('skeleton');
+        };
     }
 
     const container = document.getElementById("sections-container");
 
-    // ==========================================
-    // 1. SECCIÓN: AGREGADOS RECIENTES (ÚLTIMOS 5)
-    // ==========================================
-    const secRecientes = document.createElement("div");
-    secRecientes.className = "section";
-    secRecientes.innerHTML = `<h2>Agregados Recientes</h2><div class="image-grid" id="grid-recientes"></div>`;
+    // --- 1. SECCIÓN: RECIENTES ---
+    const secRecientes = crearSeccion("Agregados Recientes", "grid-recientes");
     container.appendChild(secRecientes);
-
     const gridRecientes = document.getElementById("grid-recientes");
-    
-    // Invertimos el orden para tener los últimos y cortamos los primeros 5
-    const ultimosCinco = db.slice().reverse().slice(0, 5);
-
-    ultimosCinco.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "card-item";
-        card.onclick = () => abrirDetalles(p.id);
-        card.innerHTML = `<div class="img-wrapper skeleton"><img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy"><div class="image-title">${p.id}</div></div>`;
-        gridRecientes.appendChild(card);
+    db.slice().reverse().slice(0, 8).forEach(p => {
+        gridRecientes.appendChild(crearCard(p));
     });
 
-    // ==========================================
-    // 2. SECCIÓN: JAVS MÁS VISTOS (5 ALEATORIOS CADA 24H)
-    // ==========================================
-    const secVistos = document.createElement("div");
-    secVistos.className = "section";
-    secVistos.innerHTML = `<h2>Javs más vistos</h2><div class="image-grid" id="grid-vistos"></div>`;
+    // --- 2. SECCIÓN: MÁS VISTOS (LÓGICA 24H) ---
+    const secVistos = crearSeccion("Javs más vistos", "grid-vistos");
     container.appendChild(secVistos);
-
     const gridVistos = document.getElementById("grid-vistos");
 
     const horas24EnMs = 24 * 60 * 60 * 1000; 
     const tiempoActual = new Date().getTime();
-    let peliculasAleatorias = [];
-
     const tiempoGuardado = localStorage.getItem('vistos_timer');
     const idsGuardados = localStorage.getItem('vistos_ids');
-
-    function generarNuevosAleatorios() {
-        const dbMezclada = db.slice().sort(() => 0.5 - Math.random());
-        peliculasAleatorias = dbMezclada.slice(0, 5);
-        const idsParaGuardar = peliculasAleatorias.map(p => p.id);
-        localStorage.setItem('vistos_ids', JSON.stringify(idsParaGuardar));
-        localStorage.setItem('vistos_timer', tiempoActual.toString());
-    }
+    let peliculasAleatorias = [];
 
     if (tiempoGuardado && idsGuardados && (tiempoActual - parseInt(tiempoGuardado)) < horas24EnMs) {
         const arrayDeIds = JSON.parse(idsGuardados);
         peliculasAleatorias = db.filter(p => arrayDeIds.includes(p.id));
-        
-        if(peliculasAleatorias.length < 5) {
-            generarNuevosAleatorios();
-        }
     } else {
-        generarNuevosAleatorios();
+        peliculasAleatorias = db.slice().sort(() => 0.5 - Math.random()).slice(0, 8);
+        localStorage.setItem('vistos_ids', JSON.stringify(peliculasAleatorias.map(p => p.id)));
+        localStorage.setItem('vistos_timer', tiempoActual.toString());
     }
 
     peliculasAleatorias.forEach(p => {
+        gridVistos.appendChild(crearCard(p));
+    });
+
+    // --- FUNCIONES AUXILIARES ---
+    function crearSeccion(titulo, idGrid) {
+        const div = document.createElement("div");
+        div.className = "section";
+        div.innerHTML = `<h2>${titulo}</h2><div class="image-grid" id="${idGrid}"></div>`;
+        return div;
+    }
+
+    function crearCard(p) {
         const card = document.createElement("div");
         card.className = "card-item";
         card.onclick = () => abrirDetalles(p.id);
-        card.innerHTML = `<div class="img-wrapper skeleton"><img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy"><div class="image-title">${p.id}</div></div>`;
-        gridVistos.appendChild(card);
-    });
+        card.innerHTML = `
+            <div class="img-wrapper skeleton">
+                <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">
+            </div>
+            <div class="image-title">${p.id}</div>
+        `;
+        return card;
+    }
 
-    // ==========================================
-    // BUSCADOR REAL
-    // ==========================================
+    // --- BUSCADOR ---
     const buscador = document.getElementById('input-buscador');
     buscador.addEventListener('input', (e) => {
         const texto = e.target.value.toLowerCase().trim();
         const resultadosDiv = document.getElementById('resultados-busqueda');
         resultadosDiv.innerHTML = "";
-
         if (texto.length < 2) return;
-
-        const filtrados = db.filter(p => p.id.toLowerCase().includes(texto));
-
-        filtrados.forEach(p => {
+        db.filter(p => p.id.toLowerCase().includes(texto)).forEach(p => {
             const item = document.createElement('div');
             item.className = 'res-item';
             item.onclick = () => abrirDetalles(p.id);
