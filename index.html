@@ -18,13 +18,11 @@
         * { margin:0; padding:0; box-sizing:border-box; outline: none; }
         body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); overflow-x:hidden; -webkit-tap-highlight-color: transparent; }
         
-        /* Animación Shimmer */
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         .skeleton { background: linear-gradient(90deg, var(--bg-color-alt) 25%, var(--skeleton-bg) 50%, var(--bg-color-alt) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; }
         
         .container { width:100%; padding-bottom:100px; }
         
-        /* HEADER ESTILO CINEMAX */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 15px 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%); 
@@ -32,7 +30,6 @@
         }
         header h1 { font-size: 28px; color: var(--accent-color); font-weight: 900; letter-spacing: -1px; text-transform: uppercase; font-family: 'Arial Black', sans-serif;}
 
-        /* HERO PREMIUM */
         .hero { 
             position: relative; width: 100%; height: 70vh; overflow: hidden; background: #000; 
         }
@@ -52,7 +49,6 @@
             border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 10px;
         }
 
-        /* SECCIONES Y GRIDS */
         #sections-container { margin-top: -20px; position: relative; z-index: 20; }
         .section { margin-bottom: 25px; padding-left: 15px; }
         .section h2 { font-size: 17px; margin-bottom: 12px; font-weight: 700; color: var(--text-color); }
@@ -62,28 +58,19 @@
         
         .card-item { flex-shrink: 0; width: 135px; cursor: pointer; transition: transform 0.2s; position: relative; display: flex; flex-direction: column; }
         .card-item:active { transform: scale(0.95); }
-        
-        .img-wrapper { width: 100%; aspect-ratio: 2/3; border-radius: 4px; overflow: hidden; background: var(--skeleton-bg); border: 1px solid rgba(255,255,255,0.05); position: relative; }
+        .img-wrapper { width: 100%; aspect-ratio: 2/3; border-radius: 4px; overflow: hidden; background: var(--skeleton-bg); border: 1px solid rgba(255,255,255,0.05); }
         .img-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
-        
-        /* Título (ID) debajo de la imagen */
-        .image-title {
-            font-size: 11px; color: var(--text-color-sec); margin-top: 6px; text-align: center; font-weight: bold;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
+        .image-title { font-size: 11px; color: var(--text-color-sec); margin-top: 6px; text-align: center; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* BUSCADOR */
         #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(20, 20, 20, 0.98); z-index: 2000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .search-box-modal { background: rgba(255,255,255,0.1); border-radius: 4px; display: flex; align-items: center; padding: 12px 15px; margin-top: 60px; }
         .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; font-size: 16px; }
         .close-search { position: absolute; top: 20px; right: 20px; font-size: 24px; color: #fff; background: none; border: none; }
-        
         #resultados-busqueda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
         .res-item { background: var(--bg-color-alt); border-radius: 4px; overflow: hidden; aspect-ratio: 2/3; position: relative; }
         .res-item img { width: 100%; height: 100%; object-fit: cover; }
         .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.9); color: #fff; font-size: 9px; text-align: center; font-weight: bold; padding: 3px 0; }
 
-        /* MENÚ INFERIOR */
         .bottom-menu { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid rgba(255, 255, 255, 0.05); }
         .menu-item { display: flex; flex-direction: column; align-items: center; color: #888; text-decoration: none; font-size: 10px; background: none; border: none; cursor: pointer; width: 25%; font-weight: 500;}
         .menu-item i { font-size: 20px; margin-bottom: 5px; }
@@ -127,9 +114,8 @@
 <script src="peliculas.js"></script>
 
 <script>
-// --- LOGICA DE DATOS INTEGRADA ---
 function abrirDetalles(id) {
-    let db = (typeof baseDeDatos !== 'undefined') ? baseDeDatos : window.baseDeDatos;
+    let db = window.baseDeDatos || (typeof baseDeDatos !== 'undefined' ? baseDeDatos : []);
     const p = db.find(item => item.id === id);
     if(p) {
         localStorage.setItem('peli_id', p.id);
@@ -155,17 +141,33 @@ function cerrarBuscador() {
 }
 
 window.onload = function() {
-    if (typeof baseDeDatos === 'undefined') {
-        window.baseDeDatos = [
-            { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4" },
-            { id: "NGOD-170", titulo: "NGOD-170 Uncensored", poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4" }
-        ];
-    }
+    let intentos = 0;
+    let checkDB = setInterval(() => {
+        let db = (typeof baseDeDatos !== 'undefined') ? baseDeDatos : window.baseDeDatos;
+        
+        if (db && db.length > 2) {
+            clearInterval(checkDB);
+            inicializarApp(db);
+        } 
+        else if (intentos > 20) { 
+            clearInterval(checkDB);
+            const respaldo = (typeof baseDeDatos !== 'undefined') ? baseDeDatos : [
+                { id: "JUL-908", titulo: "JUL-908 Especial", poster: "https://i.ibb.co/Y48wTByV/JUL-908.jpg", bg: "https://i.ibb.co/v4p52FgD/JUL-908.png", video: "https://appcine.b-cdn.net/Codegg/JUL-908.mp4" },
+                { id: "NGOD-170", titulo: "NGOD-170 Uncensored", poster: "https://i.ibb.co/wNV1TShf/NGOD-170.webp", bg: "https://pics.dmm.co.jp/digital/video/ngod00170/ngod00170jp-14.jpg", video: "https://appcine.b-cdn.net/Codegg/NGOD-170.mp4" }
+            ];
+            inicializarApp(respaldo);
+        }
+        intentos++;
+    }, 100);
+};
 
-    let db = (typeof baseDeDatos !== 'undefined') ? baseDeDatos : window.baseDeDatos;
+function inicializarApp(db) {
+    // --- LÓGICA DE ACTUALIZACIÓN CADA HORA (ESTILO CINEMAX) ---
+    const ahora = new Date();
+    const semillaHora = ahora.getFullYear() + ahora.getMonth() + ahora.getDate() + ahora.getHours();
+    const indiceAleatorio = semillaHora % db.length;
+    const pHero = db[indiceAleatorio]; 
 
-    // --- CARGAR HERO ---
-    const pHero = db[0]; 
     if(pHero) {
         const imgHero = document.getElementById("hero-img");
         imgHero.src = pHero.bg || pHero.poster;
@@ -178,22 +180,18 @@ window.onload = function() {
     }
 
     const container = document.getElementById("sections-container");
+    container.innerHTML = ""; 
 
-    // --- 1. SECCIÓN: RECIENTES ---
-    const secRecientes = crearSeccion("Agregados Recientes", "grid-recientes");
-    container.appendChild(secRecientes);
-    const gridRecientes = document.getElementById("grid-recientes");
+    // Sección Recientes
+    const gridRecientes = crearSeccion(container, "Agregados Recientes", "grid-recientes");
     db.slice().reverse().slice(0, 8).forEach(p => {
         gridRecientes.appendChild(crearCard(p));
     });
 
-    // --- 2. SECCIÓN: MÁS VISTOS (LÓGICA 24H) ---
-    const secVistos = crearSeccion("Javs más vistos", "grid-vistos");
-    container.appendChild(secVistos);
-    const gridVistos = document.getElementById("grid-vistos");
-
+    // Sección Más Vistos (Lógica 24h)
+    const gridVistos = crearSeccion(container, "Javs más vistos", "grid-vistos");
     const horas24EnMs = 24 * 60 * 60 * 1000; 
-    const tiempoActual = new Date().getTime();
+    const tiempoActual = ahora.getTime();
     const tiempoGuardado = localStorage.getItem('vistos_timer');
     const idsGuardados = localStorage.getItem('vistos_ids');
     let peliculasAleatorias = [];
@@ -201,6 +199,7 @@ window.onload = function() {
     if (tiempoGuardado && idsGuardados && (tiempoActual - parseInt(tiempoGuardado)) < horas24EnMs) {
         const arrayDeIds = JSON.parse(idsGuardados);
         peliculasAleatorias = db.filter(p => arrayDeIds.includes(p.id));
+        if(peliculasAleatorias.length === 0) peliculasAleatorias = db.slice().sort(() => 0.5 - Math.random()).slice(0, 8);
     } else {
         peliculasAleatorias = db.slice().sort(() => 0.5 - Math.random()).slice(0, 8);
         localStorage.setItem('vistos_ids', JSON.stringify(peliculasAleatorias.map(p => p.id)));
@@ -211,28 +210,31 @@ window.onload = function() {
         gridVistos.appendChild(crearCard(p));
     });
 
-    // --- FUNCIONES AUXILIARES ---
-    function crearSeccion(titulo, idGrid) {
-        const div = document.createElement("div");
-        div.className = "section";
-        div.innerHTML = `<h2>${titulo}</h2><div class="image-grid" id="${idGrid}"></div>`;
-        return div;
-    }
+    configurarBuscador(db);
+}
 
-    function crearCard(p) {
-        const card = document.createElement("div");
-        card.className = "card-item";
-        card.onclick = () => abrirDetalles(p.id);
-        card.innerHTML = `
-            <div class="img-wrapper skeleton">
-                <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">
-            </div>
-            <div class="image-title">${p.id}</div>
-        `;
-        return card;
-    }
+function crearSeccion(parent, titulo, idGrid) {
+    const div = document.createElement("div");
+    div.className = "section";
+    div.innerHTML = `<h2>${titulo}</h2><div class="image-grid" id="${idGrid}"></div>`;
+    parent.appendChild(div);
+    return document.getElementById(idGrid);
+}
 
-    // --- BUSCADOR ---
+function crearCard(p) {
+    const card = document.createElement("div");
+    card.className = "card-item";
+    card.onclick = () => abrirDetalles(p.id);
+    card.innerHTML = `
+        <div class="img-wrapper skeleton">
+            <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">
+        </div>
+        <div class="image-title">${p.id}</div>
+    `;
+    return card;
+}
+
+function configurarBuscador(db) {
     const buscador = document.getElementById('input-buscador');
     buscador.addEventListener('input', (e) => {
         const texto = e.target.value.toLowerCase().trim();
@@ -247,7 +249,7 @@ window.onload = function() {
             resultadosDiv.appendChild(item);
         });
     });
-};
+}
 </script>
 </body>
 </html>
