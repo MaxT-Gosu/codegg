@@ -539,4 +539,15 @@ const baseDeDatos = [
         actriz: "Aoi Ichinose ",
         tags: "Maid, School Girls"
     },
+	{ 
+        id: "KISD-049", 
+        titulo: " Men Who Are Black Tits Gal Toy", 
+        poster: "https://i.ibb.co/TMCcnLM1/KISD-049.webp", 
+        bg: "https://i.ibb.co/cKSXRcqT/KISD-049.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Kisd-049.mp4", 
+        estudio: "Kira ★ Kira",
+        fecha: "Jun. 19, 2011",
+        actriz: "Various",
+        tags: "Reducing Mosaic"
+    },
 ];
