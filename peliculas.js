@@ -594,4 +594,15 @@ const baseDeDatos = [
         actriz: "Kurea Hasumi",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "YST-349", 
+        titulo: "Regardless Of Whether It's Vulgar Or Refined", 
+        poster: "https://i.ibb.co/N6F5rbJs/1774723145.webp", 
+        bg: "https://i.ibb.co/vMb73fd/vlcsnap-2026-04-14-13h49m53s154.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Yst-349.mp4", 
+        estudio: "Koyacho",
+        fecha: "Apr. 05, 2026",
+        actriz: "Minato Sakuragi",
+        tags: "Reducing Mosaic"
+    },
 ];
