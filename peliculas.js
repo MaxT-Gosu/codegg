@@ -616,4 +616,15 @@ const baseDeDatos = [
         actriz: "Ayumi Takanashi",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "JUFD-713", 
+        titulo: "Bondage Slave Was Conceived Bite The Flesh", 
+        poster: "https://i.ibb.co/kVMgP2Fz/1775441800.webp", 
+        bg: "https://i.ibb.co/KzNfzfW4/vlcsnap-2026-04-15-08h41m37s597.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jufd-713-Rm%20Reducing%20Mosaic%20Bondage%20Slave%20Was%20Conceived%20Bite%20The.mp4", 
+        estudio: "Fitch",
+        fecha: "Mar. 01, 2017",
+        actriz: "Shizuku Amayoshi",
+        tags: "Reducing Mosaic"
+    },
 ];
