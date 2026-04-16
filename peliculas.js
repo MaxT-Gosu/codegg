@@ -627,4 +627,15 @@ const baseDeDatos = [
         actriz: "Shizuku Amayoshi",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "START-542", 
+        titulo: "I was invited out for drinks by my power", 
+        poster: "https://i.ibb.co/F4N75Tq1/1776108961127.webp", 
+        bg: "https://i.ibb.co/LhDGFFjW/vlcsnap-2026-04-16-14h35m40s910.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Start-542.mp4", 
+        estudio: "Sod Create",
+        fecha: "Apr. 13, 2026",
+        actriz: "Rei Kamiki",
+        tags: "Reducing Mosaic"
+    },
 ];
