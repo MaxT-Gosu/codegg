@@ -638,4 +638,16 @@ const baseDeDatos = [
         actriz: "Rei Kamiki",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "JUL-775", 
+        titulo: "Scandinavian Blonde Beauty Madonna Exclusive", 
+        poster: "https://i.ibb.co/1YgJ2FHJ/1637308783.webp", 
+        bg: "https://i.ibb.co/ZpMQ5bVS/vlcsnap-2026-04-17-11h33m39s016.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jul-775.mp4", 
+        estudio: "Madonna",
+        fecha: "Nov. 23, 2021",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    },
+];
 ];
