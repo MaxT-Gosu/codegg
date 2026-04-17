@@ -6,29 +6,48 @@
     <title>Detalles - JavGG</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
-
     <style>
         :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; --accent-color: #E50914; }
         body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; }
         
+        /* HERO Y EFECTOS DE IMAGEN */
         .hero { position: relative; width: 100%; height: 45vh; background: #000; overflow: hidden; }
-        #hero-bg { width: 100%; height: 100%; background-size: cover; background-position: center top; opacity: 0; transition: opacity 0.5s ease-in-out; }
-        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 0%, transparent 60%); }
+        
+        #hero-bg { 
+            width: 100%; 
+            height: 100%; 
+            background-size: cover; 
+            background-position: center top; 
+            opacity: 0; /* Inicia invisible para la transición suave */
+            transition: opacity 0.5s ease-in-out; /* Efecto Fade-in */
+        }
 
+        .hero::after { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(to top, var(--bg) 0%, transparent 60%); 
+        }
+
+        /* --- SKELETON LOADER --- */
         .skeleton {
             background: #1a1a1a;
             background-image: linear-gradient(90deg, #1a1a1a 0px, #333 40px, #1a1a1a 80px);
             background-size: 200% 100%;
             animation: skeleton-loading 1.5s infinite linear;
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Queda detrás del degradado y textos */
         }
 
         @keyframes skeleton-loading {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+        /* ----------------------- */
 
         .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; text-align: left; }
         .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
@@ -45,6 +64,7 @@
         .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
         .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
 
+        /* BUSCADOR MODAL */
         #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
         .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
@@ -58,11 +78,11 @@
         .menu { position: fixed; bottom: 0; width: 100%; background: rgba(15,15,15,0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
         .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; width: 25%; }
         .menu-item i { font-size: 20px; margin-bottom: 4px; }
+        .menu-item:active { color: var(--primary); }
 
-        /* ESTILOS REPRODUCTOR PROFESIONAL */
-        #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 5000; }
-        .video-js { width: 100% !important; height: 100% !important; }
-        .close { position: absolute; top: 30px; right: 20px; color: #fff; font-size: 35px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; z-index: 5001; cursor: pointer; }
+        #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 2000; }
+        video { width: 100%; height: 100%; }
+        .close { position: absolute; top: 30px; right: 20px; color: #fff; font-size: 35px; background: none; border: none; z-index: 2001; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -101,13 +121,9 @@
     <button class="menu-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></button>
 </nav>
 
-<div id="player-overlay">
-    <button class="close" onclick="closePlayer()">&times;</button>
-    <video id="v-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"></video>
-</div>
+<div id="player-overlay"><button class="close" onclick="closePlayer()">&times;</button><video id="v" controls></video></div>
 
 <script src="peliculas.js"></script>
-<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
 
 <script>
     const data = {
@@ -122,27 +138,32 @@
         tags: localStorage.getItem('peli_tags')
     };
 
-    // Inicializar Video.js
-    var player = videojs('v-player');
-
-    // CARGA DE IMAGEN
+    // --- CARGA SUAVE DE IMAGEN (SKELETON A FADE-IN) ---
     const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
     const heroBgElement = document.getElementById('hero-bg');
     const skeletonElement = document.getElementById('hero-skeleton');
 
     if(finalBg) {
+        // Creamos una imagen "fantasma" en memoria para saber cuándo termina de cargar
         const imgLoader = new Image();
         imgLoader.src = finalBg;
+        
         imgLoader.onload = () => {
+            // Cuando carga: ocultamos el skeleton, ponemos el fondo y lo hacemos visible
             skeletonElement.style.display = 'none';
             heroBgElement.style.backgroundImage = "url('" + finalBg + "')";
             heroBgElement.style.opacity = '1'; 
         };
-        imgLoader.onerror = () => skeletonElement.style.display = 'none';
+        
+        imgLoader.onerror = () => {
+             // Si falla la imagen por error de red, igual quitamos el skeleton
+             skeletonElement.style.display = 'none';
+        }
     } else {
         skeletonElement.style.display = 'none';
     }
     
+    // Pintar resto de interfaz
     document.getElementById('p-title').innerText = data.title || "Sin título";
     document.getElementById('p-id').innerText = data.id || "N/A";
     document.getElementById('p-studio').innerText = data.studio || "Desconocido";
@@ -160,6 +181,7 @@
         });
     }
 
+    /* BUSCADOR GLOBAL */
     function abrirBuscador() {
         document.getElementById('modal-busqueda').style.display = 'block';
         document.getElementById('input-buscador').focus();
@@ -173,8 +195,11 @@
         const texto = e.target.value.toLowerCase().trim();
         const resultadosDiv = document.getElementById('resultados-busqueda');
         resultadosDiv.innerHTML = "";
+        
         if (texto.length < 2) return;
+        
         const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
+        
         filtrados.forEach(p => {
             const item = document.createElement('div');
             item.className = 'res-item';
@@ -196,23 +221,28 @@
     });
 
     function play() {
+        const v = document.getElementById('v');
         if(!data.video || data.video === "null") return alert("Video no disponible");
 
-        // Unity Ads (si existe)
+        // --- CONEXIÓN CON UNITY ADS ---
         if (typeof AndroidAds !== "undefined") {
             AndroidAds.lanzarAnuncio(); 
+        } else {
+            console.log("Anuncio de Unity omitido (no estás en la app de Android).");
         }
 
-        // Configurar fuente y mostrar reproductor
-        player.src({ src: data.video, type: 'video/mp4' });
+        // Mostrar reproductor
+        v.src = data.video;
         document.getElementById('player-overlay').style.display = 'block';
-        player.play();
+        v.play();
     }
 
     function closePlayer() {
-        player.pause();
+        const v = document.getElementById('v');
+        v.pause(); v.src = "";
         document.getElementById('player-overlay').style.display = 'none';
     }
 </script>
+
 </body>
 </html>
