@@ -59,7 +59,7 @@
         .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; width: 25%; }
         .menu-item i { font-size: 20px; margin-bottom: 4px; }
 
-        /* ESTILOS REPRODUCTOR PROFESIONAL */
+        /* REPRODUCTOR */
         #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 5000; }
         .video-js { width: 100% !important; height: 100% !important; }
         .close { position: absolute; top: 30px; right: 20px; color: #fff; font-size: 35px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; z-index: 5001; cursor: pointer; }
@@ -103,7 +103,7 @@
 
 <div id="player-overlay">
     <button class="close" onclick="closePlayer()">&times;</button>
-    <video id="v-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"></video>
+    <video id="v-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" playsinline></video>
 </div>
 
 <script src="peliculas.js"></script>
@@ -122,10 +122,16 @@
         tags: localStorage.getItem('peli_tags')
     };
 
-    // Inicializar Video.js
-    var player = videojs('v-player');
+    // INICIALIZACIÓN DEL REPRODUCTOR CON MEJORAS DE BOTONES
+    var player = videojs('v-player', {
+        fluid: true,
+        responsive: true,
+        controlBar: {
+            pictureInPictureToggle: true, // Superposición
+            fullscreenToggle: true        // Pantalla completa
+        }
+    });
 
-    // CARGA DE IMAGEN
     const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
     const heroBgElement = document.getElementById('hero-bg');
     const skeletonElement = document.getElementById('hero-skeleton');
@@ -198,12 +204,11 @@
     function play() {
         if(!data.video || data.video === "null") return alert("Video no disponible");
 
-        // Unity Ads (si existe)
+        // Unity Ads (si existe en la App)
         if (typeof AndroidAds !== "undefined") {
             AndroidAds.lanzarAnuncio(); 
         }
 
-        // Configurar fuente y mostrar reproductor
         player.src({ src: data.video, type: 'video/mp4' });
         document.getElementById('player-overlay').style.display = 'block';
         player.play();
