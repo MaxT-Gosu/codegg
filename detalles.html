@@ -122,13 +122,25 @@
         tags: localStorage.getItem('peli_tags')
     };
 
-    // INICIALIZACIÓN DEL REPRODUCTOR CON MEJORAS DE BOTONES
+    // INICIALIZACIÓN DEL REPRODUCTOR
     var player = videojs('v-player', {
         fluid: true,
         responsive: true,
         controlBar: {
-            pictureInPictureToggle: true, // Superposición
-            fullscreenToggle: true        // Pantalla completa
+            pictureInPictureToggle: true, 
+            fullscreenToggle: true        
+        }
+    });
+
+    // --- NUEVO: PARCHE PARA EL BOTÓN DE PANTALLA FLOTANTE ---
+    player.on('requestPictureInPicture', function() {
+        // Obtenemos el elemento de video real que crea Video.js
+        const videoElement = document.getElementById('v-player_html5_api');
+        
+        if (videoElement && videoElement.requestPictureInPicture) {
+            videoElement.requestPictureInPicture().catch(error => {
+                console.log("Error PiP:", error);
+            });
         }
     });
 
@@ -204,7 +216,6 @@
     function play() {
         if(!data.video || data.video === "null") return alert("Video no disponible");
 
-        // Unity Ads (si existe en la App)
         if (typeof AndroidAds !== "undefined") {
             AndroidAds.lanzarAnuncio(); 
         }
