@@ -129,7 +129,6 @@
         }
     });
 
-    // Lógica para detectar el botón de retroceder del teléfono
     window.onpopstate = function() {
         if (document.getElementById('player-overlay').style.display === 'block') {
             closePlayer();
@@ -208,12 +207,12 @@
     function play() {
         if(!data.video || data.video === "null") return alert("Video no disponible");
 
-        // Publicidad eliminada de esta sección
+        // --- PUBLICIDAD SMART LINK ADSTERRA ---
+        window.open("https://www.profitablecpmratenetwork.com/jb6cyc4g?key=d42800bba4100981ec7c43105b7ea5e0", "_blank");
 
         player.src({ src: data.video, type: 'video/mp4' });
         document.getElementById('player-overlay').style.display = 'block';
         
-        // Empujamos un estado al historial para que el botón "atrás" funcione como cierre
         history.pushState({playing: true}, "Reproduciendo");
         
         player.play();
@@ -222,9 +221,8 @@
     function closePlayer() {
         player.pause();
         document.getElementById('player-overlay').style.display = 'none';
-        // Si el usuario cerró el reproductor de otra forma, nos aseguramos de limpiar el historial
         if(history.state && history.state.playing) {
-            // No hacemos nada, el popstate ya se encargó o se encargará
+            // Limpieza opcional de historial
         }
     }
 </script>
