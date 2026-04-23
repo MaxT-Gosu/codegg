@@ -1,4 +1,4 @@
-// IMPORTANTE: Guarda este archivo como code.js
+// Este es tu archivo peliculas.js corregido
 const baseDeDatos = [
     { 
         id: "NGOD-170", 
@@ -13,7 +13,7 @@ const baseDeDatos = [
     },
     { 
         id: "IPIT-012", 
-        titulo: "Business Trip Destination Room NTR Blond Female Employee", 
+        titulo: "Business Trip Destination Room NTR Blond Female Employee Who Continued", 
         poster: "https://cdn001.imggle.net/webp/poster/20212709/1637387937.webp", 
         bg: "https://pics.dmm.co.jp/digital/video/ipit00012/ipit00012jp-10.jpg", 
         video: "https://appcine.b-cdn.net/Codegg/IPIT-012.mp4", 
@@ -41,21 +41,626 @@ const baseDeDatos = [
         video: "https://appcine.b-cdn.net/Codegg/Stars-160.mp4.mp4", 
         estudio: "Sod Create",
         fecha: "Nov. 21, 2019",
-        actriz: "Masami Ichikawa",
+        actriz: "Ichikawa Masami....",
         tags: "Slut, Hardcore"
     },
     { 
-        id: "RBD-751", 
-        titulo: "Woman Nanami Kawakami Ashina", 
-        poster: "https://i.ibb.co/DHkNkHxx/1711593698.webp", 
-        bg: "https://i.ibb.co/mr1JxW91/vlcsnap-2026-04-23-09h18m26s426.png", 
-        video: "https://appcine.b-cdn.net/Codegg/Rbd-751.mp4", 
-        estudio: "Attackers",
-        fecha: "Mar. 07, 2016",
-        actriz: "Hitomi Honda",
+        id: "AKB-023", 
+        titulo: "Imamura Miho Cosplayer", 
+        poster: "https://cdn001.imggle.net/webp/poster/20240410/1730688308.webp", 
+        bg: "https://i.ibb.co/twnTm3K5/AKB-023.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Akb-023.mp4.mp4", 
+        estudio: "Tma ",
+        fecha: "Feb. 25, 2011",
+        actriz: "Miho Imamura",
+        tags: "Cosplay"
+    },
+    { 
+        id: "EBWH-186", 
+        titulo: "We Got Turned On By The Busty College Girl", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737085766.webp", 
+        bg: "https://i.ibb.co/F432PgJC/EBWH-186.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Ebwh-186.mp4.mp4", 
+        estudio: "E-body",
+        fecha: "Jan. 21, 2025",
+        actriz: "Hibiki Amemiya",
         tags: "Reducing Mosaic"
     },
     { 
+        id: "PPPE-300", 
+        titulo: "Brainwashing Your Boobs With Your Eyes And Ears", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737083638.webp", 
+        bg: "https://pics.dmm.co.jp/digital/video/pppe00300/pppe00300jp-8.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Pppe-300.mp4.mp4", 
+        estudio: "Oppai",
+        fecha: "Jan. 21, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MOSJ-017", 
+        titulo: "A Sadistic Older Sister's Educational Eroticism", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772038390.webp", 
+        bg: "https://i.postimg.cc/qBZ9Znj4/MOSJ-017.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mosj-017.mp4.mp4", 
+        estudio: "Orustak Pictures",
+        fecha: "Aug. 29, 2025",
+        actriz: "Rena Sayama",
+        tags: "Idol & Celebrity"
+    },
+    { 
+        id: "259LUXU-1875", 
+        titulo: "I love licking your dick.", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772173522118.webp", 
+        bg: "https://i.ibb.co/BK3QDYmP/259-LUXU-1875.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/259LUXU-1875.mp4.mp4", 
+        estudio: "Luxury Tv",
+        fecha: "Feb. 27, 2026",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "SNOS-050", 
+        titulo: "On A Hot Spring Trip With My Girlfriend And Her Sister", 
+        poster: "https://cdn001.imggle.net/webp/poster/12082025/1767893299.webp", 
+        bg: "https://i.postimg.cc/zvZRS3hN/SNOS-050.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Snos-050.mp4.mp4", 
+        estudio: "S1 No.1 Style",
+        fecha: "Jan. 13, 2026",
+        actriz: "Niko Kawagoe",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "LULU-338", 
+        titulo: "During Overtime, When We Were Alone In The Office", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242108/1727408240.webp", 
+        bg: "https://i.postimg.cc/P5Vprp9Y/LULU-338.png", 
+        video: "https://appcine.b-cdn.net/Codegg/LULU-338.mp4.mp4", 
+        estudio: "Lunatics",
+        fecha: "Oct. 01, 2024",
+        actriz: "Waka Misono",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MIDA-543", 
+        titulo: "Covered In Yua Juice, Nonstop 320 Climaxes X Convulsions 2201", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772385327.webp", 
+        bg: "https://i.postimg.cc/R0nvm29r/MIDA-543.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mida-543.mp4.mp4", 
+        estudio: "Moodyz",
+        fecha: "Mar. 03, 2026",
+        actriz: " Yua Fukuda",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MIKR-076", 
+        titulo: "A Mother Who Was Repeatedly Made To Cum By A Man With An", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1772128191.webp", 
+        bg: "https://i.postimg.cc/DZSt3XyD/MIKR-076.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIKR-076.mp4.mp4", 
+        estudio: "Moodyz",
+        fecha: "Mar. 03, 2026",
+        actriz: "Aki Sasaki",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "SNOS-063", 
+        titulo: "Overflowing Breasts Will Make You Cum To Your Death", 
+        poster: "https://cdn001.imggle.net/webp/poster/12082025/1767893239.webp", 
+        bg: "https://i.postimg.cc/hPPZJT1j/SNOS-063.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Snos-063.mp4.mp4", 
+        estudio: "S1 No.1 Style",
+        fecha: "Jan. 13, 2026",
+        actriz: "Miyuu Kiyohara",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "FPRE-112", 
+        titulo: "A Voluptuous Slut Who Plays With Her Cock Pet", 
+        poster: "https://cdn001.imggle.net/webp/poster/20240410/1730429980.webp", 
+        bg: "https://i.postimg.cc/X7P3HMb6/FPRE-112.png", 
+        video: "https://appcine.b-cdn.net/Codegg/FPRE-112.mp4", 
+        estudio: "Fitch",
+        fecha: "Nov. 05, 2024",
+        actriz: "Ran Kikuno",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUR-209", 
+        titulo: "Who Used To Like Me, Has Transformed Into A Sexy", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1737686201.webp", 
+        bg: "https://i.postimg.cc/52k5fMhx/JUR-209.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-209.mp4", 
+        estudio: "Madonna",
+        fecha: " Jan. 28, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "VAGU-158", 
+        titulo: "Making Daughter-in-law Of Nozomi And My Love", 
+        poster: "https://cdn001.imggle.net/webp/poster/20242012/1735698775.webp", 
+        bg: "https://i.postimg.cc/NG1QfJD5/VAGU-158.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-209.mp4", 
+        estudio: "Venus",
+        fecha: "Jul. 13, 2016",
+        actriz: "Nozomi Tanihara",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MIAB-433", 
+        titulo: "Breast Crushing, Infinite Piston, Sperm Reflux", 
+        poster: "https://cdn001.imggle.net/webp/poster/20250903/1744304112.webp", 
+        bg: "https://i.postimg.cc/pLfm9VXn/MIAB-433.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIAB-433.mp4", 
+        estudio: "Moodyz",
+        fecha: "Apr. 15, 2025",
+        actriz: "Noa Haruna",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "NUKA-081", 
+        titulo: "Six Creampies Without Pulling Out", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773367130.webp", 
+        bg: "https://i.postimg.cc/43FLv0Dk/NUKA-081.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Nuka-081.mp4", 
+        estudio: "Center Village",
+        fecha: "Mar. 05, 2026",
+        actriz: "Fumika Nagasawa",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "MSQD-005", 
+        titulo: "Oral sex class Haruno Ando", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773532012826.webp", 
+        bg: "https://i.postimg.cc/9QKfdJFD/MSQD-005.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MSQD-005.mp4", 
+        estudio: "Masquerade",
+        fecha: "Feb. 21, 2026",
+        actriz: "Haruno Ando",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "AMBI-108", 
+        titulo: "Devil Father's Sex Toy Conceived And Torn", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773453514.webp", 
+        bg: "https://i.postimg.cc/9Mr9b0ZY/AMBI-108.png", 
+        video: "https://appcine.b-cdn.net/Codegg/AMBI-108.mp4", 
+        estudio: "Planet Plus",
+        fecha: "Feb. 01, 2020",
+        actriz: "Planet Plus",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "DLDSS-483", 
+        titulo: "Turn My Winning Mother Into A Female", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1772842892505.webp", 
+        bg: "https://i.postimg.cc/85WmbBLy/DLDSS-483.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dldss-483.mp4", 
+        estudio: "Dahlia",
+        fecha: "Apr. 09, 2026",
+        actriz: "Suzume Mino",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "FNS-165", 
+        titulo: "Who Was Unable To Return Home Due To A Typhoon", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773901863398.webp", 
+        bg: "https://i.postimg.cc/m25N4d36/FNS-165.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dldss-483.mp4", 
+        estudio: "Faleno",
+        fecha: "Apr. 09, 2026",
+        actriz: "Nene Yoshitaka",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "099NTK-892", 
+        titulo: "A slutty body with maximum huggability and raw sex 2", 
+        poster: "https://cdn001.imggle.net/webp/poster/20241115/1733784913.webp", 
+        bg: "https://i.postimg.cc/LsLY2Qxs/099NTK-892-(2).png", 
+        video: "https://appcine.b-cdn.net/Codegg/099Ntk-892.mp4", 
+        estudio: "Magic",
+        fecha: "Dec. 09, 2024",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "FPRE-222", 
+        titulo: "Clothed Fuck With A Tall, Busty Model-type Slut", 
+        poster: "https://cdn001.imggle.net/webp/poster/01202026/1770919055.webp", 
+        bg: "https://i.postimg.cc/3R72gXdC/FPRE-222.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Fpre-222.mp4", 
+        estudio: "Fitch",
+        fecha: "Feb. 17, 2026",
+        actriz: "Ran Kikuno ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "IPIT-004", 
+        titulo: "Emma Lawrence Oral SEX Queen Advent", 
+        poster: "https://cdn001.imggle.net/webp/poster/20252204/1746500965.webp", 
+        bg: "https://i.postimg.cc/SxS5GvvT/IPIT-004.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-004.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Sep. 13, 2020",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUL-703", 
+        titulo: "Married Secretary, President's Office Creampie Sexual Intercourse", 
+        poster: "https://cdn001.imggle.net/webp/poster/20230206/1687829315.webp", 
+        bg: "https://i.postimg.cc/kXbZmMwD/JUL-703.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-703.mp4", 
+        estudio: "Madonna",
+        fecha: "Sep. 14, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUL-843", 
+        titulo: "On The 7th Day, I Lost My Reason", 
+        poster: "https://cdn001.imggle.net/webp/poster/20230207/1688264926.webp", 
+        bg: "https://i.postimg.cc/MpTfM7mX/JUL-843.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-843.mp4", 
+        estudio: "Madonna",
+        fecha: "Jan. 25, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "JUR-669", 
+        titulo: "My Stepson Broke His Arms And Legs", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773948927.webp", 
+        bg: "https://i.postimg.cc/3NkTsN3n/JUR-669.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-669.mp4", 
+        estudio: "Madonna",
+        fecha: "Mar. 24, 2026",
+        actriz: "Miyuu Imai",
+        tags: "Reducing Mosaic"
+    },
+    { 
+        id: "IPIT-006", 
+        titulo: "SEX CLIMAX Pleasure Climax 3 Production Special", 
+        poster: "https://cdn001.imggle.net/webp/poster/20252204/1746587696.webp", 
+        bg: "https://i.postimg.cc/7LDMdwvR/IPIT-006.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-006.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Oct. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JUL-535", 
+        titulo: "A Beautiful Married Woman Drowing In Pleasure At", 
+        poster: "https://cdn002.imggle.net/webp/poster/jul-535.webp", 
+        bg: "https://i.ibb.co/cXvRfq9M/vlcsnap-2026-03-25-17h19m16s857.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-006.mp4", 
+        estudio: "Madonna",
+        fecha: "Apr. 07, 2021",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JUL-908", 
+        titulo: "Continued To Be Squid In Uncontrollable Unequaled", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221202/1647624162.webp", 
+        bg: "https://i.ibb.co/4wwcN6Mz/JUL-908.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jul-908.mp4", 
+        estudio: "Madonna",
+        fecha: "Mar. 22, 2022",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JIPX-958", 
+        titulo: "Wild Iku Muscle Slender Beauty's Acme Super", 
+        poster: "https://cdn001.imggle.net/webp/poster/20222410/1668821998.webp", 
+        bg: "https://i.ibb.co/R4hNj8zP/IPX-958.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipx-958.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Mar. 22, 2022",
+        actriz: "Ruisa Totsuki",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "JUL-941", 
+        titulo: "A Foreign Wife Who Is Not Familiar With The Housing", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221904/1650607404.webp", 
+        bg: "https://i.ibb.co/XfYhCfrZ/JUL-941.png", 
+        video: "https://appcine.b-cdn.net/Codegg/JUL-941.mp4", 
+        estudio: "Madonna",
+        fecha: "Apr. 26, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "MEYD-671", 
+        titulo: "The Company That Applied For The Part Recruitment Called", 
+        poster: "https://cdn002.imggle.net/webp/poster/meyd-671.webp", 
+        bg: "https://i.ibb.co/fsrG0HQ/MEYD-671.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Meyd-671.mp4", 
+        estudio: "Tameike Goro",
+        fecha: "Apr. 13, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "MIAA-685", 
+        titulo: "Foreign Bride Who Does Not Know Foreplay Was Trained", 
+        poster: "https://cdn001.imggle.net/webp/poster/20221108/1660627911.webp", 
+        bg: "https://i.ibb.co/1tyfK72M/MIAA-685.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIAA-685.mp4", 
+        estudio: "Moodyz",
+        fecha: "Aug. 02, 2022",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "RKI-614", 
+        titulo: "Ultra-Sexy Dirty Talk Master Lily Heart's", 
+        poster: "https://cdn002.imggle.net/webp/poster/rki-614.webp", 
+        bg: "https://i.ibb.co/M51v2Swp/RKI-614.png", 
+        video: "https://appcine.b-cdn.net/Codegg/RKI-614.mp4", 
+        estudio: "Moodyz",
+        fecha: "Jul. 14, 2021",
+        actriz: "Lily Hart ",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "SONE-574", 
+        titulo: "When your partner is in front of you, you", 
+        poster: "https://cdn001.imggle.net/webp/poster/20253001/1738866422.webp", 
+        bg: "https://i.ibb.co/LhxSkPcg/SONE-574.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sone-574.mp4", 
+        estudio: "S1 No.1 Style",
+        fecha: "Feb. 07, 2025",
+        actriz: "Aka Asuka",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "GVH-255", 
+        titulo: "A Lascivious Wife Who Provokes With No Bra", 
+        poster: "https://cdn002.imggle.net/webp/poster/gvh-255.webp", 
+        bg: "https://i.ibb.co/35NDYkJk/GVH-255.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Gvh-255.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Feb. 07, 2025",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "IPIT-009", 
+        titulo: "Bad Teacher - The Hot Blonde Who Fucking Devours", 
+        poster: "https://cdn001.imggle.net/webp/poster/20222612/1674519023.webp", 
+        bg: "https://i.ibb.co/tpTbHTgd/IPIT-009.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-009.mp4", 
+        estudio: "Idea Pocket ",
+        fecha: "Nov. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    }, // <-- COMA AÑADIDA AQUÍ
+    { 
+        id: "300MIUM-1257", 
+        titulo: "A smile that only my marshmallow-boobed girlfriend", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773380333372.webp", 
+        bg: "https://image.mgstage.com/images/prestigepremium/300mium/1257/cap_e_12_300mium-1257.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/300MIUM-1257.mp4", 
+        estudio: "Prestige Premium",
+        fecha: "Nov. 13, 2020",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "SYKH-129", 
+        titulo: "Boots Beauty Witch PREMIUM Black-robed Demon Nozomi", 
+        poster: "https://cdn001.imggle.net/webp/poster/20241115/1734150801.webp", 
+        bg: "https://i.ibb.co/MyQ86B0k/SYKH-129.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sykh-129.mp4", 
+        estudio: "Emaniel",
+        fecha: "Dec. 17, 2024",
+        actriz: "Nozomi Arimura",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "IPIT-012", 
+        titulo: "Business Trip Destination Room NTR Blond Female Employee", 
+        poster: "https://cdn001.imggle.net/webp/poster/20212709/1637387937.webp", 
+        bg: "https://i.ibb.co/Vff50pc/IPIT-012.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-012.mp4", 
+        estudio: "Idea Pocket",
+        fecha: "Dec. 13, 2020",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "FC2PPV-4862565", 
+        titulo: "Huge breasted nurse wife with a bust of 100 cm.", 
+        poster: "https://cdn001.imggle.net/webp/poster/06032026/1773376012.webp", 
+        bg: "https://i.ibb.co/pvBpdghQ/FC2-PPV-4862565.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Ipit-012.mp4", 
+        estudio: "Fc2ppv",
+        fecha: "Mar. 12, 2026",
+        actriz: "Desconocida",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "NNPJ-459", 
+        titulo: "When I Took A Scandinavian Amateur Beauty Back To The Hotel...", 
+        poster: "https://i.ibb.co/tPCT30t5/NNPJ-459.webp", 
+        bg: "https://i.ibb.co/JjTyLQL2/NNPJ-459.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Hhd800.Com%40Nnpj-459.mp4", 
+        estudio: "Nampa Japan",
+        fecha: "Jul. 25, 2021",
+        actriz: "Lily Hart",
+        tags: "Blowjob"
+    },
+	{ 
+        id: "HZGD-197", 
+        titulo: "Slender Busty Scandinavian Beautiful Wife", 
+        poster: "https://i.ibb.co/yn9my8tr/HZGD-197.webp", 
+        bg: "https://i.ibb.co/jPNXBv48/HZGD-197.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Hzgd-197.mp4", 
+        estudio: "Hitodzuma Hanazono Gekijou",
+        fecha: "Aug. 27, 2021",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "HAWA-251", 
+        titulo: "Now, I Would Like To Introduce The Most Erotic Wife", 
+        poster: "https://i.ibb.co/fzCZ5f1n/HAWA-251.webp", 
+        bg: "https://i.ibb.co/SXzy6rcD/HAWA-251.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Hawa-251.mp4", 
+        estudio: "Kosumosu Eizou",
+        fecha: "Jun. 24, 2021",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "277DCV-182", 
+        titulo: "Is it okay to send it home?", 
+        poster: "https://i.ibb.co/nZtzNcV/277-DCV-182.webp", 
+        bg: "https://i.ibb.co/QFfZh5Z4/277-DCV-182.png", 
+        video: "https://appcine.b-cdn.net/Codegg/277Dcv-182.mp4", 
+        estudio: "Document Tv",
+        fecha: "May. 21, 2021",
+        actriz: "Desconocida",
+        tags: "Nice Tits"
+    },
+	{ 
+        id: "MIDA-067", 
+        titulo: "My First And Precious Girlfriend", 
+        poster: "https://i.ibb.co/qMW7M4md/MIDA-067.png", 
+        bg: "https://i.ibb.co/QFfZh5Z4/277-DCV-182.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mida-067.mp4", 
+        estudio: "Moodyz ",
+        fecha: "Mar. 04, 2025",
+        actriz: "Aoi Ichinose ",
+        tags: "Maid, School Girls"
+    },
+	{ 
+        id: "KISD-049", 
+        titulo: " Men Who Are Black Tits Gal Toy", 
+        poster: "https://i.ibb.co/TMCcnLM1/KISD-049.webp", 
+        bg: "https://i.ibb.co/cKSXRcqT/KISD-049.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Kisd-049.mp4", 
+        estudio: "Kira ★ Kira",
+        fecha: "Jun. 19, 2011",
+        actriz: "Various",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "FC2PPV-4876387", 
+        titulo: "Beautiful wife with a shaved pussy", 
+        poster: "https://i.ibb.co/1tFFZkrj/FC2-PPV-4876387.webp", 
+        bg: "https://i.ibb.co/84dd0Ksr/FC2-PPV-4876387.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Fc2ppv-4876387.mp4", 
+        estudio: "Fc2ppv",
+        fecha: "Apr. 08, 2026",
+        actriz: "Desconocida",
+        tags: "Uncensored"
+    },
+	{ 
+        id: "JUR-687", 
+        titulo: "I Have Sex With My Wife Three Times A Week.", 
+        poster: "https://i.ibb.co/Q3mjQYmP/1775760837.webp", 
+        bg: "https://i.ibb.co/JWQ9hLCC/vlcsnap-2026-04-11-14h46m21s089.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Hhd800.Com%40Jur-687.mp4", 
+        estudio: "Madonna",
+        fecha: "Apr. 14, 2026",
+        actriz: "Meguri ",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "GVH-832", 
+        titulo: "Mother-son Incest Sayuri Hayama", 
+        poster: "https://i.ibb.co/x8FHsByL/1775242739.webp", 
+        bg: "https://i.ibb.co/1GQhwfp5/vlcsnap-2026-04-12-08h19m55s872.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Gvh-832.mp4", 
+        estudio: "Glory Quest",
+        fecha: "Apr. 07, 2026",
+        actriz: "Sayuri Hayama ",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "WAAA-634", 
+        titulo: "She Gets Creampied Over And Over Again!", 
+        poster: "https://i.ibb.co/3YSM2pNm/1775158226.webp", 
+        bg: "https://i.ibb.co/23pnStjd/vlcsnap-2026-04-13-13h32m52s371.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Waaa-634.mp4", 
+        estudio: "GWanz Factory",
+        fecha: "Apr. 07, 2026",
+        actriz: "Kurea Hasumi",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "YST-349", 
+        titulo: "Regardless Of Whether It's Vulgar Or Refined", 
+        poster: "https://i.ibb.co/N6F5rbJs/1774723145.webp", 
+        bg: "https://i.ibb.co/vMb73fd/vlcsnap-2026-04-14-13h49m53s154.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Yst-349.mp4", 
+        estudio: "Koyacho",
+        fecha: "Apr. 05, 2026",
+        actriz: "Minato Sakuragi",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "MIGD-641", 
+        titulo: "Human Body Fixed Anal Slave History", 
+        poster: "https://i.ibb.co/hJ18yqPQ/1775834326.webp", 
+        bg: "https://i.ibb.co/RTFsKyRj/vlcsnap-2026-04-14-17h23m04s725.png", 
+        video: "https://appcine.b-cdn.net/Codegg/MIGD-641.mp4", 
+        estudio: "Moodyz",
+        fecha: "Mar. 13, 2015",
+        actriz: "Ayumi Takanashi",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "JUFD-713", 
+        titulo: "Bondage Slave Was Conceived Bite The Flesh", 
+        poster: "https://i.ibb.co/kVMgP2Fz/1775441800.webp", 
+        bg: "https://i.ibb.co/KzNfzfW4/vlcsnap-2026-04-15-08h41m37s597.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jufd-713-Rm%20Reducing%20Mosaic%20Bondage%20Slave%20Was%20Conceived%20Bite%20The.mp4", 
+        estudio: "Fitch",
+        fecha: "Mar. 01, 2017",
+        actriz: "Shizuku Amayoshi",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "START-542", 
+        titulo: "I was invited out for drinks by my power", 
+        poster: "https://i.ibb.co/F4N75Tq1/1776108961127.webp", 
+        bg: "https://i.ibb.co/LhDGFFjW/vlcsnap-2026-04-16-14h35m40s910.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Start-542.mp4", 
+        estudio: "Sod Create",
+        fecha: "Apr. 13, 2026",
+        actriz: "Rei Kamiki",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "JUL-775", 
+        titulo: "Scandinavian Blonde Beauty Madonna Exclusive", 
+        poster: "https://i.ibb.co/1YgJ2FHJ/1637308783.webp", 
+        bg: "https://i.ibb.co/ZpMQ5bVS/vlcsnap-2026-04-17-11h33m39s016.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jul-775.mp4", 
+        estudio: "Madonna",
+        fecha: "Nov. 23, 2021",
+        actriz: "Lily Hart",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "HJMO-718", 
+        titulo: "Multiple Ejaculations In Your Mouth", 
+        poster: "https://i.ibb.co/JjrCSRpS/1776363811.webp", 
+        bg: "https://i.ibb.co/7t5FNhMD/vlcsnap-2026-04-18-08h21m42s066.png", 
+        video: "https://appcine.b-cdn.net/Codegg/HJMO-718.mp4", 
+        estudio: "Hajime Kikaku",
+        fecha: "Apr. 21, 2026",
+        actriz: "Kasumi Takase",
+        tags: "Pantyhose"
+    },
+	{ 
         id: "MFYD-127", 
         titulo: "Who Has Returned To The Countryside", 
         poster: "https://i.ibb.co/PGXJ85R2/177636asdasdasdasda2220.webp", 
@@ -65,6 +670,27 @@ const baseDeDatos = [
         fecha: "Apr. 21, 2026",
         actriz: "Noa Eikawa",
         tags: "Beautiful Butt"
-    }
-    // Puedes seguir añadiendo los demás siguiendo este mismo formato exacto
+    },
+	{ 
+        id: "GMA-093", 
+        titulo: "Bondage Training Wife", 
+        poster: "https://i.ibb.co/2YqmdDBV/1776012357.webp", 
+        bg: "https://i.ibb.co/TB17LNzr/vlcsnap-2026-04-22-10h30m51s687.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Gma-093.mp4", 
+        estudio: "Global Media Annex",
+        fecha: "Apr. 14, 2026",
+        actriz: "Hitomi Honda",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "RBD-751", 
+        titulo: "Woman Nanami Kawakami Ashina", 
+        poster: "https://i.ibb.co/DHkNkHxx/1711593698.webp", 
+        bg: "https://i.ibb.co/mr1JxW91/vlcsnap-2026-04-23-09h18m26s426.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Rbd-751.mp4", 
+        estudio: "Attackers",
+		actriz: "Hitomi Honda",
+        fecha: "Mar. 07, 2016",
+        tags: "Reducing Mosaic"
+    },
 ];
