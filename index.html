@@ -58,13 +58,13 @@
             gap: 12px;
             padding-right: 15px;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Oculta scroll en Firefox */
+            scrollbar-width: none; 
         }
-        .slider-container::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome/Safari */
+        .slider-container::-webkit-scrollbar { display: none; }
 
-        /* Estilo para Agregados Recientes (Horizontales) */
+        /* Estilo Landscape (Horizontal) */
         .card-landscape {
-            flex: 0 0 240px; /* Ancho fijo para modo horizontal */
+            flex: 0 0 240px;
             aspect-ratio: 16/9;
             background: #1a1a1a;
             border-radius: 4px;
@@ -73,9 +73,9 @@
             position: relative;
         }
 
-        /* Estilo para Más Vistos (Verticales) */
+        /* Estilo Portrait (Vertical) */
         .card-portrait {
-            flex: 0 0 120px; /* Ancho fijo para modo vertical */
+            flex: 0 0 120px;
             aspect-ratio: 2/3;
             background: #1a1a1a;
             border-radius: 4px;
@@ -95,6 +95,25 @@
             font-size: 9px; border-radius: 2px;
         }
 
+        /* Estilo Ranking para Top Mensual */
+        .ranking-number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--accent-color);
+            color: white;
+            font-weight: 900;
+            font-size: 12px;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            z-index: 5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
         /* Navegación Inferior */
         .nav-bar {
             position: fixed; bottom: 0; width: 100%; height: 65px;
@@ -106,7 +125,6 @@
         .nav-item.active { color: var(--accent-color); }
         .nav-item i { font-size: 20px; margin-bottom: 4px; }
 
-        /* Skeletons */
         .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%); background-size: 200% 100%; animation: pulse 1.5s infinite linear; }
         @keyframes pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
@@ -130,10 +148,15 @@
         <div class="slider-container" id="slider-vistos"></div>
     </div>
 
+    <div class="section">
+        <h2>Top Mensual</h2>
+        <div class="slider-container" id="slider-top-mensual"></div>
+    </div>
+
     <nav class="nav-bar">
         <a href="index.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
         <a href="uncensored.html" class="nav-item"><i class="fas fa-bolt"></i><span>Uncensored</span></a>
-        <div class="nav-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></div>
+        <div class="nav-item" onclick="alert('Buscador en desarrollo')"><i class="fas fa-search"></i><span>Buscar</span></div>
     </nav>
 
     <script src="code.js"></script>
@@ -148,7 +171,7 @@
             document.getElementById('hero-title').innerText = randomPeli.id;
             document.getElementById('btn-hero-play').onclick = () => verDetalle(randomPeli.id);
 
-            // 2. Agregados Recientes (Usa "bg" y clase "card-landscape")
+            // 2. Renderizar Agregados Recientes (Landscape - BG)
             const recientes = [...baseDeDatos].reverse().slice(0, 10);
             const containerRecientes = document.getElementById('slider-recientes');
             containerRecientes.innerHTML = recientes.map(p => `
@@ -158,27 +181,24 @@
                 </div>
             `).join('');
 
-            // 3. Más Vistos (Usa "poster" y clase "card-portrait")
-            const vistos = obtenerMasVistosCache();
-            const containerVistos = document.getElementById('slider-vistos');
-            containerVistos.innerHTML = vistos.map(p => `
-                <div class="card-portrait skeleton" onclick="verDetalle('${p.id}')">
-                    <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
-                    <div class="card-id">${p.id}</div>
-                </div>
-            `).join('');
+            // 3. Renderizar Más Vistos (Portrait - Poster)
+            const vistos = obtenerCache('vistos_cache', 10 * 60 * 60 * 1000); // 10 Horas
+            renderSliderPortrait(vistos, 'slider-vistos');
+
+            // 4. Renderizar Top Mensual (Portrait con Ranking - Poster)
+            const topMensual = obtenerCache('top_mensual_cache', 30 * 24 * 60 * 60 * 1000); // 30 Días
+            renderSliderPortrait(topMensual, 'slider-top-mensual', true);
         });
 
-        function obtenerMasVistosCache() {
+        function obtenerCache(key, expiration) {
             const AHORA = Date.now();
-            const DIEZ_HORAS = 10 * 60 * 60 * 1000;
-            const cache = JSON.parse(localStorage.getItem('vistos_cache'));
+            const cache = JSON.parse(localStorage.getItem(key));
 
-            if (cache && (AHORA - cache.timestamp < DIEZ_HORAS)) {
+            if (cache && (AHORA - cache.timestamp < expiration)) {
                 return cache.ids.map(id => baseDeDatos.find(p => p.id === id)).filter(p => p);
             } else {
                 const randoms = [...baseDeDatos].sort(() => 0.5 - Math.random()).slice(0, 10);
-                localStorage.setItem('vistos_cache', JSON.stringify({
+                localStorage.setItem(key, JSON.stringify({
                     timestamp: AHORA,
                     ids: randoms.map(p => p.id)
                 }));
@@ -186,12 +206,21 @@
             }
         }
 
+        function renderSliderPortrait(lista, elementId, conRanking = false) {
+            const container = document.getElementById(elementId);
+            container.innerHTML = lista.map((p, index) => `
+                <div class="card-portrait skeleton" onclick="verDetalle('${p.id}')">
+                    ${conRanking ? `<span class="ranking-number">${index + 1}</span>` : ''}
+                    <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
+                    <div class="card-id">${p.id}</div>
+                </div>
+            `).join('');
+        }
+
         function verDetalle(id) {
             localStorage.setItem('peli_id', id);
             window.location.href = 'detalles.html';
         }
-
-        function abrirBuscador() { alert("Buscador modal aquí..."); } // Implementar según tu modal
     </script>
 </body>
 </html>
