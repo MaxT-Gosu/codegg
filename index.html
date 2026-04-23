@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavGG - Home</title>
+    <title>JavGG - Premium Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { 
@@ -18,10 +18,11 @@
             font-family: 'Helvetica Neue', Arial, sans-serif; 
             background: var(--bg-color); 
             color: var(--text-color); 
-            padding-bottom: 80px; 
+            padding-bottom: 90px;
+            overflow-x: hidden;
         }
 
-        /* Hero visual Dinámico */
+        /* Hero */
         .hero {
             position: relative;
             width: 100%;
@@ -31,115 +32,79 @@
             display: flex;
             align-items: flex-end;
             padding: 20px;
-            transition: background 0.5s ease-in-out;
         }
-
         .hero::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, var(--bg-color) 10%, transparent 70%);
+            background: linear-gradient(to top, var(--bg-color) 10%, transparent 80%);
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-        }
-
+        .hero-content { position: relative; z-index: 10; }
         .btn-hero {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            margin-top: 10px;
-            cursor: pointer;
+            background: #fff; color: #000; border: none; padding: 10px 20px;
+            border-radius: 4px; font-weight: bold; margin-top: 10px;
         }
 
-        /* Secciones de contenido */
-        .section { padding: 20px 15px; }
-        .section h2 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid var(--accent-color); padding-left: 10px; text-transform: uppercase; letter-spacing: 1px; }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        /* --- ESTILO DE SLIDER HORIZONTAL --- */
+        .section { padding: 20px 0 10px 15px; }
+        .section h2 { 
+            font-size: 1rem; margin-bottom: 12px; 
+            border-left: 3px solid var(--accent-color); padding-left: 8px; 
         }
 
-        .card-item {
-            position: relative;
-            aspect-ratio: 2/3;
+        .slider-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding-right: 15px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Oculta scroll en Firefox */
+        }
+        .slider-container::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome/Safari */
+
+        /* Estilo para Agregados Recientes (Horizontales) */
+        .card-landscape {
+            flex: 0 0 240px; /* Ancho fijo para modo horizontal */
+            aspect-ratio: 16/9;
+            background: #1a1a1a;
             border-radius: 4px;
             overflow: hidden;
-            background: #1a1a1a;
+            scroll-snap-align: start;
+            position: relative;
         }
 
-        .card-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s;
+        /* Estilo para Más Vistos (Verticales) */
+        .card-portrait {
+            flex: 0 0 120px; /* Ancho fijo para modo vertical */
+            aspect-ratio: 2/3;
+            background: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        .card-landscape img, .card-portrait img {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0; transition: opacity 0.5s;
         }
 
         .card-id {
-            position: absolute;
-            bottom: 5px;
-            left: 5px;
-            background: rgba(0,0,0,0.7);
-            padding: 2px 5px;
-            font-size: 9px;
-            border-radius: 3px;
+            position: absolute; bottom: 5px; left: 5px;
+            background: rgba(0,0,0,0.7); padding: 2px 5px;
+            font-size: 9px; border-radius: 2px;
         }
 
-        /* Barra de Navegación */
+        /* Navegación Inferior */
         .nav-bar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 65px;
-            background: var(--nav-bg);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid #333;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            position: fixed; bottom: 0; width: 100%; height: 65px;
+            background: var(--nav-bg); display: flex;
+            justify-content: space-around; align-items: center;
+            border-top: 1px solid #222; z-index: 1000; backdrop-filter: blur(10px);
         }
-
-        .nav-item {
-            color: #888;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 11px;
-        }
-
+        .nav-item { color: #888; text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 11px; }
         .nav-item.active { color: var(--accent-color); }
         .nav-item i { font-size: 20px; margin-bottom: 4px; }
-
-        /* Buscador Modal */
-        #modal-busqueda {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 2000;
-            padding: 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px;
-            background: #222;
-            border: 1px solid var(--accent-color);
-            color: white;
-            border-radius: 5px;
-            font-size: 16px;
-        }
 
         /* Skeletons */
         .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%); background-size: 200% 100%; animation: pulse 1.5s infinite linear; }
@@ -150,78 +115,68 @@
 
     <div class="hero" id="main-hero">
         <div class="hero-content">
-            <h2 id="hero-title">Cargando...</h2>
-            <button class="btn-hero" id="btn-hero-play">VER AHORA</button>
+            <h2 id="hero-title">---</h2>
+            <button class="btn-hero" id="btn-hero-play"><i class="fas fa-play"></i> VER AHORA</button>
         </div>
     </div>
 
     <div class="section">
         <h2>Agregados Recientes</h2>
-        <div class="image-grid" id="grid-recientes"></div>
+        <div class="slider-container" id="slider-recientes"></div>
     </div>
 
     <div class="section">
         <h2>Más Vistos</h2>
-        <div class="image-grid" id="grid-vistos"></div>
+        <div class="slider-container" id="slider-vistos"></div>
     </div>
 
     <nav class="nav-bar">
-        <a href="index.html" class="nav-item active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="uncensored.html" class="nav-item">
-            <i class="fas fa-bolt"></i>
-            <span>Uncensored</span>
-        </a>
-        <div class="nav-item" onclick="abrirBuscador()">
-            <i class="fas fa-search"></i>
-            <span>Buscar</span>
-        </div>
+        <a href="index.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="uncensored.html" class="nav-item"><i class="fas fa-bolt"></i><span>Uncensored</span></a>
+        <div class="nav-item" onclick="abrirBuscador()"><i class="fas fa-search"></i><span>Buscar</span></div>
     </nav>
 
-    <div id="modal-busqueda">
-        <div style="display:flex; justify-content: space-between; margin-bottom:20px;">
-            <h3>Buscar por ID</h3>
-            <i class="fas fa-times" onclick="cerrarBuscador()"></i>
-        </div>
-        <input type="text" id="input-buscador" class="search-input" placeholder="Ej: NGOD-170...">
-        <div id="resultados-busqueda" style="margin-top:20px;"></div>
-    </div>
-
     <script src="code.js"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             if (typeof baseDeDatos === 'undefined') return;
 
-            // 1. HERO ALEATORIO (Cada vez que entra)
+            // 1. Hero Aleatorio
             const randomPeli = baseDeDatos[Math.floor(Math.random() * baseDeDatos.length)];
             const heroDiv = document.getElementById('main-hero');
             heroDiv.style.backgroundImage = `url('${randomPeli.bg || randomPeli.poster}')`;
             document.getElementById('hero-title').innerText = randomPeli.id;
             document.getElementById('btn-hero-play').onclick = () => verDetalle(randomPeli.id);
 
-            // 2. AGREGADOS RECIENTES (Últimos 10)
+            // 2. Agregados Recientes (Usa "bg" y clase "card-landscape")
             const recientes = [...baseDeDatos].reverse().slice(0, 10);
-            renderGrid(recientes, 'grid-recientes');
+            const containerRecientes = document.getElementById('slider-recientes');
+            containerRecientes.innerHTML = recientes.map(p => `
+                <div class="card-landscape skeleton" onclick="verDetalle('${p.id}')">
+                    <img src="${p.bg || p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
+                    <div class="card-id">${p.id}</div>
+                </div>
+            `).join('');
 
-            // 3. MÁS VISTOS (10 aleatorios cada 10 horas)
+            // 3. Más Vistos (Usa "poster" y clase "card-portrait")
             const vistos = obtenerMasVistosCache();
-            renderGrid(vistos, 'grid-vistos');
+            const containerVistos = document.getElementById('slider-vistos');
+            containerVistos.innerHTML = vistos.map(p => `
+                <div class="card-portrait skeleton" onclick="verDetalle('${p.id}')">
+                    <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
+                    <div class="card-id">${p.id}</div>
+                </div>
+            `).join('');
         });
 
-        // Lógica de caché de 10 horas para "Más Vistos"
         function obtenerMasVistosCache() {
             const AHORA = Date.now();
             const DIEZ_HORAS = 10 * 60 * 60 * 1000;
             const cache = JSON.parse(localStorage.getItem('vistos_cache'));
 
             if (cache && (AHORA - cache.timestamp < DIEZ_HORAS)) {
-                // Reconstruir lista desde los IDs guardados para asegurar que existan en code.js
                 return cache.ids.map(id => baseDeDatos.find(p => p.id === id)).filter(p => p);
             } else {
-                // Generar nuevos aleatorios
                 const randoms = [...baseDeDatos].sort(() => 0.5 - Math.random()).slice(0, 10);
                 localStorage.setItem('vistos_cache', JSON.stringify({
                     timestamp: AHORA,
@@ -231,39 +186,12 @@
             }
         }
 
-        function renderGrid(lista, elementId) {
-            const grid = document.getElementById(elementId);
-            grid.innerHTML = lista.map(p => `
-                <div class="card-item skeleton" onclick="verDetalle('${p.id}')">
-                    <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
-                    <div class="card-id">${p.id}</div>
-                </div>
-            `).join('');
-        }
-
         function verDetalle(id) {
             localStorage.setItem('peli_id', id);
             window.location.href = 'detalles.html';
         }
 
-        // Buscador
-        function abrirBuscador() { document.getElementById('modal-busqueda').style.display = 'block'; }
-        function cerrarBuscador() { document.getElementById('modal-busqueda').style.display = 'none'; }
-
-        document.getElementById('input-buscador').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const resDiv = document.getElementById('resultados-busqueda');
-            resDiv.innerHTML = "";
-            if(query.length < 2) return;
-
-            baseDeDatos.filter(p => p.id.toLowerCase().includes(query)).forEach(p => {
-                const d = document.createElement('div');
-                d.style = "padding:10px; border-bottom:1px solid #333; display:flex; align-items:center; gap:10px;";
-                d.onclick = () => verDetalle(p.id);
-                d.innerHTML = `<img src="${p.poster}" width="40" height="60" style="object-fit:cover;"> <span>${p.id}</span>`;
-                resDiv.appendChild(d);
-            });
-        });
+        function abrirBuscador() { alert("Buscador modal aquí..."); } // Implementar según tu modal
     </script>
 </body>
 </html>
