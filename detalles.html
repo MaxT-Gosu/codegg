@@ -24,10 +24,7 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
         }
 
-        @keyframes skeleton-loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+        @keyframes skeleton-loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         .header-content { padding: 0 20px; margin-top: -60px; position: relative; z-index: 10; text-align: left; }
         .badge { background: var(--primary); padding: 3px 8px; border-radius: 3px; font-weight: 900; font-size: 12px; margin-bottom: 8px; display: inline-block; }
@@ -44,7 +41,6 @@
         .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
         .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
 
-        /* MODAL BUSCADOR */
         #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
         .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
         .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
@@ -55,7 +51,6 @@
         .res-item img { width: 100%; height: 100%; object-fit: cover; }
         .res-id { position: absolute; bottom: 0; width: 100%; background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; text-align: center; font-weight: bold; padding: 2px 0; }
 
-        /* REPRODUCTOR */
         #player-overlay { display: none; position: fixed; inset: 0; background: #000; z-index: 5000; }
         .video-js { width: 100% !important; height: 100% !important; }
         
@@ -64,16 +59,13 @@
             background: rgba(0,0,0,0.8); padding: 10px 18px; 
             border-radius: 8px; font-size: 14px; z-index: 6000; 
             color: white; font-weight: bold; border-left: 5px solid var(--primary);
-            display: none;
-            backdrop-filter: blur(5px);
+            display: none; backdrop-filter: blur(5px);
         }
         #ad-counter-box span { color: var(--primary); font-size: 16px; margin-left: 5px; }
 
-        /* MENÚ INFERIOR (CORREGIDO A 3 BOTONES) */
         .menu { position: fixed; bottom: 0; width: 100%; background: rgba(15,15,15,0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 100; }
         .menu-item { color: #888; text-decoration: none; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; width: 33.3%; }
         .menu-item i { font-size: 20px; margin-bottom: 4px; }
-        .menu-item.active { color: var(--primary); }
     </style>
 </head>
 <body>
@@ -121,149 +113,89 @@
 <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
 
 <script>
-    // Recuperar datos del localStorage
-    const data = {
-        id: localStorage.getItem('peli_id'),
-        title: localStorage.getItem('peli_titulo'),
-        img: localStorage.getItem('peli_imagen'),
-        bg: localStorage.getItem('peli_background'),
-        video: localStorage.getItem('peli_video'),
-        studio: localStorage.getItem('peli_estudio'),
-        fecha: localStorage.getItem('peli_fecha'),
-        actriz: localStorage.getItem('peli_actriz'),
-        tags: localStorage.getItem('peli_tags')
-    };
+    // LÓGICA DE CARGA DINÁMICA
+    const peliId = localStorage.getItem('peli_id');
+    const peli = baseDeDatos.find(p => p.id === peliId);
 
-    var player = videojs('v-player', {
-        fluid: true,
-        responsive: true,
-        controlBar: { pictureInPictureToggle: true, fullscreenToggle: true }
-    });
+    if (peli) {
+        // Rellenar visuales
+        document.getElementById('p-title').innerText = peli.titulo;
+        document.getElementById('p-id').innerText = peli.id;
+        document.getElementById('p-studio').innerText = peli.estudio || "Desconocido";
+        document.getElementById('p-fecha').innerText = peli.fecha || "No disponible";
+        document.getElementById('p-actriz').innerText = peli.actriz || "Desconocida";
 
-    // Control del botón atrás del dispositivo
-    window.onpopstate = function() {
-        if (document.getElementById('player-overlay').style.display === 'block') {
-            closePlayer();
-        }
-    };
-
-    // Carga de imágenes de fondo
-    const finalBg = (data.bg && data.bg !== "" && data.bg !== "null") ? data.bg : data.img;
-    const heroBgElement = document.getElementById('hero-bg');
-    const skeletonElement = document.getElementById('hero-skeleton');
-
-    if(finalBg) {
-        const imgLoader = new Image();
-        imgLoader.src = finalBg;
-        imgLoader.onload = () => {
-            skeletonElement.style.display = 'none';
-            heroBgElement.style.backgroundImage = "url('" + finalBg + "')";
-            heroBgElement.style.opacity = '1'; 
+        // Carga de imagen de fondo
+        const heroBg = document.getElementById('hero-bg');
+        const img = new Image();
+        img.src = peli.bg || peli.poster;
+        img.onload = () => {
+            document.getElementById('hero-skeleton').style.display = 'none';
+            heroBg.style.backgroundImage = `url('${img.src}')`;
+            heroBg.style.opacity = '1';
         };
-        imgLoader.onerror = () => skeletonElement.style.display = 'none';
-    } else {
-        skeletonElement.style.display = 'none';
-    }
-    
-    // Rellenar textos
-    document.getElementById('p-title').innerText = data.title || "Sin título";
-    document.getElementById('p-id').innerText = data.id || "N/A";
-    document.getElementById('p-studio').innerText = data.studio || "Desconocido";
-    document.getElementById('p-fecha').innerText = data.fecha || "No disponible";
-    document.getElementById('p-actriz').innerText = data.actriz || "Desconocida";
 
-    // Rellenar Tags
-    const tagContainer = document.getElementById('p-tags');
-    tagContainer.innerHTML = "";
-    if(data.tags && data.tags !== "null") {
-        data.tags.split(',').forEach(t => {
-            const span = document.createElement('span');
-            span.className = 'tag';
-            span.innerHTML = `<i class="fas fa-tag"></i> ${t.trim()}`;
-            tagContainer.appendChild(span);
-        });
+        // Tags
+        const tagsContainer = document.getElementById('p-tags');
+        if(peli.tags) {
+            peli.tags.split(',').forEach(tag => {
+                const s = document.createElement('span');
+                s.className = 'tag';
+                s.innerHTML = `<i class="fas fa-tag"></i> ${tag.trim()}`;
+                tagsContainer.appendChild(s);
+            });
+        }
     }
 
-    let countdownInterval;
+    var player = videojs('v-player', { fluid: true });
 
     function play() {
-        if(!data.video || data.video === "null") return alert("Video no disponible");
+        if(!peli || !peli.video) return alert("Video no disponible");
         
-        // Configuración de publicidad y video final
-        const linkTuPublicidad = "https://appcine.b-cdn.net/publcidad/Sin%20t%C3%ADtulo.mp4";
-        const linkPelicula = data.video;
-
         document.getElementById('player-overlay').style.display = 'block';
         document.getElementById('ad-counter-box').style.display = 'block';
 
         let timeLeft = 30;
-        document.getElementById('ad-timer').innerText = timeLeft;
-        
-        clearInterval(countdownInterval);
-        countdownInterval = setInterval(() => {
+        const timer = setInterval(() => {
             timeLeft--;
             document.getElementById('ad-timer').innerText = timeLeft;
-            if (timeLeft <= 0) clearInterval(countdownInterval);
+            if(timeLeft <= 0) clearInterval(timer);
         }, 1000);
 
-        player.src({ src: linkTuPublicidad, type: 'video/mp4' });
-        player.controls(false); 
+        player.src({ src: "https://appcine.b-cdn.net/publcidad/Sin%20t%C3%ADtulo.mp4", type: 'video/mp4' });
+        player.controls(false);
         player.play();
 
         player.one('ended', function() {
-            clearInterval(countdownInterval);
+            clearInterval(timer);
             document.getElementById('ad-counter-box').style.display = 'none';
-            player.src({ src: linkPelicula, type: 'video/mp4' });
-            player.controls(true); 
+            player.src({ src: peli.video, type: 'video/mp4' });
+            player.controls(true);
             player.play();
         });
-        
-        history.pushState({playing: true}, "Reproduciendo");
     }
 
     function closePlayer() {
-        clearInterval(countdownInterval);
         player.pause();
         document.getElementById('player-overlay').style.display = 'none';
-        document.getElementById('ad-counter-box').style.display = 'none';
     }
 
-    function abrirBuscador() {
-        document.getElementById('modal-busqueda').style.display = 'block';
-        document.getElementById('input-buscador').focus();
-    }
+    function abrirBuscador() { document.getElementById('modal-busqueda').style.display = 'block'; }
+    function cerrarBuscador() { document.getElementById('modal-busqueda').style.display = 'none'; }
     
-    function cerrarBuscador() {
-        document.getElementById('modal-busqueda').style.display = 'none';
-    }
-
-    // Lógica del buscador usando la nueva baseDeDatos de code.js
+    // Función para el buscador dentro de detalles
     document.getElementById('input-buscador').addEventListener('input', (e) => {
-        const texto = e.target.value.toLowerCase().trim();
-        const resultadosDiv = document.getElementById('resultados-busqueda');
-        resultadosDiv.innerHTML = "";
-        
-        if (texto.length < 2 || typeof baseDeDatos === 'undefined') return;
-        
-        const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(texto));
-        
-        filtrados.forEach(p => {
-            const item = document.createElement('div');
-            item.className = 'res-item';
-            item.onclick = () => {
-                localStorage.setItem('peli_id', p.id);
-                localStorage.setItem('peli_titulo', p.titulo);
-                localStorage.setItem('peli_imagen', p.poster);
-                localStorage.setItem('peli_background', p.bg || "");
-                localStorage.setItem('peli_video', p.video);
-                localStorage.setItem('peli_estudio', p.estudio);
-                localStorage.setItem('peli_fecha', p.fecha || "");
-                localStorage.setItem('peli_actriz', p.actriz || "");
-                localStorage.setItem('peli_tags', p.tags || "");
-                location.reload();
-            };
-            item.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
-            resultadosDiv.appendChild(item);
+        const query = e.target.value.toLowerCase();
+        const resDiv = document.getElementById('resultados-busqueda');
+        resDiv.innerHTML = "";
+        if(query.length < 2) return;
+
+        baseDeDatos.filter(p => p.id.toLowerCase().includes(query)).forEach(p => {
+            const d = document.createElement('div');
+            d.className = 'res-item';
+            d.onclick = () => { localStorage.setItem('peli_id', p.id); location.reload(); };
+            d.innerHTML = `<img src="${p.poster}"><div class="res-id">${p.id}</div>`;
+            resDiv.appendChild(d);
         });
     });
 </script>
