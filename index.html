@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavGG - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            --bg-color: #0a0a0a; 
+            --accent-color: #E50914; 
+            --text-color: #ffffff;
+            --nav-bg: rgba(20, 20, 20, 0.95);
+        }
+        
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            padding-bottom: 80px; 
+        }
+
+        /* Hero visual */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 40vh;
+            background: linear-gradient(to bottom, transparent, var(--bg-color)), url('https://i.ibb.co/mF44PD1F/vlcsnap-2026-04-20-11h13m12s897.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Secciones de contenido */
+        .section { padding: 20px 15px; }
+        .section h2 { font-size: 1.2rem; margin-bottom: 15px; border-left: 4px solid var(--accent-color); padding-left: 10px; }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .card-item {
+            position: relative;
+            aspect-ratio: 2/3;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .card-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-id {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background: rgba(0,0,0,0.7);
+            padding: 2px 5px;
+            font-size: 10px;
+            border-radius: 3px;
+        }
+
+        /* Barra de Navegación Inferior (Corregida) */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 65px;
+            background: var(--nav-bg);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #333;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            color: #888;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .nav-item.active { color: var(--accent-color); }
+        .nav-item i { font-size: 20px; margin-bottom: 4px; }
+
+        /* Buscador Modal */
+        #modal-busqueda {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            background: #222;
+            border: 1px solid var(--accent-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Skeletons */
+        .skeleton { background: #222; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+    </style>
+</head>
+<body>
+
+    <div class="hero"></div>
+
+    <div class="section">
+        <h2>Novedades Recientes</h2>
+        <div class="image-grid" id="grid-novedades">
+            </div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="uncensored.html" class="nav-item">
+            <i class="fas fa-bolt"></i>
+            <span>Uncensored</span>
+        </a>
+        <div class="nav-item" onclick="abrirBuscador()">
+            <i class="fas fa-search"></i>
+            <span>Buscar</span>
+        </div>
+    </nav>
+
+    <div id="modal-busqueda">
+        <div style="display:flex; justify-content: space-between; margin-bottom:20px;">
+            <h3>Buscar por ID</h3>
+            <i class="fas fa-times" onclick="cerrarBuscador()"></i>
+        </div>
+        <input type="text" id="input-buscador" class="search-input" placeholder="Ej: NGOD-170...">
+        <div id="resultados-busqueda" style="margin-top:20px;"></div>
+    </div>
+
+    <script src="code.js"></script>
+
+    <script>
+        // Inicializar la App
+        document.addEventListener("DOMContentLoaded", () => {
+            const grid = document.getElementById("grid-novedades");
+            
+            // Mostrar las últimas 9 películas de code.js
+            const ultimas = baseDeDatos.slice(-9).reverse();
+
+            grid.innerHTML = ultimas.map(p => `
+                <div class="card-item skeleton" onclick="verDetalle('${p.id}')">
+                    <img src="${p.poster}" onload="this.parentElement.classList.remove('skeleton')">
+                    <div class="card-id">${p.id}</div>
+                </div>
+            `).join('');
+        });
+
+        function verDetalle(id) {
+            localStorage.setItem('peli_id', id);
+            window.location.href = 'detalles.html';
+        }
+
+        // Lógica del Buscador
+        function abrirBuscador() { document.getElementById('modal-busqueda').style.display = 'block'; }
+        function cerrarBuscador() { document.getElementById('modal-busqueda').style.display = 'none'; }
+
+        document.getElementById('input-buscador').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const resDiv = document.getElementById('resultados-busqueda');
+            resDiv.innerHTML = "";
+            
+            if(query.length < 2) return;
+
+            const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(query));
+            filtrados.forEach(p => {
+                const d = document.createElement('div');
+                d.style = "padding:10px; border-bottom:1px solid #333; display:flex; align-items:center; gap:10px;";
+                d.onclick = () => verDetalle(p.id);
+                d.innerHTML = `<img src="${p.poster}" width="40"> <span>${p.id}</span>`;
+                resDiv.appendChild(d);
+            });
+        });
+    </script>
+
+</body>
+</html>
