@@ -21,19 +21,46 @@
             padding-bottom: 80px; 
         }
 
-        /* Hero visual */
+        /* Hero visual Dinámico */
         .hero {
             position: relative;
             width: 100%;
-            height: 40vh;
-            background: linear-gradient(to bottom, transparent, var(--bg-color)), url('https://i.ibb.co/mF44PD1F/vlcsnap-2026-04-20-11h13m12s897.png');
+            height: 45vh;
             background-size: cover;
-            background-position: center;
+            background-position: center top;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-color) 10%, transparent 70%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+
+        .btn-hero {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 10px;
+            cursor: pointer;
         }
 
         /* Secciones de contenido */
         .section { padding: 20px 15px; }
-        .section h2 { font-size: 1.2rem; margin-bottom: 15px; border-left: 4px solid var(--accent-color); padding-left: 10px; }
+        .section h2 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid var(--accent-color); padding-left: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
         .image-grid {
             display: grid;
@@ -53,6 +80,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s;
         }
 
         .card-id {
@@ -61,11 +90,11 @@
             left: 5px;
             background: rgba(0,0,0,0.7);
             padding: 2px 5px;
-            font-size: 10px;
+            font-size: 9px;
             border-radius: 3px;
         }
 
-        /* Barra de Navegación Inferior (Corregida) */
+        /* Barra de Navegación */
         .nav-bar {
             position: fixed;
             bottom: 0;
@@ -77,6 +106,7 @@
             align-items: center;
             border-top: 1px solid #333;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
         .nav-item {
@@ -112,18 +142,27 @@
         }
 
         /* Skeletons */
-        .skeleton { background: #222; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%); background-size: 200% 100%; animation: pulse 1.5s infinite linear; }
+        @keyframes pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
 <body>
 
-    <div class="hero"></div>
+    <div class="hero" id="main-hero">
+        <div class="hero-content">
+            <h2 id="hero-title">Cargando...</h2>
+            <button class="btn-hero" id="btn-hero-play">VER AHORA</button>
+        </div>
+    </div>
 
     <div class="section">
-        <h2>Novedades Recientes</h2>
-        <div class="image-grid" id="grid-novedades">
-            </div>
+        <h2>Agregados Recientes</h2>
+        <div class="image-grid" id="grid-recientes"></div>
+    </div>
+
+    <div class="section">
+        <h2>Más Vistos</h2>
+        <div class="image-grid" id="grid-vistos"></div>
     </div>
 
     <nav class="nav-bar">
@@ -153,27 +192,61 @@
     <script src="code.js"></script>
 
     <script>
-        // Inicializar la App
         document.addEventListener("DOMContentLoaded", () => {
-            const grid = document.getElementById("grid-novedades");
-            
-            // Mostrar las últimas 9 películas de code.js
-            const ultimas = baseDeDatos.slice(-9).reverse();
+            if (typeof baseDeDatos === 'undefined') return;
 
-            grid.innerHTML = ultimas.map(p => `
+            // 1. HERO ALEATORIO (Cada vez que entra)
+            const randomPeli = baseDeDatos[Math.floor(Math.random() * baseDeDatos.length)];
+            const heroDiv = document.getElementById('main-hero');
+            heroDiv.style.backgroundImage = `url('${randomPeli.bg || randomPeli.poster}')`;
+            document.getElementById('hero-title').innerText = randomPeli.id;
+            document.getElementById('btn-hero-play').onclick = () => verDetalle(randomPeli.id);
+
+            // 2. AGREGADOS RECIENTES (Últimos 10)
+            const recientes = [...baseDeDatos].reverse().slice(0, 10);
+            renderGrid(recientes, 'grid-recientes');
+
+            // 3. MÁS VISTOS (10 aleatorios cada 10 horas)
+            const vistos = obtenerMasVistosCache();
+            renderGrid(vistos, 'grid-vistos');
+        });
+
+        // Lógica de caché de 10 horas para "Más Vistos"
+        function obtenerMasVistosCache() {
+            const AHORA = Date.now();
+            const DIEZ_HORAS = 10 * 60 * 60 * 1000;
+            const cache = JSON.parse(localStorage.getItem('vistos_cache'));
+
+            if (cache && (AHORA - cache.timestamp < DIEZ_HORAS)) {
+                // Reconstruir lista desde los IDs guardados para asegurar que existan en code.js
+                return cache.ids.map(id => baseDeDatos.find(p => p.id === id)).filter(p => p);
+            } else {
+                // Generar nuevos aleatorios
+                const randoms = [...baseDeDatos].sort(() => 0.5 - Math.random()).slice(0, 10);
+                localStorage.setItem('vistos_cache', JSON.stringify({
+                    timestamp: AHORA,
+                    ids: randoms.map(p => p.id)
+                }));
+                return randoms;
+            }
+        }
+
+        function renderGrid(lista, elementId) {
+            const grid = document.getElementById(elementId);
+            grid.innerHTML = lista.map(p => `
                 <div class="card-item skeleton" onclick="verDetalle('${p.id}')">
-                    <img src="${p.poster}" onload="this.parentElement.classList.remove('skeleton')">
+                    <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
                     <div class="card-id">${p.id}</div>
                 </div>
             `).join('');
-        });
+        }
 
         function verDetalle(id) {
             localStorage.setItem('peli_id', id);
             window.location.href = 'detalles.html';
         }
 
-        // Lógica del Buscador
+        // Buscador
         function abrirBuscador() { document.getElementById('modal-busqueda').style.display = 'block'; }
         function cerrarBuscador() { document.getElementById('modal-busqueda').style.display = 'none'; }
 
@@ -181,19 +254,16 @@
             const query = e.target.value.toLowerCase();
             const resDiv = document.getElementById('resultados-busqueda');
             resDiv.innerHTML = "";
-            
             if(query.length < 2) return;
 
-            const filtrados = baseDeDatos.filter(p => p.id.toLowerCase().includes(query));
-            filtrados.forEach(p => {
+            baseDeDatos.filter(p => p.id.toLowerCase().includes(query)).forEach(p => {
                 const d = document.createElement('div');
                 d.style = "padding:10px; border-bottom:1px solid #333; display:flex; align-items:center; gap:10px;";
                 d.onclick = () => verDetalle(p.id);
-                d.innerHTML = `<img src="${p.poster}" width="40"> <span>${p.id}</span>`;
+                d.innerHTML = `<img src="${p.poster}" width="40" height="60" style="object-fit:cover;"> <span>${p.id}</span>`;
                 resDiv.appendChild(d);
             });
         });
     </script>
-
 </body>
 </html>
