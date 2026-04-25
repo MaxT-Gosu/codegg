@@ -693,4 +693,15 @@ const baseDeDatos = [
         fecha: "Mar. 07, 2016",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "SNIS-513", 
+        titulo: "The Mad Yoga Beside Sleeping Housewife", 
+        poster: "https://i.ibb.co/39knpBtp/1707789609.webp", 
+        bg: "https://i.ibb.co/9mC8Cfzz/snis00513jp-4.jpg", 
+        video: "https://appcine.b-cdn.net/Codegg/Snis-513.mp4", 
+        estudio: "S1 No.1 Style",
+		actriz: "Mimi Saotome",
+        fecha: "Oct. 07, 2015",
+        tags: "Reducing Mosaic"
+    },
 ];
