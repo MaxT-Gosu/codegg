@@ -715,4 +715,15 @@ const baseDeDatos = [
         fecha: "Mar. 18, 2025",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "MOOC-018", 
+        titulo: "My Junior Co-worker, A Crossdresser Office Lady", 
+        poster: "https://i.ibb.co/vxVYSzc5/1775242094.webp", 
+        bg: "https://i.ibb.co/bgrJM18T/vlcsnap-2026-04-26-06h12m22s584.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mooc-018.mp4", 
+        estudio: "Mousozoku",
+		actriz: "Kokoro Shizuku",
+        fecha: "Apr. 07, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
