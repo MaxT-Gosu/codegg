@@ -726,4 +726,15 @@ const baseDeDatos = [
         fecha: "Apr. 07, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "MIDA-520", 
+        titulo: "Busty Investigator, Legs Shaking", 
+        poster: "https://i.ibb.co/MyXjzMrn/1770922302.webp", 
+        bg: "https://i.ibb.co/hJVH90sj/vlcsnap-2026-04-27-17h29m01s815.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mida-520.mp4", 
+        estudio: "Moodyz",
+		actriz: "Kanna Sannoki",
+        fecha: "Feb. 17, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
