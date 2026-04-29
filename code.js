@@ -737,4 +737,15 @@ const baseDeDatos = [
         fecha: "Feb. 17, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "NVH-076", 
+        titulo: "Transsexual Slut Lesbian Kissing Maniacs", 
+        poster: "https://i.ibb.co/WpnXfwBj/1775332095.webp", 
+        bg: "https://i.ibb.co/KkyKVcb/vlcsnap-2026-04-29-17h12m41s646.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Nvh-076.mp4", 
+        estudio: "Glory Quest",
+		actriz: "Miki Sunohara,Yuna Nagisa",
+        fecha: "Apr. 07, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
