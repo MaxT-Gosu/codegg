@@ -770,4 +770,15 @@ const baseDeDatos = [
         fecha: "Mar. 27, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "EBWH-324", 
+        titulo: "I'm Gloomy, Socially Awkward", 
+        poster: "https://i.ibb.co/KxWt0wgw/1776362605.webp", 
+        bg: "https://i.ibb.co/KjmsgFvk/vlcsnap-2026-05-01-06h23m48s199.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ebwh-324.mp4", 
+        estudio: "E-body",
+		actriz: "Amu Otowata",
+        fecha: "Apr. 21, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
