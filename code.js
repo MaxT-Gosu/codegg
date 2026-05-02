@@ -781,4 +781,15 @@ const baseDeDatos = [
         fecha: "Apr. 21, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "ROE-475", 
+        titulo: "Whom I Thought Was A Tuna For 16 Years", 
+        poster: "https://i.ibb.co/j9HvfnRw/1776967972.webp", 
+        bg: "https://i.ibb.co/p6bWRfFP/vlcsnap-2026-05-02-06h57m23s444.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Roe-475.mp4", 
+        estudio: "Madonna",
+		actriz: "Momoko Isshiki",
+        fecha: "Apr. 28, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
