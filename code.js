@@ -825,4 +825,15 @@ const baseDeDatos = [
         fecha: "Apr. 28, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "JUFE-618", 
+        titulo: "My Big Sister Loves Me The Most In The World", 
+        poster: "https://i.ibb.co/9mtnNnNK/1775160123.webp", 
+        bg: "https://i.ibb.co/C3SvK3Hq/vlcsnap-2026-05-06-16h28m47s258.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jufe-618.mp4", 
+        estudio: "Fitch",
+		actriz: "Nao Satsuki",
+        fecha: "Apr. 07, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
