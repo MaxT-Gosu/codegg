@@ -847,4 +847,15 @@ const baseDeDatos = [
         fecha: "Apr. 21, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "CAWD-980", 
+        titulo: "Stunning Genius Ballerina Finally Falls", 
+        poster: "https://i.ibb.co/mCPngWgZ/9b2f83ae95.webp", 
+        bg: "https://i.ibb.co/HDx1pdBr/vlcsnap-2026-05-08-09h58m40s996.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Cawd-980.mp4", 
+        estudio: "Kawaii",
+		actriz: "Saki Kiyono",
+        fecha: "May. 05, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
