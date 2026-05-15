@@ -891,4 +891,15 @@ const baseDeDatos = [
         fecha: "Mar. 25, 2025",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "PETS-065", 
+        titulo: "First-time Shoot: Handsome Former Stage Actor", 
+        poster: "https://i.ibb.co/gL2TGCrS/1777047771.webp", 
+        bg: "https://i.ibb.co/1t88pWKY/vlcsnap-2026-05-15-10h42m05s901.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Pets-065.mp4", 
+        estudio: "Petshop",
+		actriz: "Mousouzoku",
+        fecha: "Apr. 28, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
