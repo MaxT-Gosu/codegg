@@ -902,4 +902,15 @@ const baseDeDatos = [
         fecha: "Apr. 28, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "NTRD-115", 
+        titulo: "Netorareze Subordinate And No Way", 
+        poster: "https://i.ibb.co/8D5rSxK8/1691208713.webp", 
+        bg: "https://i.ibb.co/DgzLz1Fb/vlcsnap-2026-05-16-16h56m06s453.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Ntrd-115.mp4", 
+        estudio: "Takara Eizou",
+		actriz: "Hana Haruna",
+        fecha: "Aug. 08, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
