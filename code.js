@@ -924,4 +924,15 @@ const baseDeDatos = [
         fecha: "May. 12, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "DASS-884", 
+        titulo: "Former Underground Idol And Current AV Actress Ikeda", 
+        poster: "https://i.ibb.co/5WDQhG9t/1771699368.webp", 
+        bg: "https://i.ibb.co/N6XK4RKn/vlcsnap-2026-05-18-11h33m00s316.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dass-884.mp4", 
+        estudio: "DasS",
+		actriz: "Marina Ikeda",
+        fecha: "Feb. 24, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
