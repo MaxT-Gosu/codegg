@@ -935,4 +935,15 @@ const baseDeDatos = [
         fecha: "Feb. 24, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "DASS-916", 
+        titulo: "She Continues To Be Thrust And Stroked Relentlessly", 
+        poster: "https://i.ibb.co/JF385yhR/1773970639-1.webp", 
+        bg: "https://i.ibb.co/4wzP2k2n/vlcsnap-2026-05-19-10h31m27s861.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Dass-916.mp4", 
+        estudio: "DasS",
+		actriz: "Renka Yuki",
+        fecha: "Mar. 24, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
