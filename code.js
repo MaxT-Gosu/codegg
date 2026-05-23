@@ -957,4 +957,15 @@ const baseDeDatos = [
         fecha: "Apr. 28, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "MOOC-019", 
+        titulo: "A Beautiful Trans Woman With Wet Hair After", 
+        poster: "https://i.ibb.co/0R3dtFqj/216f72291a.webp", 
+        bg: "https://i.ibb.co/7dpSwpyN/vlcsnap-2026-05-23-07h38m47s165.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Mooc-019.mp4", 
+        estudio: "Mousozoku",
+		actriz: "Kuroro Tsukino",
+        fecha: "May. 05, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
