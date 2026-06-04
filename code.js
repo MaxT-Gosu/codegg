@@ -1012,4 +1012,15 @@ const baseDeDatos = [
         fecha: "Mar. 24, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "SAL-262", 
+        titulo: "Exotic Beauty Transsexual Himeno Juri Makes", 
+        poster: "https://i.ibb.co/XxNbqq8S/1774323815.webp", 
+        bg: "https://i.ibb.co/j99V8H7n/vlcsnap-2026-06-04-10h22m13s548.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sal-262.mp4", 
+        estudio: "Shemale A La Carte ",
+		actriz: "Juri Himeno,Shia Himeoka",
+        fecha: "Mar. 24, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
