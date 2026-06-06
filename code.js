@@ -1023,4 +1023,15 @@ const baseDeDatos = [
         fecha: "Mar. 24, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "SW-134", 
+        titulo: "The Boss’s Wife Waits In Agony For The Young Cock’s", 
+        poster: "https://i.ibb.co/kVyb8KkK/noname.png", 
+        bg: "https://i.ibb.co/fdDvrBVF/vlcsnap-2026-06-06-14h16m41s193.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Sw-134.mp4", 
+        estudio: "SWITCH",
+		actriz: "Yui Hatano",
+        fecha: "2026-01-12",
+        tags: "Reducing Mosaic"
+    },
 ];
