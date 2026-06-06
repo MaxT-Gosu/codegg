@@ -9,7 +9,7 @@
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
 
     <style>
-        :root { --primary: #E50914; --bg: #0a0a0a; --link: #58a6ff; --accent-color: #E50914; }
+        :root { --primary: #E50914; --bg: #0b111e; --text-orange: #f2a950; --text-label: #8da2bb; }
         body { margin: 0; background: var(--bg); font-family: 'Roboto', sans-serif; color: #fff; padding-bottom: 100px; }
         
         .hero { position: relative; width: 100%; height: 45vh; background: #000; overflow: hidden; }
@@ -32,17 +32,15 @@
         
         .btn-play { background: #fff; color: #000; border: none; width: 100%; padding: 14px; border-radius: 6px; font-weight: 900; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 25px; }
 
-        .info-box { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
-        .row { display: flex; align-items: center; font-size: 14px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
-        .row i.arrow { color: var(--primary); margin-right: 10px; font-size: 10px; }
-        .label { color: #888; margin-right: 6px; font-weight: 400; width: 100px; }
-        .value { color: var(--link); text-decoration: none; font-weight: 700; }
-
-        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-        .tag { background: #1a1a1a; color: var(--link); padding: 5px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
+        /* DISEÑO DE ACUERDO A LA IMAGEN */
+        .info-box { padding: 0 20px; display: flex; flex-direction: column; gap: 16px; }
+        .row { display: flex; flex-direction: row; align-items: flex-start; font-size: 16px; line-height: 1.5; }
+        .label { color: var(--text-label); font-weight: 700; width: 90px; flex-shrink: 0; }
+        .value { color: #fff; font-weight: 400; }
+        .value.highlight { color: var(--text-orange); font-weight: 700; }
 
         #modal-busqueda { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000; padding: 20px; backdrop-filter: blur(15px); overflow-y: auto; }
-        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--accent-color); margin: 40px 0 20px 0; }
+        .search-box-modal { background: #1a1a1a; border-radius: 8px; display: flex; align-items: center; padding: 15px; border: 1px solid var(--primary); margin: 40px 0 20px 0; }
         .search-box-modal input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 18px; }
         .close-search { position: absolute; top: 15px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
         
@@ -93,10 +91,12 @@
 <div id="ad-counter-box">La película comienza en: <span id="ad-timer">30</span>s</div>
 
 <div class="info-box">
-    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Release:</span><span class="value" id="p-fecha">---</span></div>
-    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Studio:</span><span class="value" id="p-studio">---</span></div>
-    <div class="row"><i class="fas fa-caret-right arrow"></i><span class="label">Actriz:</span><span class="value" id="p-actriz">---</span></div>
-    <div class="row" style="border:none;"><i class="fas fa-caret-right arrow"></i><span class="label">Tags:</span><div class="tag-list" id="p-tags"></div></div>
+    <div class="row"><span class="label">Code:</span><span class="value" id="p-code">---</span></div>
+    <div class="row"><span class="label">Date:</span><span class="value" id="p-fecha">---</span></div>
+    <div class="row"><span class="label">Time:</span><span class="value" id="p-time">02:00:00</span></div>
+    <div class="row"><span class="label">Pornstars:</span><span class="value highlight" id="p-actriz">---</span></div>
+    <div class="row"><span class="label">Studio:</span><span class="value highlight" id="p-studio">---</span></div>
+    <div class="row"><span class="label">Tags:</span><span class="value highlight" id="p-tags">---</span></div>
 </div>
 
 <nav class="menu">
@@ -121,9 +121,11 @@
         // Rellenar visuales
         document.getElementById('p-title').innerText = peli.titulo;
         document.getElementById('p-id').innerText = peli.id;
+        document.getElementById('p-code').innerText = peli.id; // Usa el ID de la BD como Code
         document.getElementById('p-studio').innerText = peli.estudio || "Desconocido";
         document.getElementById('p-fecha').innerText = peli.fecha || "No disponible";
         document.getElementById('p-actriz').innerText = peli.actriz || "Desconocida";
+        document.getElementById('p-tags').innerText = peli.tags || "Ninguno";
 
         // Carga de imagen de fondo
         const heroBg = document.getElementById('hero-bg');
@@ -134,17 +136,6 @@
             heroBg.style.backgroundImage = `url('${img.src}')`;
             heroBg.style.opacity = '1';
         };
-
-        // Tags
-        const tagsContainer = document.getElementById('p-tags');
-        if(peli.tags) {
-            peli.tags.split(',').forEach(tag => {
-                const s = document.createElement('span');
-                s.className = 'tag';
-                s.innerHTML = `<i class="fas fa-tag"></i> ${tag.trim()}`;
-                tagsContainer.appendChild(s);
-            });
-        }
     }
 
     var player = videojs('v-player', { fluid: true });
@@ -183,7 +174,6 @@
     function abrirBuscador() { document.getElementById('modal-busqueda').style.display = 'block'; }
     function cerrarBuscador() { document.getElementById('modal-busqueda').style.display = 'none'; }
     
-    // Función para el buscador dentro de detalles
     document.getElementById('input-buscador').addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
         const resDiv = document.getElementById('resultados-busqueda');
