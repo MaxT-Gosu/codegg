@@ -1021,7 +1021,7 @@ const baseDeDatos = [
         estudio: "Shemale A La Carte ",
 		actriz: "Juri Himeno,Shia Himeoka",
         fecha: "Mar. 24, 2026",
-        tags: "Reducing Mosaic"
+        tags: "Reducing Mosaic,trans"
     },
 	{ 
         id: "SW-134", 
@@ -1032,6 +1032,17 @@ const baseDeDatos = [
         estudio: "SWITCH",
 		actriz: "Yui Hatano",
         fecha: "2026-01-12",
+        tags: "Reducing Mosaic"
+    },
+	{ 
+        id: "JUR-258", 
+        titulo: "A Former Celebrity With A Hidden I-cup", 
+        poster: "https://i.ibb.co/1fzM7W3g/1743698763.webp", 
+        bg: "https://i.ibb.co/9kf3qKtH/vlcsnap-2026-06-09-12h09m35s962.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-258.mp4", 
+        estudio: "Madonna",
+		actriz: "Sayaka",
+        fecha: "Apr. 08, 2025",
         tags: "Reducing Mosaic"
     },
 ];
