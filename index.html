@@ -3,224 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavGG - Premium Home</title>
+    <title>CodeGG - Premium Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { 
+            /* Colores originales de CodeGG */
             --bg-color: #0a0a0a; 
+            --bg-color-alt: #141414; 
             --accent-color: #E50914; 
             --text-color: #ffffff;
-            --nav-bg: rgba(20, 20, 20, 0.95);
+            --text-color-sec: #b3b3b3; 
+            --skeleton-bg: #222222; 
+            --nav-bg: rgba(10, 10, 10, 0.95);
         }
         
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { 
-            font-family: 'Helvetica Neue', Arial, sans-serif; 
-            background: var(--bg-color); 
-            color: var(--text-color); 
-            padding-bottom: 90px;
-            overflow-x: hidden;
+        * { margin:0; padding:0; box-sizing:border-box; outline: none; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); overflow-x:hidden; -webkit-tap-highlight-color: transparent; }
+        
+        /* Animación Skeleton */
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton { background: linear-gradient(90deg, var(--bg-color-alt) 25%, var(--skeleton-bg) 50%, var(--bg-color-alt) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+        
+        .container { width:100%; padding-bottom:100px; }
+        
+        /* HEADER */
+        header { 
+            display: flex; justify-content: center; align-items: center; 
+            padding: 20px; 
+            background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%); 
+            position: fixed; width: 100%; z-index: 100;
+        }
+        header h1 { font-size: 24px; color: var(--accent-color); font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'Arial Black', sans-serif;}
+
+        /* HERO ESTILO PARAMOUNT+ (Carrusel de Posters Redondeados) */
+        .hero-carousel {
+            position: relative; width: 100%; pt: 80px; padding: 90px 0 20px 0;
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            gap: 15px; padding-left: 20px; padding-right: 20px;
+            scrollbar-width: none;
+        }
+        .hero-carousel::-webkit-scrollbar { display: none; }
+        
+        .hero-card {
+            flex: 0 0 85%; scroll-snap-align: center;
+            position: relative; aspect-ratio: 2/3; max-height: 65vh;
+            border-radius: 16px; overflow: hidden; background: #000;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .hero-card img { 
+            width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease-in-out; 
+        }
+        .hero-card::after { 
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 40%, transparent 100%);
+        }
+        .hero-content { position: absolute; bottom: 5%; left: 5%; width: 90%; z-index: 10; text-align: center; }
+        .hero-content h2 { font-size: clamp(18px, 5vw, 28px); font-weight: 900; margin-bottom: 12px; line-height: 1.2; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); }
+        .hero-btns { display: flex; justify-content: center; gap: 10px; }
+        .hero-btns button { 
+            background: #ffffff; color: #000; border: none;
+            padding: 10px 20px; font-size: 14px; font-weight: 700; 
+            border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+            text-transform: uppercase;
+        }
+        .hero-btns button.btn-list {
+            background: rgba(255,255,255,0.25); color: #fff; backdrop-filter: blur(10px);
         }
 
-        /* Hero */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 45vh;
-            background-size: cover;
-            background-position: center top;
-            display: flex;
-            align-items: flex-end;
-            padding: 20px;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--bg-color) 10%, transparent 80%);
-        }
-        .hero-content { position: relative; z-index: 10; }
-        .btn-hero {
-            background: #fff; color: #000; border: none; padding: 10px 20px;
-            border-radius: 4px; font-weight: bold; margin-top: 10px;
-        }
-
-        /* --- ESTILO DE SLIDER HORIZONTAL --- */
-        .section { padding: 20px 0 10px 15px; }
+        /* SECCIONES */
+        #sections-container { margin-top: 10px; position: relative; z-index: 20; }
+        .section { margin-bottom: 30px; padding-left: 15px; }
         .section h2 { 
-            font-size: 1rem; margin-bottom: 12px; 
-            border-left: 3px solid var(--accent-color); padding-left: 8px; 
+            font-size: 18px; margin-bottom: 15px; font-weight: 700; color: var(--text-color); letter-spacing: -0.3px; 
+            border-left: 3px solid var(--accent-color); padding-left: 8px; /* Detalle conservado de tu código */
+        }
+        
+        .scroll-row { display: flex; overflow-x: auto; gap: 14px; padding-bottom: 12px; scrollbar-width: none; padding-right: 20px; }
+        .scroll-row::-webkit-scrollbar { display: none; }
+        
+        .card-item { flex-shrink: 0; cursor: pointer; transition: transform 0.2s; position: relative; display: flex; flex-direction: column; width: 125px; } 
+        .card-item:active { transform: scale(0.95); }
+        .img-wrapper { width: 100%; border-radius: 8px; overflow: hidden; background: var(--skeleton-bg); border: 1px solid rgba(255,255,255,0.05); aspect-ratio: 2/3; position: relative; }
+        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
+
+        .card-title {
+            font-size: 12px; color: var(--text-color-sec); margin-top: 6px; text-align: left; padding: 0 2px;
+            display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
         }
 
-        .slider-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 12px;
-            padding-right: 15px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none; 
-        }
-        .slider-container::-webkit-scrollbar { display: none; }
-
-        /* Estilo Landscape (Horizontal) */
-        .card-landscape {
-            flex: 0 0 240px;
-            aspect-ratio: 16/9;
-            background: #1a1a1a;
-            border-radius: 4px;
-            overflow: hidden;
-            scroll-snap-align: start;
-            position: relative;
+        /* DISEÑO DE NÚMEROS (DENTRO DE LA IMAGEN, ARRIBA A LA IZQUIERDA) */
+        .rank-number {
+            position: absolute; 
+            left: 8px; 
+            top: 8px; 
+            font-size: 40px; 
+            font-weight: 900; 
+            font-family: 'Arial Black', sans-serif;
+            color: rgba(10, 10, 10, 0.9); 
+            text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; 
+            line-height: 1; 
+            z-index: 5; 
+            pointer-events: none;
         }
 
-        /* Estilo Portrait (Vertical) */
-        .card-portrait {
-            flex: 0 0 120px;
-            aspect-ratio: 2/3;
-            background: #1a1a1a;
-            border-radius: 4px;
-            overflow: hidden;
-            scroll-snap-align: start;
-            position: relative;
-        }
-
-        .card-landscape img, .card-portrait img {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0; transition: opacity 0.5s;
-        }
-
-        .card-id {
-            position: absolute; bottom: 5px; left: 5px;
-            background: rgba(0,0,0,0.7); padding: 2px 5px;
-            font-size: 9px; border-radius: 2px;
-        }
-
-        /* Estilo Ranking para Top Mensual */
-        .ranking-number {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: var(--accent-color);
-            color: white;
-            font-weight: 900;
-            font-size: 12px;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            z-index: 5;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-
-        /* Navegación Inferior */
+        /* NAVEGACIÓN INFERIOR (Estilo original CodeGG) */
         .nav-bar {
             position: fixed; bottom: 0; width: 100%; height: 65px;
             background: var(--nav-bg); display: flex;
             justify-content: space-around; align-items: center;
             border-top: 1px solid #222; z-index: 1000; backdrop-filter: blur(10px);
         }
-        .nav-item { color: #888; text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 11px; }
+        .nav-item { color: #888; text-decoration: none; display: flex; flex-direction: column; align-items: center; font-size: 11px; cursor: pointer; }
         .nav-item.active { color: var(--accent-color); }
         .nav-item i { font-size: 20px; margin-bottom: 4px; }
-
-        .skeleton { background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%); background-size: 200% 100%; animation: pulse 1.5s infinite linear; }
-        @keyframes pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
 <body>
 
-    <div class="hero" id="main-hero">
-        <div class="hero-content">
-            <h2 id="hero-title">---</h2>
-            <button class="btn-hero" id="btn-hero-play"><i class="fas fa-play"></i> VER AHORA</button>
+<div class="container">
+    <header><h1>CODEGG</h1></header>
+    
+    <div class="hero-carousel" id="hero-container">
+        </div>
+
+    <div id="sections-container">
+        <div class="section">
+            <h2>Agregados Recientes</h2>
+            <div class="scroll-row" id="row-recientes"></div>
+        </div>
+
+        <div class="section">
+            <h2>Más Vistos</h2>
+            <div class="scroll-row" id="row-mas-vistos"></div>
+        </div>
+
+        <div class="section">
+            <h2>Top Mensual</h2>
+            <div class="scroll-row row-top10" id="row-top-mensual"></div>
         </div>
     </div>
+</div>
 
-    <div class="section">
-        <h2>Agregados Recientes</h2>
-        <div class="slider-container" id="slider-recientes"></div>
-    </div>
+<nav class="nav-bar">
+    <a href="index.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="uncensored.html" class="nav-item"><i class="fas fa-bolt"></i><span>Uncensored</span></a>
+    <div class="nav-item" onclick="alert('Buscador en desarrollo')"><i class="fas fa-search"></i><span>Buscar</span></div>
+</nav>
 
-    <div class="section">
-        <h2>Más Vistos</h2>
-        <div class="slider-container" id="slider-vistos"></div>
-    </div>
+<script src="code.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (typeof baseDeDatos !== 'undefined') {
+            window.db = baseDeDatos;
+            cargarAppGG();
+        }
+    });
 
-    <div class="section">
-        <h2>Top Mensual</h2>
-        <div class="slider-container" id="slider-top-mensual"></div>
-    </div>
+    // Utilería para gestionar caché temporal con LocalStorage
+    function obtenerDatosCache(clave, tiempoExpiracionMs, generadorDatos) {
+        const cache = localStorage.getItem(clave);
+        const cacheTime = localStorage.getItem(`${clave}_time`);
+        const ahora = Date.now();
 
-    <nav class="nav-bar">
-        <a href="index.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="uncensored.html" class="nav-item"><i class="fas fa-bolt"></i><span>Uncensored</span></a>
-        <div class="nav-item" onclick="alert('Buscador en desarrollo')"><i class="fas fa-search"></i><span>Buscar</span></div>
-    </nav>
+        if (cache && cacheTime && (ahora - cacheTime < tiempoExpiracionMs)) {
+            return JSON.parse(cache);
+        } else {
+            const nuevosDatos = generadorDatos();
+            localStorage.setItem(clave, JSON.stringify(nuevosDatos));
+            localStorage.setItem(`${clave}_time`, ahora);
+            return nuevosDatos;
+        }
+    }
 
-    <script src="code.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (typeof baseDeDatos === 'undefined') return;
-
-            // 1. Hero Aleatorio
-            const randomPeli = baseDeDatos[Math.floor(Math.random() * baseDeDatos.length)];
-            const heroDiv = document.getElementById('main-hero');
-            heroDiv.style.backgroundImage = `url('${randomPeli.bg || randomPeli.poster}')`;
-            document.getElementById('hero-title').innerText = randomPeli.id;
-            document.getElementById('btn-hero-play').onclick = () => verDetalle(randomPeli.id);
-
-            // 2. Renderizar Agregados Recientes (Landscape - BG)
-            const recientes = [...baseDeDatos].reverse().slice(0, 10);
-            const containerRecientes = document.getElementById('slider-recientes');
-            containerRecientes.innerHTML = recientes.map(p => `
-                <div class="card-landscape skeleton" onclick="verDetalle('${p.id}')">
-                    <img src="${p.bg || p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
-                    <div class="card-id">${p.id}</div>
-                </div>
-            `).join('');
-
-            // 3. Renderizar Más Vistos (Portrait - Poster)
-            const vistos = obtenerCache('vistos_cache', 10 * 60 * 60 * 1000); // 10 Horas
-            renderSliderPortrait(vistos, 'slider-vistos');
-
-            // 4. Renderizar Top Mensual (Portrait con Ranking - Poster)
-            const topMensual = obtenerCache('top_mensual_cache', 30 * 24 * 60 * 60 * 1000); // 30 Días
-            renderSliderPortrait(topMensual, 'slider-top-mensual', true);
+    function cargarAppGG() {
+        // --- LOGICA HERO (5 Portadas tomadas de las imágenes poster) ---
+        const heroContainer = document.getElementById("hero-container");
+        const itemsHero = obtenerDatosCache('gg_hero_cache', 24 * 60 * 60 * 1000, () => {
+            return [...window.db].sort(() => 0.5 - Math.random()).slice(0, 5).map(i => i.id);
         });
 
-        function obtenerCache(key, expiration) {
-            const AHORA = Date.now();
-            const cache = JSON.parse(localStorage.getItem(key));
+        heroContainer.innerHTML = ""; 
 
-            if (cache && (AHORA - cache.timestamp < expiration)) {
-                return cache.ids.map(id => baseDeDatos.find(p => p.id === id)).filter(p => p);
-            } else {
-                const randoms = [...baseDeDatos].sort(() => 0.5 - Math.random()).slice(0, 10);
-                localStorage.setItem(key, JSON.stringify({
-                    timestamp: AHORA,
-                    ids: randoms.map(p => p.id)
-                }));
-                return randoms;
+        itemsHero.forEach(id => {
+            const item = window.db.find(x => x.id === id);
+            if(item) {
+                const card = document.createElement('div');
+                card.className = 'hero-card skeleton';
+                // Usamos item.titulo si existe, si no usamos item.id como en tu código original
+                const tituloMostrado = item.titulo || item.id;
+                
+                card.innerHTML = `
+                    <img src="${item.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">
+                    <div class="hero-content">
+                        <h2>${tituloMostrado}</h2>
+                        <div class="hero-btns">
+                            <button onclick="verDetalle('${item.id}')"><i class="fas fa-play"></i> VER AHORA</button>
+                            <button class="btn-list"><i class="fas fa-plus"></i> MI LISTA</button>
+                        </div>
+                    </div>
+                `;
+                heroContainer.appendChild(card);
             }
+        });
+
+        // --- FILA RECIENTES ---
+        const rowRecientes = document.getElementById('row-recientes');
+        rowRecientes.innerHTML = "";
+        [...window.db].reverse().slice(0, 10).forEach(item => {
+            rowRecientes.appendChild(crearCardParamount(item, false));
+        });
+
+        // --- FILA MÁS VISTOS (10 Horas de Caché) ---
+        const rowMasVistos = document.getElementById('row-mas-vistos');
+        rowMasVistos.innerHTML = "";
+        const idsMasVistos = obtenerDatosCache('gg_vistos_10h', 10 * 60 * 60 * 1000, () => {
+            return [...window.db].sort(() => 0.5 - Math.random()).slice(0, 10).map(i => i.id);
+        });
+        idsMasVistos.forEach(id => {
+            const item = window.db.find(x => x.id === id);
+            if(item) rowMasVistos.appendChild(crearCardParamount(item, false));
+        });
+
+        // --- FILA TOP MENSUAL (30 Días de Caché) ---
+        const rowTopMensual = document.getElementById('row-top-mensual');
+        rowTopMensual.innerHTML = "";
+        const idsTopMensual = obtenerDatosCache('gg_top_mensual_30d', 30 * 24 * 60 * 60 * 1000, () => {
+            return [...window.db].sort(() => 0.5 - Math.random()).slice(0, 10).map(i => i.id);
+        });
+        idsTopMensual.forEach((id, index) => {
+            const item = window.db.find(x => x.id === id);
+            if(item) rowTopMensual.appendChild(crearCardParamount(item, true, index + 1));
+        });
+    }
+
+    // Constructor de tarjetas
+    function crearCardParamount(item, esTop, numero) {
+        const div = document.createElement('div');
+        div.className = 'card-item';
+        div.onclick = () => verDetalle(`${item.id}`);
+        
+        const tituloMostrado = item.titulo || item.id;
+        let imgWrapperContent = `<img src="${item.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">`;
+        
+        // Número posicionado arriba a la izquierda
+        if (esTop) {
+            imgWrapperContent += `<span class="rank-number">${numero}</span>`;
         }
 
-        function renderSliderPortrait(lista, elementId, conRanking = false) {
-            const container = document.getElementById(elementId);
-            container.innerHTML = lista.map((p, index) => `
-                <div class="card-portrait skeleton" onclick="verDetalle('${p.id}')">
-                    ${conRanking ? `<span class="ranking-number">${index + 1}</span>` : ''}
-                    <img src="${p.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')">
-                    <div class="card-id">${p.id}</div>
-                </div>
-            `).join('');
-        }
+        div.innerHTML = `
+            <div class="img-wrapper skeleton">
+                ${imgWrapperContent}
+            </div>
+            <div class="card-title">${tituloMostrado}</div>
+        `;
+        
+        return div;
+    }
 
-        function verDetalle(id) {
-            localStorage.setItem('peli_id', id);
-            window.location.href = 'detalles.html';
-        }
-    </script>
+    // Lógica de redirección original de CodeGG
+    function verDetalle(id) {
+        localStorage.setItem('peli_id', id);
+        window.location.href = 'detalles.html';
+    }
+</script>
 </body>
 </html>
