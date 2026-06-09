@@ -75,7 +75,7 @@
         .section { margin-bottom: 30px; padding-left: 15px; }
         .section h2 { 
             font-size: 18px; margin-bottom: 15px; font-weight: 700; color: var(--text-color); letter-spacing: -0.3px; 
-            border-left: 3px solid var(--accent-color); padding-left: 8px; /* Detalle conservado de tu código */
+            border-left: 3px solid var(--accent-color); padding-left: 8px; 
         }
         
         .scroll-row { display: flex; overflow-x: auto; gap: 14px; padding-bottom: 12px; scrollbar-width: none; padding-right: 20px; }
@@ -106,7 +106,7 @@
             pointer-events: none;
         }
 
-        /* NAVEGACIÓN INFERIOR (Estilo original CodeGG) */
+        /* NAVEGACIÓN INFERIOR */
         .nav-bar {
             position: fixed; bottom: 0; width: 100%; height: 65px;
             background: var(--nav-bg); display: flex;
@@ -138,8 +138,13 @@
         </div>
 
         <div class="section">
+            <h2>Top Trans</h2>
+            <div class="scroll-row" id="row-top-trans"></div>
+        </div>
+
+        <div class="section">
             <h2>Top Mensual</h2>
-            <div class="scroll-row row-top10" id="row-top-mensual"></div>
+            <div class="scroll-row" id="row-top-mensual"></div>
         </div>
     </div>
 </div>
@@ -176,7 +181,7 @@
     }
 
     function cargarAppGG() {
-        // --- LOGICA HERO (5 Portadas tomadas de las imágenes poster) ---
+        // --- LOGICA HERO (5 Portadas) ---
         const heroContainer = document.getElementById("hero-container");
         const itemsHero = obtenerDatosCache('gg_hero_cache', 24 * 60 * 60 * 1000, () => {
             return [...window.db].sort(() => 0.5 - Math.random()).slice(0, 5).map(i => i.id);
@@ -189,7 +194,6 @@
             if(item) {
                 const card = document.createElement('div');
                 card.className = 'hero-card skeleton';
-                // Usamos item.titulo si existe, si no usamos item.id como en tu código original
                 const tituloMostrado = item.titulo || item.id;
                 
                 card.innerHTML = `
@@ -206,25 +210,45 @@
             }
         });
 
-        // --- FILA RECIENTES ---
+        // --- FILA RECIENTES (SIN NUMERACIÓN) ---
         const rowRecientes = document.getElementById('row-recientes');
         rowRecientes.innerHTML = "";
         [...window.db].reverse().slice(0, 10).forEach(item => {
+            // false = sin números
             rowRecientes.appendChild(crearCardParamount(item, false));
         });
 
-        // --- FILA MÁS VISTOS (10 Horas de Caché) ---
+        // --- FILA MÁS VISTOS (CON NUMERACIÓN - 10 Horas) ---
         const rowMasVistos = document.getElementById('row-mas-vistos');
         rowMasVistos.innerHTML = "";
         const idsMasVistos = obtenerDatosCache('gg_vistos_10h', 10 * 60 * 60 * 1000, () => {
             return [...window.db].sort(() => 0.5 - Math.random()).slice(0, 10).map(i => i.id);
         });
-        idsMasVistos.forEach(id => {
+        idsMasVistos.forEach((id, index) => {
             const item = window.db.find(x => x.id === id);
-            if(item) rowMasVistos.appendChild(crearCardParamount(item, false));
+            // true = con números
+            if(item) rowMasVistos.appendChild(crearCardParamount(item, true, index + 1));
         });
 
-        // --- FILA TOP MENSUAL (30 Días de Caché) ---
+        // --- FILA TOP TRANS (CON NUMERACIÓN - 24 Horas) ---
+        const rowTopTrans = document.getElementById('row-top-trans');
+        rowTopTrans.innerHTML = "";
+        const idsTopTrans = obtenerDatosCache('gg_top_trans_24h', 24 * 60 * 60 * 1000, () => {
+            // Filtra los que tengan la propiedad 'tags' y contengan la palabra 'trans' (sin importar mayúsculas/minúsculas)
+            return window.db.filter(item => item.tags && item.tags.toLowerCase().includes('trans'))
+                            .sort(() => 0.5 - Math.random())
+                            .slice(0, 10).map(i => i.id);
+        });
+        
+        // Si no hay resultados de trans aún, se puede dejar vacío o mostrar un mensaje, 
+        // pero por ahora solo pintará las que encuentre (hasta 10).
+        idsTopTrans.forEach((id, index) => {
+            const item = window.db.find(x => x.id === id);
+            // true = con números
+            if(item) rowTopTrans.appendChild(crearCardParamount(item, true, index + 1));
+        });
+
+        // --- FILA TOP MENSUAL (CON NUMERACIÓN - 30 Días) ---
         const rowTopMensual = document.getElementById('row-top-mensual');
         rowTopMensual.innerHTML = "";
         const idsTopMensual = obtenerDatosCache('gg_top_mensual_30d', 30 * 24 * 60 * 60 * 1000, () => {
@@ -232,6 +256,7 @@
         });
         idsTopMensual.forEach((id, index) => {
             const item = window.db.find(x => x.id === id);
+            // true = con números
             if(item) rowTopMensual.appendChild(crearCardParamount(item, true, index + 1));
         });
     }
@@ -245,7 +270,7 @@
         const tituloMostrado = item.titulo || item.id;
         let imgWrapperContent = `<img src="${item.poster}" onload="this.style.opacity='1'; this.parentElement.classList.remove('skeleton')" loading="lazy">`;
         
-        // Número posicionado arriba a la izquierda
+        // Número posicionado arriba a la izquierda si esTop es verdadero
         if (esTop) {
             imgWrapperContent += `<span class="rank-number">${numero}</span>`;
         }
@@ -260,7 +285,7 @@
         return div;
     }
 
-    // Lógica de redirección original de CodeGG
+    // Lógica de redirección
     function verDetalle(id) {
         localStorage.setItem('peli_id', id);
         window.location.href = 'detalles.html';
