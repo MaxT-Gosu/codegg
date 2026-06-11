@@ -1045,4 +1045,15 @@ const baseDeDatos = [
         fecha: "Apr. 08, 2025",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "TANP-052", 
+        titulo: "Hime-chan, Who Is Super Cute With A Tan", 
+        poster: "https://i.ibb.co/GhXCjQ0/0627c7d039.webp", 
+        bg: "https://i.ibb.co/hFKchkzL/vlcsnap-2026-06-11-09h54m13s796.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Tanp-052.mp4", 
+        estudio: "Mousozoku",
+		actriz: "Hime Hanamiya",
+        fecha: " Apr. 14, 2026",
+        tags: "Reducing Mosaic,Trans"
+    },
 ];
