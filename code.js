@@ -1056,4 +1056,15 @@ const baseDeDatos = [
         fecha: " Apr. 14, 2026",
         tags: "Reducing Mosaic,Trans"
     },
+	{ 
+        id: "JUR-732", 
+        titulo: "The Class Representative, Know The Hidden Side", 
+        poster: "https://i.ibb.co/mrg0dXMf/5777f0e7c7.webp", 
+        bg: "https://i.ibb.co/V0B7q6K6/vlcsnap-2026-06-12-07h48m01s062.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-732.mp4", 
+        estudio: "Madonna",
+		actriz: "Meguri",
+        fecha: "Jun. 09, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
