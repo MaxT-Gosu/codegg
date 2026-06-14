@@ -1078,4 +1078,15 @@ const baseDeDatos = [
         fecha: "May. 29, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "START-588", 
+        titulo: "NTR Fetishes By A Perverted Couple With A Swapping", 
+        poster: "https://i.ibb.co/v4602hCj/c8e2ecc223.webp", 
+        bg: "https://i.ibb.co/CpzDRSPX/vlcsnap-2026-06-14-12h37m57s899.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Start-588.mp4", 
+        estudio: "Sod Create",
+		actriz: " Kanna Misaki,Aozora Hikari",
+        fecha: "Jul. 09, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
