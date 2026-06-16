@@ -1089,4 +1089,15 @@ const baseDeDatos = [
         fecha: "Jul. 09, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "HEZ-892", 
+        titulo: "A Story Of A Married Woman Who Had An Affair At Home", 
+        poster: "https://i.ibb.co/v4602hCj/c8e2ecc223.webp", 
+        bg: "https://i.ibb.co/hxxVWxZD/da43e13fbe.webp", 
+        video: "https://appcine.b-cdn.net/Codegg/Hez-892.mp4", 
+        estudio: "Hot Entertainment",
+		actriz: "Rika Amemura",
+        fecha: "Jun. 12, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
