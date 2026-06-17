@@ -1100,4 +1100,15 @@ const baseDeDatos = [
         fecha: "Jun. 12, 2026",
         tags: "Reducing Mosaic"
     },
+		{ 
+        id: "JUC-906", 
+        titulo: "R**e shame examination of the body of the daughter", 
+        poster: "https://i.ibb.co/RT9XrRNT/1697679932.webp", 
+        bg: "https://i.ibb.co/sdQ39M1C/vlcsnap-2026-06-17-11h17m36s990.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Juc-906.mp4", 
+        estudio: "Madonna",
+		actriz: "Miho Ashina",
+        fecha: "120 minutes",
+        tags: "Reducing Mosaic"
+    },
 ];
