@@ -1111,4 +1111,15 @@ const baseDeDatos = [
         fecha: "120 minutes",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "FPRE-235", 
+        titulo: "As A Scumbag Older Brother Who Holds", 
+        poster: "https://i.ibb.co/xSL5kqGW/e7d74cc2e8.webp", 
+        bg: "https://i.ibb.co/9mB9KTLz/vlcsnap-2026-06-19-16h28m48s387.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Fpre-235.mp4", 
+        estudio: "Fitch",
+		actriz: "Kyou Minami",
+        fecha: "Jun. 16, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
