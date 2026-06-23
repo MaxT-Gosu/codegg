@@ -1133,4 +1133,15 @@ const baseDeDatos = [
         fecha: "Oct. 01, 2015",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "JUR-704-RM", 
+        titulo: "Know The Hidden Side Of Student Guidance Counselor", 
+        poster: "https://i.ibb.co/kYzHLmq/03a8b7b925.webp", 
+        bg: "https://i.ibb.co/Ndm01H27/vlcsnap-2026-06-23-15h21m49s742.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-704.mp4", 
+        estudio: "Madonna",
+		actriz: "Ririko Kinoshita",
+        fecha: "May. 12, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
