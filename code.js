@@ -1144,4 +1144,15 @@ const baseDeDatos = [
         fecha: "May. 12, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "JUR-764-RM", 
+        titulo: "Shocking Footage Of A Wife Cheating On Her Husband", 
+        poster: "https://i.ibb.co/MxbbTqGp/36d884a8a9.webp", 
+        bg: "https://i.ibb.co/WvLyV5jm/vlcsnap-2026-06-25-18h24m54s899.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Jur-764.mp4", 
+        estudio: "Madonna",
+		actriz: "Iyo Shinohara",
+        fecha: "Jun. 23, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
