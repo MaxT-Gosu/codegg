@@ -1155,4 +1155,15 @@ const baseDeDatos = [
         fecha: "Jun. 23, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "SNOS-255-RM", 
+        titulo: "Alone With My Strong-willed, Blue-collar Boss In A Shed Where", 
+        poster: "https://i.ibb.co/ZsyJPnK/4c3c7c171a.webp", 
+        bg: "https://i.ibb.co/cKBRnF9T/vlcsnap-2026-06-28-07h26m15s791.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Snos-255.mp4", 
+        estudio: "S1 No.1 Style",
+		actriz: "Riri Nanatsumori",
+        fecha: "Jun. 23, 2026",
+        tags: "Reducing Mosaic"
+    },
 ];
