@@ -1166,4 +1166,15 @@ const baseDeDatos = [
         fecha: "Jun. 23, 2026",
         tags: "Reducing Mosaic"
     },
+	{ 
+        id: "JUQ-026-RM", 
+        titulo: "Free During The Daytime On Weekdays.", 
+        poster: "https://i.ibb.co/Wp0NWzj4/1659759762.webp", 
+        bg: "https://i.ibb.co/F43YBR1x/vlcsnap-2026-06-30-10h19m55s573.png", 
+        video: "https://appcine.b-cdn.net/Codegg/Juq-026.mp4", 
+        estudio: "Madonna",
+		actriz: "Reiko Kobayakawa",
+        fecha: "Jul. 12, 2022",
+        tags: "Reducing Mosaic"
+    },
 ];
